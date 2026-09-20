@@ -28,13 +28,13 @@
 - Create: `api/` (Hono Cloudflare worker scaffold)
 - Create: `README.md`
 
-- [ ] Step 1: Scaffold the SPA with `npm create vite@latest web -- --template svelte`. Answer the interactive prompts if they appear (project name web, Svelte, TypeScript).
-- [ ] Step 2: Scaffold the worker with `npm create hono@latest api -- --template cloudflare-workers`. Answer prompts: no install yet if offered, name api.
-- [ ] Step 3: Remove demo code that does not belong to a wedding page: strip `web/src` demo component content down to a minimal App.svelte shell.
-- [ ] Step 4: Install dependencies in both packages: `npm install` in `web/`, then `npm install` in `api/`.
-- [ ] Step 5: Run `npm run build` in `web/`, then `npm run build` in `api/`.
-- [ ] Step 6: Write a README describing the monorepo layout and the two package scripts.
-- [ ] Step 7: Commit with message `feat: scaffold svelte and hono packages`.
+- [x] Step 1: Scaffold the SPA with `npm create vite@latest web -- --template svelte`. Answer the interactive prompts if they appear (project name web, Svelte, TypeScript).
+- [x] Step 2: Scaffold the worker with `npm create hono@latest api -- --template cloudflare-workers`. Answer prompts: no install yet if offered, name api.
+- [x] Step 3: Remove demo code that does not belong to a wedding page: strip `web/src` demo component content down to a minimal App.svelte shell.
+- [x] Step 4: Install dependencies in both packages: `npm install` in `web/`, then `npm install` in `api/`.
+- [x] Step 5: Run `npm run build` in `web/`, then `npm run build` in `api/`.
+- [x] Step 6: Write a README describing the monorepo layout and the two package scripts.
+- [x] Step 7: Commit with message `feat: scaffold svelte and hono packages`.
 
 ### Task 2: Drizzle schema for Neon → verify: `drizzle-kit generate` exits 0 and a migration SQL file exists
 
