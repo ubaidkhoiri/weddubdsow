@@ -88,12 +88,51 @@
 		return `Undangan Ngunduh Mantu ${event.groom} & ${event.bride}, ${event.dateStart} sampai ${event.dateEnd} di ${event.venue}.`;
 	}
 
-	let musicStarted = $state(false);
 	let musicOn = $state(false);
+	let ytPlayer: unknown = null;
+
+	function applyMusic() {
+		const p = ytPlayer as any;
+		if (p) {
+			if (musicOn) p.playVideo();
+			else p.pauseVideo();
+		}
+	}
+
+	function buildYtPlayer() {
+		const w = window as any;
+		ytPlayer = new w.YT.Player("yt-player", {
+			videoId: "1892ujwIooo",
+			playerVars: { playsinline: 1, rel: 0 },
+			events: {
+				onReady: () => applyMusic(),
+				onStateChange: (e: any) => {
+					if (e.data === w.YT.PlayerState.ENDED) musicOn = false;
+				},
+			},
+		});
+	}
+
+	function ensureYtPlayer() {
+		const w = window as any;
+		if (w.YT && w.YT.Player) {
+			buildYtPlayer();
+			return;
+		}
+		w.onYouTubeIframeAPIReady = buildYtPlayer;
+		if (!w.__wedduYtLoaded) {
+			w.__wedduYtLoaded = true;
+			const s = document.createElement("script");
+			s.src = "https://www.youtube.com/iframe_api";
+			s.async = true;
+			document.head.appendChild(s);
+		}
+	}
 
 	function toggleMusic() {
-		musicStarted = true;
 		musicOn = !musicOn;
+		if (ytPlayer) applyMusic();
+		else ensureYtPlayer();
 	}
 </script>
 
@@ -161,15 +200,7 @@
 
 	<div class="petal-sprite petal-sprite--divider" aria-hidden="true"></div>
 
-	{#if musicStarted}
-		<iframe
-			class="player"
-			src="https://www.youtube-nocookie.com/embed/1892ujwIooo?autoplay={musicOn ? 1 : 0}"
-			title="Musik undangan"
-			allow="autoplay"
-			tabindex="-1"
-		></iframe>
-	{/if}
+	<div id="yt-player" class="player" aria-hidden="true" tabindex="-1"></div>
 
 	<button class="fab music" type="button" onclick={toggleMusic} aria-pressed={musicOn}>
 		{musicOn ? "Hentikan musik" : "Putar musik"}
