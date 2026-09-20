@@ -8,9 +8,21 @@
     "cf-typegen": "wrangler types --env-interface CloudflareBindings"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
+    "drizzle-orm": "^0.45.2",
     "hono": "^4.13.8"
   },
   "devDependencies": {
+    "@types/node": "^26.6.2",
+    "dotenv": "^18.0.1",
+    "drizzle-kit": "^0.31.10",
     "wrangler": "^4.110.0"
+  },
+  "allowScripts": {
+    "workerd@1.20260918.1": true,
+    "wrangler@4.135.0": true,
+    "esbuild@0.28.1": true,
+    "esbuild@0.18.20": true,
+    "esbuild@0.25.12": true
   }
 }
