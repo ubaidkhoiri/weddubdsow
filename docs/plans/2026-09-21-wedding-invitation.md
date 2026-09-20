@@ -44,14 +44,14 @@
 - Create: `api/src/db.ts`
 - Create: `api/.dev.vars` (gitignored)
 
-- [ ] Step 1: Add dependencies in `api/`: `npm i drizzle-orm @neondatabase/serverless`, then `npm i -D drizzle-kit @types/node`.
-- [ ] Step 2: Write `api/src/schema.ts` with two tables using neon serverless paginated config: `guests` (id uuid/text, name text, attendance text check in yes no maybe, guests integer, phone text nullable, created_at text default now ISO) and `messages` (id, name, message, hearts integer default 0, created_at).
-- [ ] Step 3: Write `api/src/db.ts` exporting a NeonPoolDatabase created from `env.DATABASE_URL` with the neon-http driver and the schema.
-- [ ] Step 4: Write `api/drizzle.config.ts` pointing dialect postgresql, schema ./src/schema.ts, out ./drizzle, and reading the connection string from the DATABASE_URL environment variable.
-- [ ] Step 5: Ask the user for the Neon connection string, then write it into `api/.dev.vars` as `DATABASE_URL=...` and add `api/.dev.vars` to `.gitignore`.
-- [ ] Step 6: Run `npx drizzle-kit generate` from `api/`.
-- [ ] Step 7: Run `npx drizzle-kit push` from `api/` to create tables in Neon.
-- [ ] Step 8: Commit with message `feat: drizzle schema for guests and messages`.
+- [x] Step 1: Add dependencies in `api/`: `npm i drizzle-orm @neondatabase/serverless`, then `npm i -D drizzle-kit @types/node`.
+- [x] Step 2: Write `api/src/schema.ts` with two tables using neon serverless paginated config: `guests` (id uuid/text, name text, attendance text check in yes no maybe, guests integer, phone text nullable, created_at text default now ISO) and `messages` (id, name, message, hearts integer default 0, created_at).
+- [x] Step 3: Write `api/src/db.ts` exporting a NeonPoolDatabase created from `env.DATABASE_URL` with the neon-http driver and the schema.
+- [x] Step 4: Write `api/drizzle.config.ts` pointing dialect postgresql, schema ./src/schema.ts, out ./drizzle, and reading the connection string from the DATABASE_URL environment variable.
+- [x] Step 5: Ask the user for the Neon connection string, then write it into `api/.dev.vars` as `DATABASE_URL=...` and add `api/.dev.vars` to `.gitignore`.
+- [x] Step 6: Run `npx drizzle-kit generate` from `api/`.
+- [x] Step 7: Run `npx drizzle-kit push` from `api/` to create tables in Neon.
+- [x] Step 8: Commit with message `feat: drizzle schema for guests and messages`.
 
 ### Task 3: Hono API core with tests → verify: vitest exits 0 and `wrangler dev` answers /api routes
 
