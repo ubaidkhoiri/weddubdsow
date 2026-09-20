@@ -45,13 +45,13 @@
 - Modify: `web/src/lib/SectionRsvp.svelte:5-33`
 - Modify: `web/src/lib/SectionRsvp.svelte:82`
 
-- [ ] Step 1: Add `const DRAFT_KEY = 'weddu-rsvp-draft';`.
-- [ ] Step 2: Add `onMount` that reads `localStorage.getItem(DRAFT_KEY)`, parses it, and hydrates `name`, `attendance`, `guests` and `phone` runes (guarded parse, ignore on invalid).
-- [ ] Step 3: On `blur` of each of the four fields, write `{ name, attendance, guests, phone }` to localStorage; keep it cheap by saving the current runes, not the event.
-- [ ] Step 4: In the success path of `submit()` (the branch that sets `summary` to the success kind at `:55-60`), `localStorage.removeItem(DRAFT_KEY)`.
-- [ ] Step 5: Run `npm run build` (web).
-- [ ] Step 6: Verify with agent-browser: fill the name input, reload the page, eval the input value equals the typed string.
-- [ ] Step 7: Commit `feat: persist rsvp draft`.
+- [x] Step 1: Add `const DRAFT_KEY = 'weddu-rsvp-draft';`.
+- [x] Step 2: Add `onMount` that reads `localStorage.getItem(DRAFT_KEY)`, parses it, and hydrates `name`, `attendance`, `guests` and `phone` runes (guarded parse, ignore on invalid).
+- [x] Step 3: On `blur` of each of the four fields, write `{ name, attendance, guests, phone }` to localStorage; keep it cheap by saving the current runes, not the event.
+- [x] Step 4: In the success path of `submit()` (the branch that sets `summary` to the success kind at `:55-60`), `localStorage.removeItem(DRAFT_KEY)`.
+- [x] Step 5: Run `npm run build` (web).
+- [x] Step 6: Verify with agent-browser: fill the name input, reload the page, eval the input value equals the typed string.
+- [x] Step 7: Commit `feat: persist rsvp draft`.
 
 ## Task 4: diy canvas heart confetti on rsvp yes → verify: web build exit 0 and a submitted Yes form creates a canvas element
 
