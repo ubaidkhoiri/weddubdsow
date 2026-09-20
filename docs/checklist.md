@@ -2,6 +2,8 @@
 
 Invitation live at https://api.ubdaw.workers.dev. Check each item on a real phone. Record pass or fail next to each.
 
+Status 2026-09-21: music items verified on iPhone XR, iOS 16.1, Safari. Remaining items still open.
+
 ## Invitation
 
 - [ ] Cover envelope opens on tap, gold wax seal "U & S" shows.
