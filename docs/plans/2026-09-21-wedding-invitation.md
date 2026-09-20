@@ -96,13 +96,13 @@
 - Create: `web/src/App.svelte`
 - Modify: `web/package.json`
 
-- [ ] Step 1: Write `web/src/lib/content.ts` with a content object: couple names Ubaid and Sofia, event name Ngunduh Mantu, date range 7 to 8 October 2026, main day 8 October 09.00, venue name Balai Desa Kalurahan Giripurwo, maps URL, music YouTube URL, WhatsApp share number, and placeholder arrays for gallery, bios, story timeline and closing text.
-- [ ] Step 2: Add `dotlottie` web component support via `npm install @dotlottie/web-component` in `web/`.
-- [ ] Step 3: Write `web/src/App.svelte` as the phone column with a full-screen cover overlay that shows an animated envelope (a dotLottie LottieFiles asset or a CSS smoke-and-wax-seal if no free asset fits) and a tap to open action.
-- [ ] Step 4: Write the hero section under the cover: event name, bride and groom names, date line and a scroll hint.
-- [ ] Step 5: Add a countdown that targets the main day 8 October 2026 09:00 in the Asia/Jakarta timezone.
-- [ ] Step 6: Make the App run `npm run build` cleanly in `web/` and serve the static output with `npx wrangler dev` pointing at the assets to confirm the cover renders.
-- [ ] Step 7: Commit with message `feat: invitation shell, cover intro and hero`.
+- [x] Step 1: Write `web/src/lib/content.ts` with a content object: couple names Ubaid and Sofia, event name Ngunduh Mantu, date range 7 to 8 October 2026, main day 8 October 09.00, venue name Balai Desa Kalurahan Giripurwo, maps URL, music YouTube URL, WhatsApp share number, and placeholder arrays for gallery, bios, story timeline and closing text.
+- [x] Step 2: Add `dotlottie` web component support via `npm install @dotlottie/wc`. Plan named a wrong package: real one is `@lottiefiles/dotlottie-wc` (0.9.28), installed.
+- [x] Step 3: Write `web/src/App.svelte` as the phone column with a full-screen cover overlay that shows an animated envelope (a dotLottie LottieFiles asset or a CSS smoke-and-wax-seal if no free asset fits) and a tap to open action. Used a CSS envelope with gold wax seal (no free asset URL verifiable offline; CSS is deterministic and brand-coloured).
+- [x] Step 4: Write the hero section under the cover: event name, bride and groom names, date line and a scroll hint.
+- [x] Step 5: Add a countdown that targets the main day 8 October 2026 09:00 in the Asia/Jakarta timezone.
+- [x] Step 6: Make the App run `npm run build` cleanly in `web/` and serve the static output with `npx wrangler dev` pointing at the assets to confirm the cover renders.
+- [x] Step 7: Commit with message `feat: invitation shell, cover intro and hero`.
 
 ### Task 6: Invitation sections with placeholder content → verify: all section headings present in the rendered page
 
