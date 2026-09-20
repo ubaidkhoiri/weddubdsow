@@ -230,8 +230,8 @@
 		padding: var(--spacing-xs) var(--spacing-s);
 		font-size: var(--text-body);
 		color: var(--color-text-strong);
-		background: var(--color-bg-raised);
-		border: 1px solid var(--color-stroke-strong);
+		background: var(--color-bg-base);
+		border: 1px solid var(--color-stroke-weak);
 		border-radius: var(--radius-control);
 	}
 

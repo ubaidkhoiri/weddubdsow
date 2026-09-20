@@ -178,9 +178,7 @@
 		flex-direction: column;
 		gap: var(--spacing-m);
 		padding: var(--spacing-card);
-		border-radius: var(--radius-surface);
-		border: 1px solid var(--color-stroke-weak);
-		background: var(--color-bg-raised);
+		border: 1px solid var(--color-accent-gold-weak);
 	}
 
 	.post-error {
@@ -310,9 +308,7 @@
 		flex-direction: column;
 		gap: var(--spacing-2xs);
 		padding: var(--spacing-s);
-		border-radius: var(--radius-surface);
 		border: 1px solid var(--color-stroke-weak);
-		background: var(--color-bg-raised);
 	}
 
 	.msg-name {
