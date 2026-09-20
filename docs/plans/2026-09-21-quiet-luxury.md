@@ -183,8 +183,8 @@
 **Files:**
 - Modify: none (verifikasi + git)
 
-- [ ] Step 1: Run `npm run build` di web dan `npm test` di `C:\Users\ubdd\_code\weddubdsow\api` (regresi API, exit 0).
-- [ ] Step 2: agent-browser ke `http://localhost:8787/#/admin`: form login tetap tampil, dan routa `#/admin` tidak menampilkan undangan (regresi admin).
-- [ ] Step 3: `git push origin main` dari `C:\Users\ubdd\_code\weddubdsow` (CI auto deploy).
-- [ ] Step 4: Tunggu workflow selesai, `Invoke-WebRequest -Uri https://api.ubdaw.workers.dev` lalu cek status.
-- [ ] Step 5: Commit sisa apa pun yang belum, push.
+- [x] Step 1: Run `npm run build` di web dan `npm test` di `C:\Users\ubdd\_code\weddubdsow\api` (regresi API, exit 0).
+- [x] Step 2: agent-browser ke `http://localhost:8787/#/admin`: form login tetap tampil, dan routa `#/admin` tidak menampilkan undangan (regresi admin).
+- [x] Step 3: `git push origin main` dari `C:\Users\ubdd\_code\weddubdsow` (CI auto deploy).
+- [x] Step 4: Tunggu workflow selesai, `Invoke-WebRequest -Uri https://api.ubdaw.workers.dev` lalu cek status.
+- [x] Step 5: Commit sisa apa pun yang belum, push.
