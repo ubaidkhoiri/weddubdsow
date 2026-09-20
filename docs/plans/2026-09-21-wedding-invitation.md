@@ -161,14 +161,14 @@
 - Create: `web/src/lib/api.ts` (admin additions)
 - Modify: `api/wrangler.toml`
 
-- [ ] Step 1: Write `api/src/admin.ts` with a login handler: reads ADMIN_PASSWORD from env, compares with a timing-safe comparison, derives an HMAC key from the shared secret with SHA-256 via WebCrypto, signs a token shaped as base64url(payload).expiry.signature, sets an httpOnly Secure SameSite cookie, and enforces the rate limit of 5 attempts per IP per 15 minutes.
-- [ ] Step 2: Add `api/src/routes/admin.ts` with GET /api/admin/messages (public messages plus an admin flag false), DELETE /api/admin/messages/:id (requires the admin cookie, returns 401 without it), and POST /api/admin/logout clearing the cookie.
-- [ ] Step 3: Mount the admin routes in `api/src/index.ts` and expose the login endpoint under /api/admin/login.
-- [ ] Step 4: Write a vitest test in `api/` for login with a wrong password returning 401, the right password returning 2xx and setting a cookie, and 5 failed attempts within 15 minutes blocking the next attempt with 429.
-- [ ] Step 5: Run `npm test` in `api/`.
-- [ ] Step 6: Build `web/src/routes/admin.svelte`: a login form that posts to /api/admin/login, and after success shows the guest book with a delete button per message and the RSVP list.
-- [ ] Step 7: Run `npm run dev` in `web/`, try the flow with a wrong and right password, confirm the wrong one gets an error and the right one shows the list.
-- [ ] Step 8: Commit with message `feat: admin login and message moderation`.
+- [x] Step 1: Write `api/src/admin.ts` with a login handler: reads ADMIN_PASSWORD from env, compares with a timing-safe comparison, derives an HMAC key from the shared secret with SHA-256 via WebCrypto, signs a token shaped as base64url(payload).expiry.signature, sets an httpOnly Secure SameSite cookie, and enforces the rate limit of 5 attempts per IP per 15 minutes.
+- [x] Step 2: Add `api/src/routes/admin.ts` with GET /api/admin/messages (public messages plus an admin flag false), DELETE /api/admin/messages/:id (requires the admin cookie, returns 401 without it), and POST /api/admin/logout clearing the cookie.
+- [x] Step 3: Mount the admin routes in `api/src/index.ts` and expose the login endpoint under /api/admin/login.
+- [x] Step 4: Write a vitest test in `api/` for login with a wrong password returning 401, the right password returning 2xx and setting a cookie, and 5 failed attempts within 15 minutes blocking the next attempt with 429.
+- [x] Step 5: Run `npm test` in `api/`.
+- [x] Step 6: Build `web/src/routes/admin.svelte`: a login form that posts to /api/admin/login, and after success shows the guest book with a delete button per message and the RSVP list.
+- [x] Step 7: Run `npm run dev` in `web/`, try the flow with a wrong and right password, confirm the wrong one gets an error and the right one shows the list.
+- [x] Step 8: Commit with message `feat: admin login and message moderation`.
 
 ### Task 10: Deploy to Cloudflare Workers with GitHub → verify: `wrangler deploy` reports success and the secrets are set
 
