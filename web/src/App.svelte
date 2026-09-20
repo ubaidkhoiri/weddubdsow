@@ -69,10 +69,14 @@
 		for (const el of document.querySelectorAll(".petal-sprite--hero, .petal-sprite--divider")) {
 			spriteObserver.observe(el);
 		}
+
+		ensureYtPlayer();
 	});
 
 	function openInvite() {
 		opened = true;
+		musicOn = true;
+		applyMusic();
 		try {
 			localStorage.setItem("weddu-opened", "1");
 		} catch {
@@ -90,12 +94,19 @@
 
 	let musicOn = $state(false);
 	let ytPlayer: unknown = null;
+	let ytReady = false;
+	let ytStarted = false;
 
 	function applyMusic() {
 		const p = ytPlayer as any;
-		if (p) {
-			if (musicOn) p.playVideo();
-			else p.pauseVideo();
+		if (!p || !ytReady) return;
+		if (musicOn) {
+			ytStarted = true;
+			p.unMute();
+			p.setVolume(100);
+			p.playVideo();
+		} else if (ytStarted) {
+			p.pauseVideo();
 		}
 	}
 
@@ -103,9 +114,21 @@
 		const w = window as any;
 		ytPlayer = new w.YT.Player("yt-player", {
 			videoId: "1892ujwIooo",
-			playerVars: { playsinline: 1, rel: 0 },
+			playerVars: {
+				autoplay: 1,
+				mute: 1,
+				loop: 1,
+				playlist: "1892ujwIooo",
+				playsinline: 1,
+				controls: 0,
+				rel: 0,
+			},
 			events: {
-				onReady: () => applyMusic(),
+				onReady: (e: any) => {
+					ytReady = true;
+					e.target.setVolume(100);
+					applyMusic();
+				},
 				onStateChange: (e: any) => {
 					if (e.data === w.YT.PlayerState.ENDED) musicOn = false;
 				},
