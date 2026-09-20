@@ -192,10 +192,10 @@
 **Files:**
 - Create: `docs/checklist.md`
 
-- [ ] Step 1: Write `docs/checklist.md` with the manual device checklist from the spec: cover opens, music toggles, RSVP submits, guest book submits and persists, admin login with wrong and right password, message delete works.
-- [ ] Step 2: From a clean clone of the repo, run `npm install` and `npm run build` in both packages and confirm exit 0.
+- [x] Step 1: Write `docs/checklist.md` with the manual device checklist from the spec: cover opens, music toggles, RSVP submits, guest book submits and persists, admin login with wrong and right password, message delete works.
+- [x] Step 2: From a clean clone of the repo, run `npm install` and `npm run build` in both packages and confirm exit 0.
 - [ ] Step 3: Confirm the deployed URL passes each checklist item on a real phone, or record which items failed.
-- [ ] Step 4: Commit `docs/checklist.md` with message `docs: device checklist`.
+- [x] Step 4: Commit `docs/checklist.md` with message `docs: device checklist`.
 
 ## Notes for the executing agent
 
