@@ -159,11 +159,11 @@
 - Modify: `web/src/lib/SectionGallery.svelte:71-101`
 - Modify: `web/src/lib/SectionClosing.svelte:39-59`
 
-- [ ] Step 1: Schedule: `.cards` (50-57) ganti gap jadi `var(--spacing-l)` dan hapus border. `.card` (59-67) hapus `padding`, `border-radius`, `border`, `background`; tambah `border-bottom: 1px solid var(--color-stroke-weak)`. `.time` (85-91) ukuran `var(--text-lead)`, weight 300, `font-family: var(--font-display)`.
-- [ ] Step 2: Gallery: `.thumb` (80-88) hapus border-radius, tambah `border: 1px solid var(--color-accent-gold-weak)`; `.thumb img` (90-96) hapus border-radius, `padding: var(--spacing-2xs)` supaya frame tipis; `.grid` (71-78) gap `var(--spacing-s)`.
-- [ ] Step 3: Closing: `.prose` (39-45) tetap; `.couple` (53-59) `font-family: var(--font-display)`, italic, `font-weight: 300`, size `var(--text-h2)`.
-- [ ] Step 4: Run `npm run build` di web.
-- [ ] Step 5: agent-browser ke `http://localhost:8787/#/section-gallery` relatif: eval computed backgroundColor `.card` dan borderColor `.thumb img`.
+- [x] Step 1: Schedule: `.cards` (50-57) ganti gap jadi `var(--spacing-l)` dan hapus border. `.card` (59-67) hapus `padding`, `border-radius`, `border`, `background`; tambah `border-bottom: 1px solid var(--color-stroke-weak)`. `.time` (85-91) ukuran `var(--text-lead)`, weight 300, `font-family: var(--font-display)`.
+- [x] Step 2: Gallery: `.thumb` (80-88) hapus border-radius, tambah `border: 1px solid var(--color-accent-gold-weak)`; `.thumb img` (90-96) hapus border-radius, `padding: var(--spacing-2xs)` supaya frame tipis; `.grid` (71-78) gap `var(--spacing-s)`.
+- [x] Step 3: Closing: `.prose` (39-45) tetap; `.couple` (53-59) `font-family: var(--font-display)`, italic, `font-weight: 300`, size `var(--text-h2)`.
+- [x] Step 4: Run `npm run build` di web.
+- [x] Step 5: agent-browser ke `http://localhost:8787/#/section-gallery` relatif: eval computed backgroundColor `.card` dan borderColor `.thumb img`.
 - [ ] Step 6: Commit `feat: editorial schedule gallery closing`.
 
 ### Task 5: RSVP dan guest book panel hairline → verify: build (web) exit 0; agent-browser post pesan di `#messages` dengan nama unik muncul di `ul.feed` setelah submit.
