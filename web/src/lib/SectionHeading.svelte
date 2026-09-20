@@ -22,7 +22,7 @@
 		position: relative;
 		padding-top: var(--spacing-xs);
 		padding-bottom: var(--spacing-s);
-		border-bottom: 1px solid var(--color-accent-gold-weak);
+		border-bottom: 1px solid var(--color-stroke-weak);
 	}
 
 	.eyebrow {
@@ -30,7 +30,7 @@
 		font-weight: var(--font-weight-bold);
 		letter-spacing: var(--tracking-caps);
 		text-transform: uppercase;
-		color: var(--color-accent-gold-text);
+		color: var(--color-text-brand);
 		margin: 0 0 var(--spacing-2xs);
 	}
 
@@ -44,9 +44,9 @@
 		top: 0;
 		right: 0;
 		font-family: var(--font-display);
-		font-style: italic;
 		font-size: var(--text-h1);
 		line-height: var(--leading-h1);
-		color: var(--color-accent-gold-weak);
+		color: var(--color-stroke-brand-weak);
+		font-variant-numeric: tabular-nums;
 	}
 </style>

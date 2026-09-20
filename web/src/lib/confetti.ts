@@ -16,9 +16,9 @@ export function burstHearts(): void {
 
 	const style = getComputedStyle(document.documentElement);
 	const colors = [
-		style.getPropertyValue("--color-accent-gold").trim(),
 		style.getPropertyValue("--color-text-brand").trim(),
-		style.getPropertyValue("--color-accent-gold-text").trim(),
+		style.getPropertyValue("--color-brand").trim(),
+		style.getPropertyValue("--color-text-strong").trim(),
 	].filter(Boolean);
 
 	const canvas = document.createElement("canvas");
@@ -53,7 +53,7 @@ export function burstHearts(): void {
 		size: 7 + Math.random() * 9,
 		rot: Math.random() * Math.PI * 2,
 		vr: (Math.random() - 0.5) * 0.18,
-		color: colors.length > 0 ? colors[i % colors.length] : "#c8983a",
+		color: colors.length > 0 ? colors[i % colors.length] : "#A95353",
 		alpha: 1,
 	}));
 

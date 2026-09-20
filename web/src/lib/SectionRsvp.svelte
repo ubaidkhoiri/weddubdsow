@@ -298,7 +298,7 @@
 		display: flex;
 		align-items: center;
 		gap: var(--spacing-s);
-		min-height: var(--size-row);
+		min-height: var(--size-touch-target);
 		font-size: var(--text-body);
 	}
 
@@ -314,7 +314,8 @@
 	}
 
 	.primary {
-		align-self: flex-start;
+		align-self: stretch;
+		width: 100%;
 		min-height: var(--size-control);
 		padding: var(--spacing-s) var(--spacing-l);
 		font-size: var(--text-body);

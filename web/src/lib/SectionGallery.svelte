@@ -67,7 +67,8 @@
 		display: block;
 		width: 100%;
 		padding: 0;
-		border: 1px solid var(--color-accent-gold-weak);
+		border: 1px solid var(--color-stroke-weak);
+		border-radius: var(--radius-sm);
 		background: transparent;
 		cursor: pointer;
 	}

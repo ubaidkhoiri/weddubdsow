@@ -180,7 +180,8 @@
 		flex-direction: column;
 		gap: var(--spacing-m);
 		padding: var(--spacing-card);
-		border: 1px solid var(--color-accent-gold-weak);
+		border: 1px solid var(--color-stroke-weak);
+		border-radius: var(--radius-surface);
 	}
 
 	.post-error {
@@ -243,7 +244,8 @@
 	}
 
 	.primary {
-		align-self: flex-start;
+		align-self: stretch;
+		width: 100%;
 		min-height: var(--size-control);
 		padding: var(--spacing-s) var(--spacing-l);
 		font-size: var(--text-body);
@@ -353,6 +355,6 @@
 	}
 
 	.heart span {
-		color: var(--color-accent-gold);
+		color: var(--color-text-brand);
 	}
 </style>

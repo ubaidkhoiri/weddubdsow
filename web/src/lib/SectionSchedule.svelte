@@ -66,14 +66,13 @@
 		font-weight: var(--font-weight-bold);
 		letter-spacing: var(--tracking-caps);
 		text-transform: uppercase;
-		color: var(--color-accent-gold-text);
+		color: var(--color-text-brand);
 		margin: 0;
 	}
 
 	.time {
 		font-size: var(--text-lead);
 		font-weight: var(--font-weight-regular);
-		font-family: var(--font-display);
 		line-height: var(--leading-body);
 		color: var(--color-text-strong);
 		margin: 0;

@@ -25,5 +25,5 @@ body {
 
 .invite :is(h1, h2, h3) {
 	font-family: var(--font-display);
-	font-weight: 300;
+	font-weight: var(--font-weight-bold);
 }

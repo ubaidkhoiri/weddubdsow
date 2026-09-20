@@ -35,7 +35,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-l);
-		border-inline-start: 2px solid var(--color-accent-gold-weak);
+		border-inline-start: var(--border-width-strong) solid var(--color-stroke-brand-weak);
 		padding-inline-start: var(--spacing-m);
 	}
 
@@ -46,12 +46,13 @@
 
 	.dot {
 		position: absolute;
-		left: calc(var(--spacing-m) * -1 - 5px);
+		left: calc(var(--spacing-m) * -1 - 4px);
 		top: 6px;
 		width: 8px;
 		height: 8px;
 		border-radius: var(--radius-full);
-		background: var(--color-accent-gold);
+		background: var(--color-text-brand);
+		transform: translateX(-50%);
 	}
 
 	.body {
@@ -65,7 +66,7 @@
 		font-weight: var(--font-weight-bold);
 		letter-spacing: var(--tracking-caps);
 		text-transform: uppercase;
-		color: var(--color-accent-gold-text);
+		color: var(--color-text-brand);
 		margin: 0;
 	}
 

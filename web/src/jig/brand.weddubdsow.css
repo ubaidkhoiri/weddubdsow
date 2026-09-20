@@ -10,60 +10,53 @@
    Solid foregrounds cannot do this: they look right on one background and wrong on
    the next, and dark mode has three.
 
-   Brand colour decided in the approved spec (2026-09-21): jade and cream with gold accents.
-   Jade is a green, so per E-64 it is decorative ONLY; interactive elements use
-   --color-text-strong. Gold is ornamental; never interactive (E-65). The unbranded
-   default was replaced, not kept. Edit --brand-h/-s/-l below directly — `jig update` will not touch this file. */
+   Brand colour decided in the approved spec (2026-09-21-minimal-islamic-editorial):
+   minimal islamic editorial. Warm cream base, muted rose accent, near-black text.
+   Rose is hue 0, a red family, so per E-64 it is decorative ONLY; interactive
+   elements use --color-text-strong. Edits happen here — `jig update` will not touch this file. */
 
 :root {
   color-scheme: light;
 
   /* ================= BRAND =================
-     One brand colour. It marks interactive elements (I-56).
-     Intentionally near-black here: A-01, no invented colour.
+     One brand colour. It marks decorative elements (I-56).
+     Intentionally near-black primary; rose is decorative only (E-64).
      Requirements when you set it:
-       - ≥ 4.5:1 against --color-bg-raised AND against --color-fill
        - If the brand colour is red, amber or green, DO NOT use it for interactive
          elements (E-64) — it will collide with the system colours below. */
-  --brand-h: 158;
-  --brand-s: 40%;
-  --brand-l: 52%;
+  --brand-h: 0;
+  --brand-s: 66%;
+  --brand-l: 66%;
 
-  /* The solid brand colour. Interactive elements reference this (I-56).
-     The variations below are alpha steps off the same hue. */
+  /* The solid brand colour. Decorative references this (E-64). */
   --color-brand: hsl(var(--brand-h) var(--brand-s) var(--brand-l));
 
   /* ================= ELEVATION BACKGROUNDS (solid) =================
      Light comes from above: higher elevation is lighter.
-     Keep the three levels visually consistent across light and dark. */
-  --color-bg-base:    oklch(0.985 0.004 95);   /* page. Off-white, not #fff (C-18). */
-  --color-bg-raised:  oklch(1     0     0);    /* cards, panels, sticky bars        */
-  --color-bg-overlay: oklch(1     0     0);    /* dialogs, popovers, dropdowns      */
+     Warm cream page, plain white raised surfaces (C-18). */
+  --color-bg-base:    oklch(0.984 0.006 88);   /* page #FAF8F4. Off-white, not #fff (C-18). */
+  --color-bg-raised:  oklch(1     0     0);    /* cards, panels, sticky bars #FFFFFF        */
+  --color-bg-overlay: oklch(1     0     0);    /* dialogs, popovers, dropdowns             */
 
   /* ================= NEUTRAL FOREGROUNDS (transparent) =================
-     Light mode: opacities of black. Never pure black at 100% (C-18). */
-  --color-text-strong:   rgb(0 0 0 / 85%);   /* headings, body, labels   — ≥ 4.5:1 */
-  --color-text-weak:     rgb(0 0 0 / 58%);   /* supporting text          — ≥ 4.5:1 */
+     Light mode: opacities of black. Never pure black at 100% (C-18).
+     Muted is decorative-only; weak is the readable floor. */
+  --color-text-strong:   rgb(0 0 0 / 88%);   /* #252522 headings, body — ≥ 4.5:1 */
+  --color-text-weak:     rgb(0 0 0 / 59%);   /* #77746D supporting text — ≥ 4.5:1 */
+  --color-text-muted:    rgb(0 0 0 / 58%);   /* captions — ≥ 4.5:1 on fill (C-19) */
   --color-stroke-strong: rgb(0 0 0 / 45%);   /* input/checkbox borders, icons — ≥ 3:1 */
-  --color-stroke-weak:   rgb(0 0 0 / 10%);   /* dividers. Decorative, no floor.    */
+  --color-stroke-weak:   #E8E4DC;            /* dividers #E8E4DC. Decorative, no floor. */
   --color-fill:          rgb(0 0 0 / 4%);    /* tags, badges, secondary surfaces   */
 
   --color-icon:      var(--color-stroke-strong);
   --color-icon-weak: var(--color-stroke-weak);
 
   /* ================= BRAND FOREGROUNDS (4 variations) ================= */
-  --color-text-brand:          hsl(158 35% 15% / 100%);   /* darker jade for text: meets C-19 floor */
-  --color-stroke-brand-strong: hsl(158 35% 15% / 80%);   /* meets C-19 floor */
+  --color-text-brand:          hsl(0 34% 49%);   /* #A95353 accent-dark for text: meets C-19 floor */
+  --color-stroke-brand-strong: #A95353;          /* accent-dark stroke, ≥ 3:1 */
   --color-stroke-brand-weak:   hsl(var(--brand-h) var(--brand-s) var(--brand-l) / 20%);
-  --color-fill-brand:          hsl(var(--brand-h) var(--brand-s) var(--brand-l) / 5%);
-  --color-on-brand:            oklch(1 0 0);   /* text on a solid brand fill */
-
-  /* Ornamental gold for accent lines, seals and glints. Decorative only (E-64, E-65). */
-  --color-accent-gold:      hsl(43 78% 56%);
-  --color-accent-gold-weak: hsl(43 85% 64% / 45%);
-  --color-accent-gold-glow: hsl(43 95% 68% / 40%);
-  /* Gold for small-caps text accents (eyebrows, dates): needs ≥ 4.5:1 on cream. */
-  --color-accent-gold-text: hsl(43 60% 36%);
+  --color-fill-brand:          hsl(4 55% 91%);   /* #F5DFDC accent-soft wash */
+  --color-on-brand:            rgb(0 0 0 / 88%); /* text on a solid brand fill */
 
   /* ================= SYSTEM COLOURS =================
      Three, with familiar traffic-light meanings. Four variations each.
@@ -73,8 +66,6 @@
        - text (100%)          >= 4.5:1 against --color-bg-base AND --color-bg-raised
        - stroke-strong (80%)  >= 3:1 against the same two, composited
        - stroke-weak and fill are decorative and have no floor
-     These are not style preferences. A system colour that fails them is
-     unreadable to the people the colour exists to warn.
      Each colour is one h/s/l triple (plus a fill alpha, which differs between
      light and dark) referenced by all four variations below, so changing the
      colour means changing it in one place instead of 4–5. */
@@ -122,34 +113,33 @@
   --border-width-hairline: 1px;   /* control and surface borders */
   --border-width-strong:   2px;   /* emphasis, selected states  */
 
-  /* Focus ring geometry. NOT mode-negotiable, for the same reason
-     --size-touch-target is not: WCAG 2.4.11 wants a perimeter at least 2px
-     thick, and density is never a reason to go under an accessibility floor.
-     The offset keeps the ring off the control's own border so both stay
-     legible. */
   --focus-ring-width:  2px;
   --focus-ring-offset: 2px;
 
-  /* ================= TYPE ================= */
-  --font-text:    ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "Cormorant Garamond", Georgia, serif;
+  /* ================= TYPE =================
+     DM Sans, the Minimal Islamic Editorial primary face. One family for
+     text and display; hierarchy comes from size, spacing, weight, colour. */
+  --font-text:    "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono:    ui-monospace, "SF Mono", "Cascadia Code", monospace;
   --font-numeric-features: "tnum" 1, "lnum" 1;
 
-  /* ================= RADIUS — four, by element size ================= */
-  --radius-sm:   8px;    /* buttons, inputs, checkboxes */
+  /* ================= RADIUS — four, by element size =================
+     Controls 12–14, cards 16–20, large containers 20–24, no pill except
+     tags/status/compact indicators (mode selects control/surface). */
+  --radius-sm:   12px;   /* buttons, inputs, checkboxes */
   --radius-md:   16px;   /* cards, panels                       */
-  --radius-lg:   32px;   /* large surfaces, hero media          */
+  --radius-lg:   20px;   /* large surfaces, hero media          */
   --radius-full: 9999px;
 
   /* ================= ELEVATION — two shadows, plus none =================
      Shadow colour is derived from the text colour, not pure black, so it sits in
-     the palette. Light from above: y-offset positive, blur grows with elevation.
+     the palette. Subtle only: 2px/12px at 4% and 8px/24px at 6%, warm grey.
      `--shadow-none` is the explicit absence a mode selects when its elevation is
      stroke-led; every mode currently does, via `--shadow-surface`. */
   --shadow-none:    none;
-  --shadow-raised:  0 1px 2px rgb(0 0 0 / 6%), 0 2px 4px -2px rgb(0 0 0 / 8%);
-  --shadow-overlay: 0 4px 16px -4px rgb(0 0 0 / 14%), 0 1px 3px rgb(0 0 0 / 8%);
+  --shadow-raised:  0 2px 12px rgb(30 25 20 / 4%);
+  --shadow-overlay: 0 8px 24px rgb(30 25 20 / 6%);
 }
 
 /* Forced light: this invitation is light-only by product decision. The brand must
@@ -162,22 +152,23 @@
 
     /* Three solid levels. In dark, DEPTH COMES FROM BACKGROUND, NOT SHADOW —
        shadows are nearly invisible on a dark surface. Never pure black. */
-    --color-bg-base:    hsl(var(--brand-h) 6% 10%);
-    --color-bg-raised:  hsl(var(--brand-h) 6% 15%);
-    --color-bg-overlay: hsl(var(--brand-h) 6% 20%);
+    --color-bg-base:    hsl(var(--brand-h) 18% 9%);
+    --color-bg-raised:  hsl(var(--brand-h) 18% 13%);
+    --color-bg-overlay: hsl(var(--brand-h) 18% 18%);
 
     /* Foregrounds become opacities of white. Higher than the light-mode values,
        because dark interfaces lose detail faster. */
-    --color-text-strong:   rgb(255 255 255 / 100%);
-    --color-text-weak:     rgb(255 255 255 / 78%);
-    --color-stroke-strong: rgb(255 255 255 / 60%);
+    --color-text-strong:   rgb(255 255 255 / 92%);
+    --color-text-weak:     rgb(255 255 255 / 72%);
+    --color-text-muted:    rgb(255 255 255 / 62%);
+    --color-stroke-strong: rgb(255 255 255 / 58%);
     --color-stroke-weak:   rgb(255 255 255 / 12%);
     --color-fill:          rgb(255 255 255 / 6%);
 
-    --brand-l: 88%;      /* lighten and desaturate the brand for dark surfaces */
-    --color-on-brand: hsl(var(--brand-h) 6% 10%);
-    --color-text-brand:          hsl(158 55% 88%);
-    --color-stroke-brand-strong: hsl(158 55% 88% / 80%);
+    --brand-l: 70%;      /* lighten and desaturate the brand for dark surfaces */
+    --color-on-brand: hsl(var(--brand-h) 40% 10%);
+    --color-text-brand:          hsl(0 55% 78%);
+    --color-stroke-brand-strong: hsl(0 55% 78% / 80%);
 
     /* System colours lighten and desaturate in dark mode. Only the h/s/l and
        fill-alpha vars need overriding here — the four hsl() declarations

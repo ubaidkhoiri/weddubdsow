@@ -27,7 +27,7 @@
 	dialog {
 		width: min(92vw, 430px);
 		padding: var(--spacing-m);
-		border: 1px solid var(--color-accent-gold-weak);
+		border: 1px solid var(--color-stroke-strong);
 		border-radius: var(--radius-surface);
 		background: var(--color-bg-base);
 		color: var(--color-text-strong);
@@ -47,7 +47,7 @@
 
 	.map-head h3 {
 		font-family: var(--font-display);
-		font-weight: 300;
+		font-weight: var(--font-weight-bold);
 		font-size: var(--text-h3);
 		margin: 0;
 	}

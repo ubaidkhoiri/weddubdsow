@@ -129,7 +129,7 @@
 							>{deleting === m.id ? "Menghapus..." : "Hapus"}</button>
 						</div>
 						<p>{m.message}</p>
-						<small>♥ {m.hearts}</small>
+						<small>{m.hearts} <span class="heart-ico" aria-hidden="true"><svg viewBox="0 0 20 20" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M10 17.5 8.8 16.4C5 12.9 2.5 10.6 2.5 7.8 2.5 5.5 4.2 3.8 6.5 3.8c1.4 0 2.7.7 3.5 1.8.8-1.1 2.1-1.8 3.5-1.8 2.3 0 4 1.7 4 4 0 2.8-2.5 5.1-6.3 8.6L10 17.5Z"/></svg></span></small>
 					</li>
 				{/each}
 			</ul>
@@ -186,7 +186,7 @@
 		min-height: var(--size-touch-target);
 		padding: var(--spacing-s);
 		border: 1px solid var(--color-stroke-strong);
-		border-radius: var(--radius-sm);
+		border-radius: var(--radius-control);
 		background: var(--color-bg-base);
 		color: var(--color-text-strong);
 		font-size: var(--text-body);
@@ -198,7 +198,7 @@
 	}
 
 	.error {
-		color: var(--color-text-danger);
+		color: var(--color-text-error);
 		margin: 0;
 	}
 
@@ -223,7 +223,7 @@
 	}
 
 	.danger {
-		color: var(--color-text-danger);
+		color: var(--color-text-error);
 	}
 
 	.messages {

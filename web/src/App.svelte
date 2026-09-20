@@ -1,5 +1,8 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import "@lottiefiles/dotlottie-wc";
+	const ringsUrl = "/rings.lottie";
+	const prefersReduced = typeof matchMedia !== "undefined" && matchMedia("(prefers-reduced-motion: reduce)").matches;
 	import "./lib/sprites.css";
 	import { event } from "./lib/content";
 	import Admin from "./routes/admin.svelte";
@@ -56,18 +59,6 @@
 		);
 		for (const el of document.querySelectorAll("[data-reveal]")) {
 			revealObserver.observe(el);
-		}
-
-		const spriteObserver = new IntersectionObserver(
-			(entries) => {
-				for (const entry of entries) {
-					entry.target.classList.toggle("is-active", entry.isIntersecting);
-				}
-			},
-			{ threshold: 0.4 }
-		);
-		for (const el of document.querySelectorAll(".petal-sprite--hero, .petal-sprite--divider")) {
-			spriteObserver.observe(el);
 		}
 
 		ensureYtPlayer();
@@ -169,18 +160,15 @@
 		<button class="cover" type="button" onclick={openInvite} aria-label="Buka undangan">
 			<span class="cover-inner">
 				<span class="eyebrow">Undangan Ngunduh Mantu</span>
-				<span class="envelope" aria-hidden="true">
-					<span class="env-flap"></span>
-					<span class="env-body"></span>
-					<span class="env-seal">U &amp; S</span>
-					<span class="env-letter"></span>
+				<span class="rings" aria-hidden="true">
+					<dotlottie-wc src={ringsUrl} autoplay={!prefersReduced} loop></dotlottie-wc>
 				</span>
 				<span class="tap-hint">Ketuk untuk membuka</span>
 			</span>
 		</button>
 	{/if}
 
-	<header class="hero" class:dim={!opened} aria-label={event.title}>
+	<header class="hero" aria-label={event.title}>
 		<p class="eyebrow">Undangan Ngunduh Mantu</p>
 		<h1>
 			<span class="name">{event.groom}</span>
@@ -203,16 +191,6 @@
 				</span>
 			{/each}
 		</div>
-
-		<div class="petals" aria-hidden="true">
-			<span class="petal"></span>
-			<span class="petal"></span>
-			<span class="petal"></span>
-			<span class="petal"></span>
-			<span class="petal"></span>
-		</div>
-		<span class="petal-sprite petal-sprite--hero" aria-hidden="true"></span>
-		<span class="scroll-hint" aria-hidden="true"></span>
 	</header>
 
 	<div data-reveal><SectionCouple /></div>
@@ -222,8 +200,6 @@
 	<div data-reveal><SectionRsvp /></div>
 	<div data-reveal><SectionMessages /></div>
 	<div data-reveal><SectionClosing /></div>
-
-	<div class="petal-sprite petal-sprite--divider" aria-hidden="true"></div>
 
 	<div id="yt-player" class="player" aria-hidden="true" tabindex="-1"></div>
 
@@ -259,7 +235,7 @@
 		justify-content: center;
 		padding: var(--spacing-l);
 		background: var(--color-bg-base);
-		border: 1px solid var(--color-accent-gold-weak);
+		border: 1px solid var(--color-stroke-strong);
 		cursor: pointer;
 	}
 
@@ -268,6 +244,7 @@
 		flex-direction: column;
 		align-items: center;
 		gap: var(--spacing-l);
+		max-width: 320px;
 	}
 
 	.eyebrow {
@@ -275,71 +252,20 @@
 		font-weight: var(--font-weight-bold);
 		letter-spacing: var(--tracking-caps);
 		text-transform: uppercase;
-		color: var(--color-accent-gold-text);
+		color: var(--color-text-brand);
 	}
 
-	.envelope {
-		position: relative;
-		width: 240px;
-		aspect-ratio: 4 / 3;
-		border-radius: var(--radius-surface);
-		border: 1px solid var(--color-accent-gold-weak);
-	}
-
-	.env-flap {
-		position: absolute;
-		inset: 0;
-		background: var(--color-fill-brand);
-		clip-path: polygon(0 0, 100% 0, 50% 62%);
-		transition: transform var(--duration-slow) var(--ease-in-out);
-		transform-origin: top center;
-	}
-
-	.env-body {
-		position: absolute;
-		inset: 0;
-		border-radius: var(--radius-surface);
-		clip-path: polygon(0 100%, 50% 45%, 100% 100%);
-		box-shadow: inset 0 0 0 1px var(--color-accent-gold-weak);
-	}
-
-	.env-seal {
-		position: absolute;
-		left: 50%;
-		top: 42%;
-		transform: translate(-50%, -50%);
-		display: grid;
-		place-items: center;
-		width: 56px;
-		height: 56px;
-		border-radius: var(--radius-full);
-		background: var(--color-accent-gold);
+	.rings {
+		width: 200px;
+		height: 200px;
 		color: var(--color-text-strong);
-		font-family: var(--font-display);
-		font-style: italic;
-		font-size: var(--text-caption);
-		letter-spacing: 0.04em;
 	}
 
-	.env-letter {
-		position: absolute;
-		left: 12%;
-		right: 12%;
-		bottom: 10%;
-		top: 22%;
-		background: var(--color-bg-base);
-		border: 1px solid var(--color-stroke-weak);
-		border-radius: var(--radius-sm);
-		transform: translateY(6px);
-	}
-
-	.cover:hover .env-flap,
-	.cover:focus-visible .env-flap {
-		transform: rotateX(35deg);
-	}
-
-	.cover:active .env-flap {
-		transform: rotateX(75deg);
+	.rings dotlottie-wc {
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		filter: invert(1);
 	}
 
 	.cover:focus-visible {
@@ -354,37 +280,12 @@
 
 	.hero {
 		position: relative;
-		isolation: isolate;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		gap: var(--spacing-s);
 		padding: var(--spacing-xxl) var(--spacing-m) var(--spacing-section);
 		text-align: center;
-	}
-
-	@media (prefers-reduced-motion: no-preference) {
-		.hero::before {
-			content: "";
-			position: absolute;
-			z-index: -1;
-			inset: 0;
-			background: radial-gradient(80% 60% at 50% 30%, var(--color-fill-brand), transparent 70%);
-			animation: hero-zoom 14s ease-in-out infinite alternate;
-		}
-
-		@keyframes hero-zoom {
-			from {
-				transform: scale(1);
-			}
-			to {
-				transform: scale(1.04);
-			}
-		}
-	}
-
-	.petal-sprite--divider {
-		margin: 0 auto var(--spacing-section);
 	}
 
 	.hero h1 {
@@ -395,7 +296,7 @@
 		gap: var(--spacing-s);
 		font-size: var(--text-h1);
 		line-height: var(--leading-h1);
-		font-weight: 300;
+		font-weight: var(--font-weight-bold);
 		letter-spacing: var(--tracking-h1);
 		color: var(--color-text-strong);
 		margin: 0;
@@ -408,10 +309,10 @@
 	}
 
 	.amp {
-		color: var(--color-accent-gold);
+		color: var(--color-text-brand);
 		font-family: var(--font-display);
-		font-style: italic;
-		font-size: var(--text-h3);
+		font-size: var(--text-h2);
+		line-height: 1;
 	}
 
 	.date-line {
@@ -428,7 +329,7 @@
 
 	.countdown {
 		display: flex;
-		gap: var(--spacing-l);
+		gap: var(--spacing-s);
 		margin-top: var(--spacing-m);
 	}
 
@@ -437,8 +338,10 @@
 		flex-direction: column;
 		align-items: center;
 		gap: var(--spacing-2xs);
-		min-width: 64px;
+		min-width: 56px;
 		padding: var(--spacing-s);
+		border-radius: var(--radius-control);
+		background: var(--color-fill);
 	}
 
 	.cell strong {
@@ -454,15 +357,6 @@
 		color: var(--color-text-weak);
 		text-transform: uppercase;
 		letter-spacing: var(--tracking-caps);
-	}
-
-	.scroll-hint {
-		width: 18px;
-		height: 18px;
-		margin-top: var(--spacing-m);
-		border-right: 2px solid var(--color-accent-gold-weak);
-		border-bottom: 2px solid var(--color-accent-gold-weak);
-		transform: rotate(45deg);
 	}
 
 	.player {
@@ -481,12 +375,17 @@
 		padding: var(--spacing-s) var(--spacing-m);
 		border-radius: var(--radius-full);
 		font-size: var(--text-body);
+		font-weight: var(--font-weight-bold);
 		text-decoration: none;
-		background: var(--color-bg-base);
-		border: 1px solid var(--color-accent-gold-weak);
+		background: var(--color-bg-raised);
+		border: 1px solid var(--color-stroke-strong);
 		color: var(--color-text-strong);
 		box-shadow: none;
-		backdrop-filter: blur(8px);
+		cursor: pointer;
+	}
+
+	.fab:hover {
+		background: var(--color-fill);
 	}
 
 	.fab:focus-visible {
@@ -520,26 +419,7 @@
 
 	@media (min-width: 431px) {
 		.cover {
-			border-inline: 1px solid var(--color-stroke-weak);
-		}
-	}
-
-	@media (prefers-reduced-motion: no-preference) {
-		.scroll-hint {
-			animation: bob var(--duration-ambient-base) var(--ease-in-out) infinite alternate;
-		}
-
-		.cover:hover {
-			transition: transform var(--duration-base) var(--ease-out);
-		}
-
-		@keyframes bob {
-			from {
-				transform: rotate(45deg) translateY(0);
-			}
-			to {
-				transform: rotate(45deg) translateY(6px);
-			}
+			border-inline: 1px solid var(--color-stroke-strong);
 		}
 	}
 </style>
