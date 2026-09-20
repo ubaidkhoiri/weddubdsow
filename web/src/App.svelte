@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import "./lib/sprites.css";
 	import { event } from "./lib/content";
 	import SectionCouple from "./lib/SectionCouple.svelte";
 	import SectionStory from "./lib/SectionStory.svelte";
@@ -31,6 +32,33 @@
 			}
 		} catch {
 			/* localStorage unavailable, cover stays */
+		}
+
+		const revealObserver = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (entry.isIntersecting) {
+						entry.target.classList.add("is-inview");
+						revealObserver.unobserve(entry.target);
+					}
+				}
+			},
+			{ threshold: 0.15 }
+		);
+		for (const el of document.querySelectorAll("[data-reveal]")) {
+			revealObserver.observe(el);
+		}
+
+		const spriteObserver = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					entry.target.classList.toggle("is-active", entry.isIntersecting);
+				}
+			},
+			{ threshold: 0.4 }
+		);
+		for (const el of document.querySelectorAll(".petal-sprite--hero, .petal-sprite--divider")) {
+			spriteObserver.observe(el);
 		}
 	});
 
@@ -100,16 +128,26 @@
 			{/each}
 		</div>
 
+		<div class="petals" aria-hidden="true">
+			<span class="petal"></span>
+			<span class="petal"></span>
+			<span class="petal"></span>
+			<span class="petal"></span>
+			<span class="petal"></span>
+		</div>
+		<span class="petal-sprite petal-sprite--hero" aria-hidden="true"></span>
 		<span class="scroll-hint" aria-hidden="true"></span>
 	</header>
 
-	<SectionCouple />
-	<SectionStory />
-	<SectionSchedule />
-	<SectionGallery />
-	<SectionRsvp />
-	<SectionMessages />
-	<SectionClosing />
+	<div data-reveal><SectionCouple /></div>
+	<div data-reveal><SectionStory /></div>
+	<div data-reveal><SectionSchedule /></div>
+	<div data-reveal><SectionGallery /></div>
+	<div data-reveal><SectionRsvp /></div>
+	<div data-reveal><SectionMessages /></div>
+	<div data-reveal><SectionClosing /></div>
+
+	<div class="petal-sprite petal-sprite--divider" aria-hidden="true"></div>
 
 	{#if musicStarted}
 		<iframe
@@ -242,12 +280,17 @@
 	}
 
 	.hero {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		gap: var(--spacing-s);
 		padding: var(--spacing-xxl) var(--spacing-m) var(--spacing-section);
 		text-align: center;
+	}
+
+	.petal-sprite--divider {
+		margin: 0 auto var(--spacing-section);
 	}
 
 	.hero h1 {
