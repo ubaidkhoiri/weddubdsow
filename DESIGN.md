@@ -15,6 +15,10 @@ Source of truth untuk semua UI. Token layer ada di `web/src/jig`, di-generate ol
   untuk eyebrow/date label kecil. Teks lain pakai `--color-text-strong/-weak`.
 - Mode: editorial dipakai seluruh SPA undangan (`theme.css` import
   `mode.editorial.css`). Admin nanti di-scope token sendiri.
+- Forced light: undangan light-only. `color-scheme: light` di brand css, blok
+  `@media (prefers-color-scheme: dark)` dihapus. Sistem gelap (termasuk iOS dark)
+  tidak memengaruhi tampilan. Hook `:root[data-theme="dark"]` dibiarkan ada untuk
+  toggle masa depan, tidak aktif saat ini.
 
 ## Typografi
 
