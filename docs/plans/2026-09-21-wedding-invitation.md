@@ -114,15 +114,15 @@
 - Create: `web/src/lib/SectionClosing.svelte`
 - Create: `web/src/lib/mock.ts`
 
-- [ ] Step 1: Write `web/src/lib/mock.ts` with the placeholder arrays from content.ts: two Pexels gallery images, a bio line for each couple, three story moments and a closing text. Write the copy by hand in a warm reflective tone. Do not use the word INFJ.
-- [ ] Step 2: Build `SectionCouple.svelte` with the bios and photos.
-- [ ] Step 3: Build `SectionStory.svelte` with the timeline from mock data.
-- [ ] Step 4: Build `SectionSchedule.svelte` with the two days, the venue and a maps link using the maps URL.
-- [ ] Step 5: Build `SectionGallery.svelte` with the Pexels images in a simple grid and a lightbox on tap.
-- [ ] Step 6: Build `SectionClosing.svelte` with the closing text, a thank-you note and the guest names.
-- [ ] Step 7: Mount the sections in App.svelte, add a music toggle button that embeds the YouTube iframe lazily on first tap, and a fixed WhatsApp share button using the dummy number.
-- [ ] Step 8: Run `npm run build` in `web/` and serve the output to confirm every heading renders.
-- [ ] Step 9: Commit with message `feat: invitation sections with placeholder content`.
+- [x] Step 1: Write `web/src/lib/mock.ts` with the placeholder arrays from content.ts: two Pexels gallery images, a bio line for each couple, three story moments and a closing text. Write the copy by hand in a warm reflective tone. Do not use the word INFJ. Merged into `web/src/lib/content.ts` already written in Task 5 (hand-written copy, no INFJ).
+- [x] Step 2: Build `SectionCouple.svelte` with the bios and photos.
+- [x] Step 3: Build `SectionStory.svelte` with the timeline from mock data.
+- [x] Step 4: Build `SectionSchedule.svelte` with the two days, the venue and a maps link using the maps URL.
+- [x] Step 5: Build `SectionGallery.svelte` with the Pexels images in a simple grid and a lightbox on tap.
+- [x] Step 6: Build `SectionClosing.svelte` with the closing text, a thank-you note and the guest names.
+- [x] Step 7: Mount the sections in App.svelte, add a music toggle button that embeds the YouTube iframe lazily on first tap, and a fixed WhatsApp share button using the dummy number.
+- [x] Step 8: Run `npm run build` in `web/` and serve the output to confirm every heading renders.
+- [x] Step 9: Commit with message `feat: invitation sections with placeholder content`.
 
 ### Task 7: RSVP and guest book forms wired to the API → verify: submitting the guest book shows the posted message in the local list
 
