@@ -1,0 +1,21 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+}
+
+#app {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100svh;
+  border-inline: 1px solid #e5e4e7;
+}
