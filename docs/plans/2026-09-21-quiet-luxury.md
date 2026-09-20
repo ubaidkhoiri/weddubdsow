@@ -24,7 +24,7 @@
 - Modify: `web/src/app.css:12-23`
 - Modify: `web/src/App.svelte:163-242`
 
-- [ ] Step 1: Di `web/index.html`, ganti blok head jadi preconnect + stylesheet Cormorant. Setelah baris `<meta name="viewport" ...>` tambahkan:
+- [x] Step 1: Di `web/index.html`, ganti blok head jadi preconnect + stylesheet Cormorant. Setelah baris `<meta name="viewport" ...>` tambahkan:
       ```html
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -33,11 +33,11 @@
         rel="stylesheet"
       />
       ```
-- [ ] Step 2: Di `web/src/jig/brand.weddubdsow.css` setelah `--color-accent-gold-glow` (baris 64) tambahkan token keluarga font:
+- [x] Step 2: Di `web/src/jig/brand.weddubdsow.css` setelah `--color-accent-gold-glow` (baris 64) tambahkan token keluarga font:
       ```css
       --font-display: "Cormorant Garamond", Georgia, serif;
       ```
-- [ ] Step 3: Di `web/src/app.css` ganti selector body menjadi body sans sistem dengan margin 0, lalu tambahkan base:
+- [x] Step 3: Di `web/src/app.css` ganti selector body menjadi body sans sistem dengan margin 0, lalu tambahkan base:
       ```css
       body {
         display: flex;
@@ -46,7 +46,7 @@
         font-family: system-ui, "Segoe UI", Roboto, sans-serif;
       }
       ```
-- [ ] Step 4: Di `web/src/app.css` tambahkan rule baru setelah `#app`:
+- [x] Step 4: Di `web/src/app.css` tambahkan rule baru setelah `#app`:
       ```css
       .invite :is(h1, h2, h3) {
         font-family: var(--font-display);
@@ -56,10 +56,10 @@
         font-family: var(--font-display);
       }
       ```
-- [ ] Step 5: Di `web/src/App.svelte` bungkus cabang undangan: setelah `<div class="phone">` tempat `{:else}` (baris 166) tambah `<div class="invite">`, dan tutup sebelum `<footer class="admin-link">` (baris 241). Markup: baris 167 `{#if !opened}` sampai 240 tetap di dalam, baris 239 `<footer class="admin-link">` tetap di luar invite.
-- [ ] Step 6: Run `npm run build` di `C:\Users\ubdd\_code\weddubdsow\web`.
-- [ ] Step 7: Run `npx jig-ui check` di repo root.
-- [ ] Step 8: Commit `feat: quiet luxury typography foundation`.
+- [x] Step 5: Di `web/src/App.svelte` bungkus cabang undangan: setelah `<div class="phone">` tempat `{:else}` (baris 166) tambah `<div class="invite">`, dan tutup sebelum `<footer class="admin-link">` (baris 241). Markup: baris 167 `{#if !opened}` sampai 240 tetap di dalam, baris 239 `<footer class="admin-link">` tetap di luar invite.
+- [x] Step 6: Run `npm run build` di `C:\Users\ubdd\_code\weddubdsow\web`.
+- [x] Step 7: Run `npx jig-ui check` di repo root.
+- [x] Step 8: Commit `feat: quiet luxury typography foundation`.
 
 ### Task 2: Cover, hero, countdown, fab → verify: build (web) exit 0; agent-browser computed `.hero h1` fontFamily mengandung `Cormorant Garamond`; computed `.cell` backgroundColor `rgba(0, 0, 0, 0)`; computed `.cover` borderColor sama dengan `--color-accent-gold-weak`.
 
