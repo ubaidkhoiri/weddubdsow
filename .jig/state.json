@@ -1,0 +1,12 @@
+{
+  "version": "0.16.1",
+  "modes": [
+    "product"
+  ],
+  "files": {
+    "web/src/jig/brand.weddubdsow.css": "sha256:8ac2176142e1dc2cbd86174a35824ea892be90fea0ea56d0999870740e0a57aa",
+    "jig.config.json": "sha256:c8ad4006182e8077d564dcf18d85ada3f62cd4b31c57875b17365fa6beaac395",
+    "web/src/jig/mode.product.css": "sha256:d5dfed6749c0918fce733940a5499dbb145fee509513a0702f09f204353a0079",
+    "web/src/jig/theme.css": "sha256:bd6aa1c97ecdca5e5933260db68231af850f2bbfae991e4c019b66254072800e"
+  }
+}

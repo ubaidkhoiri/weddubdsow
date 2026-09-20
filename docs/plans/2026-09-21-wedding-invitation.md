@@ -82,11 +82,11 @@
 - Create: tokens source consumed by the SPA
 - Create: `DESIGN.md`
 
-- [ ] Step 1: Run `npx jig-ui@latest init --yes` from the repo root. It derives brand values from the existing tokens or uses the theme from the spec: jade and cream with gold accents. If the command asks questions, answer jade, cream, gold.
-- [ ] Step 2: Confirm a `jig.config.json` file exists at the repo root and a tokens file is generated.
-- [ ] Step 3: Run `npx jig-ui check` and correct any mechanical findings it reports.
-- [ ] Step 4: Write `DESIGN.md` at the repo root recording the brand palette, type scale, spacing and component rules derived from the tokens, so later sessions inherit them.
-- [ ] Step 5: Commit with message `chore: initialize jig design tokens`.
+- [x] Step 1: Run `npx jig-ui@latest init --yes` from the repo root. It derives brand values from the existing tokens or uses the theme from the spec: jade and cream with gold accents. If the command asks questions, answer jade, cream, gold.
+- [x] Step 2: Confirm a `jig.config.json` file exists at the repo root and a tokens file is generated.
+- [x] Step 3: Run `npx jig-ui check` and correct any mechanical findings it reports.
+- [x] Step 4: Write `DESIGN.md` at the repo root recording the brand palette, type scale, spacing and component rules derived from the tokens, so later sessions inherit them.
+- [x] Step 5: Commit with message `chore: initialize jig design tokens`.
 
 ### Task 5: SPA shell, content config, cover intro and hero → verify: built SPA serves and shows the cover
 
