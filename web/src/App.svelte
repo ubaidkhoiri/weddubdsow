@@ -2,6 +2,7 @@
 	import { onMount } from "svelte";
 	import "./lib/sprites.css";
 	import { event } from "./lib/content";
+	import Admin from "./routes/admin.svelte";
 	import SectionCouple from "./lib/SectionCouple.svelte";
 	import SectionStory from "./lib/SectionStory.svelte";
 	import SectionSchedule from "./lib/SectionSchedule.svelte";
@@ -13,6 +14,14 @@
 	const target = new Date("2026-10-08T09:00:00+07:00").getTime();
 	let opened = $state(false);
 	let now = $state(Date.now());
+	let isAdmin = $state(false);
+
+	onMount(() => {
+		const syncHash = () => (isAdmin = location.hash === "#/admin");
+		syncHash();
+		window.addEventListener("hashchange", syncHash);
+		return () => window.removeEventListener("hashchange", syncHash);
+	});
 
 	$effect(() => {
 		const timer = setInterval(() => (now = Date.now()), 1000);
@@ -89,6 +98,9 @@
 </script>
 
 <div class="phone">
+	{#if isAdmin}
+		<Admin />
+	{:else}
 	{#if !opened}
 		<button class="cover" type="button" onclick={openInvite} aria-label="Buka undangan">
 			<span class="cover-inner">
@@ -168,6 +180,11 @@
 		target="_blank"
 		rel="noreferrer"
 	>Bagikan lewat WhatsApp</a>
+
+	<footer class="admin-link">
+		<a href="#/admin">Admin</a>
+	</footer>
+	{/if}
 </div>
 
 <style>
@@ -404,6 +421,22 @@
 
 	.share {
 		right: var(--spacing-m);
+	}
+
+	.admin-link {
+		padding: var(--spacing-l) 0 var(--spacing-section);
+		text-align: center;
+		font-size: var(--text-caption);
+	}
+
+	.admin-link a {
+		color: var(--color-text-weak);
+		text-decoration: none;
+	}
+
+	.admin-link a:focus-visible {
+		outline: 2px solid var(--color-focus);
+		outline-offset: 2px;
 	}
 
 	@media (min-width: 431px) {

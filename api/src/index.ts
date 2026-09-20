@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { adminRoutes } from "./routes/admin";
 import { messageRoutes } from "./routes/messages";
 import { rsvpRoutes } from "./routes/rsvp";
 
@@ -27,5 +28,6 @@ app.get("/api/health", (c) => {
 
 app.route("/api", rsvpRoutes);
 app.route("/api", messageRoutes);
+app.route("/api/admin", adminRoutes);
 
 export default app;

@@ -68,3 +68,32 @@ export function postMessage(body: {
 export function heartMessage(id: string): Promise<ApiResult<{ ok: true }>> {
 	return send(`/api/messages/${id}/heart`, jsonInit({}));
 }
+
+export function postAdminLogin(password: string): Promise<ApiResult<{ ok: true }>> {
+	return send("/api/admin/login", jsonInit({ password }));
+}
+
+export function postAdminLogout(): Promise<ApiResult<{ ok: true }>> {
+	return send("/api/admin/logout", jsonInit({}));
+}
+
+export function getAdminMessages(): Promise<ApiResult<GuestMessage[]>> {
+	return send("/api/admin/messages");
+}
+
+export type AdminRsvp = {
+	id: string;
+	name: string;
+	attendance: Attendance;
+	guests: number;
+	phone: string | null;
+	created_at: string;
+};
+
+export function getAdminRsvp(): Promise<ApiResult<AdminRsvp[]>> {
+	return send("/api/admin/rsvp");
+}
+
+export function deleteAdminMessage(id: string): Promise<ApiResult<{ ok: true }>> {
+	return send(`/api/admin/messages/${id}`, { method: "DELETE" });
+}
