@@ -257,9 +257,9 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: var(--spacing-card);
+		padding: var(--spacing-l);
 		background: var(--color-bg-base);
-		border: 0;
+		border: 1px solid var(--color-accent-gold-weak);
 		cursor: pointer;
 	}
 
@@ -275,7 +275,7 @@
 		font-weight: var(--font-weight-bold);
 		letter-spacing: var(--tracking-caps);
 		text-transform: uppercase;
-		color: var(--color-text-weak);
+		color: var(--color-accent-gold);
 	}
 
 	.envelope {
@@ -283,8 +283,7 @@
 		width: 240px;
 		aspect-ratio: 4 / 3;
 		border-radius: var(--radius-surface);
-		background: var(--color-bg-raised);
-		border: 1px solid var(--color-stroke-weak);
+		border: 1px solid var(--color-accent-gold-weak);
 	}
 
 	.env-flap {
@@ -299,10 +298,9 @@
 	.env-body {
 		position: absolute;
 		inset: 0;
-		background: var(--color-bg-raised);
 		border-radius: var(--radius-surface);
 		clip-path: polygon(0 100%, 50% 45%, 100% 100%);
-		border: 1px solid var(--color-stroke-weak);
+		box-shadow: inset 0 0 0 1px var(--color-accent-gold-weak);
 	}
 
 	.env-seal {
@@ -316,9 +314,10 @@
 		height: 56px;
 		border-radius: var(--radius-full);
 		background: var(--color-accent-gold);
-		color: var(--color-text-strong);
+		color: var(--color-bg-base);
+		font-family: var(--font-display);
+		font-style: italic;
 		font-size: var(--text-caption);
-		font-weight: var(--font-weight-bold);
 		letter-spacing: 0.04em;
 	}
 
@@ -375,7 +374,8 @@
 		gap: var(--spacing-s);
 		font-size: var(--text-h1);
 		line-height: var(--leading-h1);
-		font-weight: var(--font-weight-bold);
+		font-weight: 300;
+		letter-spacing: var(--tracking-h1);
 		color: var(--color-text-strong);
 		margin: 0;
 	}
@@ -388,6 +388,8 @@
 
 	.amp {
 		color: var(--color-accent-gold);
+		font-family: var(--font-display);
+		font-style: italic;
 		font-size: var(--text-h3);
 	}
 
@@ -416,9 +418,7 @@
 		gap: var(--spacing-2xs);
 		min-width: 64px;
 		padding: var(--spacing-s);
-		border-radius: var(--radius-surface);
-		border: 1px solid var(--color-stroke-weak);
-		background: var(--color-bg-raised);
+		border-top: 1px solid var(--color-accent-gold-weak);
 	}
 
 	.cell strong {
@@ -462,10 +462,11 @@
 		border-radius: var(--radius-full);
 		font-size: var(--text-body);
 		text-decoration: none;
-		background: var(--color-bg-raised);
-		border: 1px solid var(--color-stroke-strong);
+		background: var(--color-bg-base);
+		border: 1px solid var(--color-accent-gold-weak);
 		color: var(--color-text-strong);
-		box-shadow: var(--shadow-raised);
+		box-shadow: none;
+		backdrop-filter: blur(8px);
 	}
 
 	.fab:focus-visible {
