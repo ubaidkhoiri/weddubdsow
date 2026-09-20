@@ -164,7 +164,7 @@
 - [x] Step 3: Closing: `.prose` (39-45) tetap; `.couple` (53-59) `font-family: var(--font-display)`, italic, `font-weight: 300`, size `var(--text-h2)`.
 - [x] Step 4: Run `npm run build` di web.
 - [x] Step 5: agent-browser ke `http://localhost:8787/#/section-gallery` relatif: eval computed backgroundColor `.card` dan borderColor `.thumb img`.
-- [ ] Step 6: Commit `feat: editorial schedule gallery closing`.
+- [x] Step 6: Commit `feat: editorial schedule gallery closing`.
 
 ### Task 5: RSVP dan guest book panel hairline → verify: build (web) exit 0; agent-browser post pesan di `#messages` dengan nama unik muncul di `ul.feed` setelah submit.
 
@@ -172,11 +172,11 @@
 - Modify: `web/src/lib/SectionMessages.svelte:176-258`
 - Modify: `web/src/lib/SectionRsvp.svelte:183-304`
 
-- [ ] Step 1: Messages: `.compose` (176-184) hapus `background` dan `border-radius`, ganti `border: 1px solid var(--color-accent-gold-weak)`; `.msg` (308-316) hapus `background` dan `border-radius`, ganti `border: 1px solid var(--color-stroke-weak)`; `.heart span` (357-359) tetap gold.
-- [ ] Step 2: Rsvp: `.summary` dan `.field input/select` (227-252) hapus `background: var(--color-bg-raised)` dan ganti border jadi `var(--color-stroke-weak)`; form tetap gap `var(--spacing-m)`.
-- [ ] Step 3: Run `npm run build` di web.
-- [ ] Step 4: agent-browser: isi `#msg-name` dan `#msg-text`, submit, pastikan nama yang dipakai muncul di `ul.feed` (regresi fungsional).
-- [ ] Step 5: Commit `feat: hairline panels for rsvp and guest book`.
+- [x] Step 1: Messages: `.compose` (176-184) hapus `background` dan `border-radius`, ganti `border: 1px solid var(--color-accent-gold-weak)`; `.msg` (308-316) hapus `background` dan `border-radius`, ganti `border: 1px solid var(--color-stroke-weak)`; `.heart span` (357-359) tetap gold.
+- [x] Step 2: Rsvp: `.summary` dan `.field input/select` (227-252) hapus `background: var(--color-bg-raised)` dan ganti border jadi `var(--color-stroke-weak)`; form tetap gap `var(--spacing-m)`.
+- [x] Step 3: Run `npm run build` di web.
+- [x] Step 4: agent-browser: isi `#msg-name` dan `#msg-text`, submit, pastikan nama yang dipakai muncul di `ul.feed` (regresi fungsional).
+- [x] Step 5: Commit `feat: hairline panels for rsvp and guest book`.
 
 ### Task 6: Regresi akhir dan deploy → verify: `Invoke-WebRequest` prod `https://api.ubdaw.workers.dev` status `200`; body mengandung `Undangan`.
 
