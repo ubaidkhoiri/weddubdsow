@@ -88,7 +88,7 @@
 - Modify: `web/src/lib/SectionGallery.svelte:19-20, 48-62`
 - Modify: `web/src/lib/SectionClosing.svelte:6-7, 23-37`
 
-- [ ] Step 1: Buat `web/src/lib/SectionHeading.svelte`:
+- [x] Step 1: Buat `web/src/lib/SectionHeading.svelte`:
       ```svelte
       <script lang="ts">
         let { eyebrow, title, numeral }: { eyebrow: string; title: string; numeral: string } = $props();
@@ -142,15 +142,15 @@
         }
       </style>
       ```
-- [ ] Step 2: Di setiap section, ganti blok `<p class="eyebrow">..</p>` + `<h2>..</h2>` dengan `<SectionHeading eyebrow="..." title="..." numeral="NN" />`. Nomor urut: Couple `01`, Story `02`, Schedule `03`, Gallery `04`, Closing `05`. Import `SectionHeading` di tiap file. Hapus style `.eyebrow` dan `h2` milik tiap section.
-- [ ] Step 3: Couple: heading baris 6-11 diganti; hapus style `.eyebrow` (26-33) dan `.couple-heading` tetap (nama besar pakai font display dari app.css).
-- [ ] Step 4: Story: baris 6-7 diganti SectionHeading+numeral 02. Story `.step h3` font-weight 300.
-- [ ] Step 5: Schedule: baris 6-7 diganti, numeral 03.
-- [ ] Step 6: Gallery: baris 19-20 diganti, numeral 04.
-- [ ] Step 7: Closing: baris 6-7 diganti, numeral 05.
-- [ ] Step 8: Run `npm run build` di web.
-- [ ] Step 9: agent-browser ke `http://localhost:8787`, eval `document.querySelectorAll(".numeral").length`.
-- [ ] Step 10: Commit `feat: section heading chrome`.
+- [x] Step 2: Di setiap section, ganti blok `<p class="eyebrow">..</p>` + `<h2>..</h2>` dengan `<SectionHeading eyebrow="..." title="..." numeral="NN" />`. Nomor urut: Couple `01`, Story `02`, Schedule `03`, Gallery `04`, Closing `05`. Import `SectionHeading` di tiap file. Hapus style `.eyebrow` dan `h2` milik tiap section.
+- [x] Step 3: Couple: heading baris 6-11 diganti; hapus style `.eyebrow` (26-33) dan `.couple-heading` tetap (nama besar pakai font display dari app.css).
+- [x] Step 4: Story: baris 6-7 diganti SectionHeading+numeral 02. Story `.step h3` font-weight 300.
+- [x] Step 5: Schedule: baris 6-7 diganti, numeral 03.
+- [x] Step 6: Gallery: baris 19-20 diganti, numeral 04.
+- [x] Step 7: Closing: baris 6-7 diganti, numeral 05.
+- [x] Step 8: Run `npm run build` di web.
+- [x] Step 9: agent-browser ke `http://localhost:8787`, eval `document.querySelectorAll(".numeral").length`.
+- [x] Step 10: Commit `feat: section heading chrome`.
 
 ### Task 4: Schedule editorial, gallery polaroid, closing italic → verify: build (web) exit 0; agent-browser computed `.card` backgroundColor `rgba(0, 0, 0, 0)`; computed `.thumb img` borderColor `var(--color-accent-gold-weak)`.
 
