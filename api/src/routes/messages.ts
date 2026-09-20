@@ -13,7 +13,7 @@ messageRoutes.get("/messages", async (c) => {
 	const rows = await getDb()
 		.select()
 		.from(messages)
-		.orderBy(desc(messages.created_at))
+		.orderBy(desc(messages.createdAt))
 		.limit(100);
 	return c.json(rows);
 });

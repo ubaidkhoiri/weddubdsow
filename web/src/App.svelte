@@ -5,6 +5,8 @@
 	import SectionStory from "./lib/SectionStory.svelte";
 	import SectionSchedule from "./lib/SectionSchedule.svelte";
 	import SectionGallery from "./lib/SectionGallery.svelte";
+	import SectionRsvp from "./lib/SectionRsvp.svelte";
+	import SectionMessages from "./lib/SectionMessages.svelte";
 	import SectionClosing from "./lib/SectionClosing.svelte";
 
 	const target = new Date("2026-10-08T09:00:00+07:00").getTime();
@@ -105,6 +107,8 @@
 	<SectionStory />
 	<SectionSchedule />
 	<SectionGallery />
+	<SectionRsvp />
+	<SectionMessages />
 	<SectionClosing />
 
 	{#if musicStarted}
