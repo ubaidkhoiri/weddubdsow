@@ -37,17 +37,14 @@
 		margin: 0;
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-s);
+		gap: var(--spacing-l);
 	}
 
 	.card {
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-2xs);
-		padding: var(--spacing-card);
-		border-radius: var(--radius-surface);
-		border: 1px solid var(--color-stroke-weak);
-		background: var(--color-bg-raised);
+		border-bottom: 1px solid var(--color-stroke-weak);
 	}
 
 	.card h3 {
@@ -66,7 +63,15 @@
 		margin: 0;
 	}
 
-	.time,
+	.time {
+		font-size: var(--text-lead);
+		font-weight: var(--font-weight-regular);
+		font-family: var(--font-display);
+		line-height: var(--leading-body);
+		color: var(--color-text-strong);
+		margin: 0;
+	}
+
 	.note {
 		font-size: var(--text-body);
 		line-height: var(--leading-body);

@@ -35,9 +35,11 @@
 	}
 
 	.couple {
-		font-size: var(--text-h3);
-		line-height: var(--leading-h3);
-		font-weight: var(--font-weight-bold);
+		font-family: var(--font-display);
+		font-style: italic;
+		font-weight: var(--font-weight-regular);
+		font-size: var(--text-h2);
+		line-height: var(--leading-h2);
 		color: var(--color-text-strong);
 		margin: 0;
 	}

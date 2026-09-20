@@ -65,8 +65,7 @@
 		display: block;
 		width: 100%;
 		padding: 0;
-		border: 0;
-		border-radius: var(--radius-surface);
+		border: 1px solid var(--color-accent-gold-weak);
 		background: transparent;
 		cursor: pointer;
 	}
@@ -76,7 +75,7 @@
 		width: 100%;
 		aspect-ratio: 3 / 4;
 		object-fit: cover;
-		border-radius: var(--radius-surface);
+		padding: var(--spacing-2xs);
 	}
 
 	.thumb:focus-visible {
