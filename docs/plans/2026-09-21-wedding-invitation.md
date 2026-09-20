@@ -131,11 +131,11 @@
 - Create: `web/src/lib/SectionMessages.svelte`
 - Create: `web/src/lib/api.ts`
 
-- [ ] Step 1: Write `web/src/lib/api.ts` with fetch wrappers for POST /api/rsvp, GET /api/messages and POST /api/messages, pointing at the dev worker origin during local dev.
-- [ ] Step 2: Build `SectionRsvp.svelte` with a form for name, attendance radio yes no maybe, guest count, optional phone. Submit posts to /api/rsvp and show a success state on HTTP 2xx and an error state otherwise.
-- [ ] Step 3: Build `SectionMessages.svelte` that fetches messages on mount, lists them newest first, has a small form to post one, and re-fetches after posting.
-- [ ] Step 4: Run the worker with `npm run dev` in `api/` and the SPA with `npm run dev` in `web/`. Post a guest book message from the page and confirm it appears immediately in the list.
-- [ ] Step 5: Commit with message `feat: rsvp and guest book wired to api`.
+- [x] Step 1: Write `web/src/lib/api.ts` with fetch wrappers for POST /api/rsvp, GET /api/messages and POST /api/messages, pointing at the dev worker origin during local dev.
+- [x] Step 2: Build `SectionRsvp.svelte` with a form for name, attendance radio yes no maybe, guest count, optional phone. Submit posts to /api/rsvp and show a success state on HTTP 2xx and an error state otherwise.
+- [x] Step 3: Build `SectionMessages.svelte` that fetches messages on mount, lists them newest first, has a small form to post one, and re-fetches after posting.
+- [x] Step 4: Run the worker with `npm run dev` in `api/` and the SPA with `npm run dev` in `web/`. Post a guest book message from the page and confirm it appears immediately in the list.
+- [x] Step 5: Commit with message `feat: rsvp and guest book wired to api`.
 
 ### Task 8: Animation polish → verify: the sprite animation plays on the live page
 
