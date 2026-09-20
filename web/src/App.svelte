@@ -76,7 +76,7 @@
 	function openInvite() {
 		opened = true;
 		musicOn = true;
-		applyMusic();
+		applyMusic(true);
 		try {
 			localStorage.setItem("weddu-opened", "1");
 		} catch {
@@ -97,11 +97,12 @@
 	let ytReady = false;
 	let ytStarted = false;
 
-	function applyMusic() {
+	function applyMusic(restart = false) {
 		const p = ytPlayer as any;
 		if (!p || !ytReady) return;
 		if (musicOn) {
 			ytStarted = true;
+			if (restart) p.seekTo(0, true);
 			p.unMute();
 			p.setVolume(100);
 			p.playVideo();
