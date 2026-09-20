@@ -144,13 +144,13 @@
 - Create: `web/src/lib/sprites.css`
 - Modify: `web/src/App.svelte`
 
-- [ ] Step 1: Add a scroll-reveal helper: an IntersectionObserver that toggles a class when sections enter the viewport for fade and slide effects.
-- [ ] Step 2: Find or create a free sprite sheet for one illustrated element, for example a bird or falling petals, sized as a horizontal strip of frames.
-- [ ] Step 3: Write `web/src/lib/sprites.css` using CSS `steps()` on `background-position` to run the sprite sheet, with reduced-motion support via prefers-reduced-motion hiding the animation.
-- [ ] Step 4: Mount the animated sprite in the hero and one decorative element mid-page, both using only the sprite sheet.
-- [ ] Step 5: Add a very light particle field of petals or confetti behind the hero using CSS only, disabled for reduced motion.
-- [ ] Step 6: Run `npm run build` in `web/`, serve it, and confirm on a phone-sized viewport that the sprite and particles move.
-- [ ] Step 7: Commit with message `feat: sprite and particle animation`.
+- [x] Step 1: Add a scroll-reveal helper: an IntersectionObserver that toggles a class when sections enter the viewport for fade and slide effects.
+- [x] Step 2: Find or create a free sprite sheet for one illustrated element, for example a bird or falling petals, sized as a horizontal strip of frames.
+- [x] Step 3: Write `web/src/lib/sprites.css` using CSS `steps()` on `background-position` to run the sprite sheet, with reduced-motion support via prefers-reduced-motion hiding the animation.
+- [x] Step 4: Mount the animated sprite in the hero and one decorative element mid-page, both using only the sprite sheet.
+- [x] Step 5: Add a very light particle field of petals or confetti behind the hero using CSS only, disabled for reduced motion.
+- [x] Step 6: Run `npm run build` in `web/`, serve it, and confirm on a phone-sized viewport that the sprite and particles move.
+- [x] Step 7: Commit with message `feat: sprite and particle animation`.
 
 ### Task 9: Admin screen and session login → verify: the wrong password returns 401 and the right one reaches the admin list
 
