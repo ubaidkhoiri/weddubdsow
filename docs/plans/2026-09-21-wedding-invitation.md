@@ -185,7 +185,7 @@
 - [x] Step 6: Verify the deployment: open the worker URL, confirm the cover renders and a guest book post persists across reload.
 - [x] Step 7: Write `.github/workflows/deploy.yml` that on push to main runs `npm ci` and `npm run build` in both packages and `npx wrangler deploy` from `api/`, using secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID.
 - [x] Step 8: Commit with message `feat: deploy workflow`.
-- [ ] Step 9: Hand the user the GitHub setup steps in README: create an empty public repo on github.com, add the remote, push, then add the API token as a GitHub Actions secret. The user reports back when the workflow has run once.
+- [x] Step 9: Hand the user the GitHub setup steps in README: create an empty public repo on github.com, add the remote, push, then add the API token as a GitHub Actions secret. The user reports back when the workflow has run once.
 
 ### Task 11: Final verification pass → verify: a fresh `git clone` can run both builds to completion
 
