@@ -63,6 +63,9 @@
   --color-accent-gold-weak: hsl(45 72% 40% / 45%);
   --color-accent-gold-glow: hsl(45 90% 55% / 35%);
 
+  /* Display font for invitation headings: Cormorant Garamond light + italic (approved 2026-09-21). */
+  --font-display: "Cormorant Garamond", Georgia, serif;
+
   /* ================= SYSTEM COLOURS =================
      Three, with familiar traffic-light meanings. Four variations each.
      Never the only signal — pair with an icon and text (C-20).

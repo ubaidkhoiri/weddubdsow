@@ -164,6 +164,7 @@
 	{#if isAdmin}
 		<Admin />
 	{:else}
+	<div class="invite">
 	{#if !opened}
 		<button class="cover" type="button" onclick={openInvite} aria-label="Buka undangan">
 			<span class="cover-inner">
@@ -239,6 +240,7 @@
 	<footer class="admin-link">
 		<a href="#/admin">Admin</a>
 	</footer>
+	</div>
 	{/if}
 </div>
 
@@ -379,7 +381,8 @@
 	}
 
 	.name {
-		font-size: clamp(1.9rem, 7vw, 2.6rem);
+		font-family: var(--font-display);
+		font-size: var(--text-h1);
 		line-height: 1.15;
 	}
 

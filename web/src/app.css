@@ -10,14 +10,24 @@ body {
 }
 
 body {
-  display: flex;
-  justify-content: center;
-  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+	display: flex;
+	justify-content: center;
+	margin: 0;
+	font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
 }
 
 #app {
-  width: 100%;
-  max-width: 430px;
-  min-height: 100svh;
-  border-inline: 1px solid #e5e4e7;
+	width: 100%;
+	max-width: 430px;
+	min-height: 100svh;
+	border-inline: 1px solid var(--color-stroke-weak);
+}
+
+.invite :is(h1, h2, h3) {
+	font-family: var(--font-display);
+	font-weight: 300;
+}
+
+.invite p {
+	font-family: var(--font-display);
 }
