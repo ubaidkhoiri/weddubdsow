@@ -5,15 +5,23 @@ Source of truth untuk semua UI. Token layer ada di `web/src/jig`, di-generate ol
 
 ## Brand
 
-- Jade (`--color-brand`, hsl 158 38% 34%). Jade itu hijau, jadi per rule E-64 brand
-  ini DECORATIVE ONLY. Elemen interaktif (link, tombol utama) pakai
+- Jade (`--color-brand`, hsl 158 40% 52%, mint cerah). Jade itu hijau, jadi per rule
+  E-64 brand ini DECORATIVE ONLY. Elemen interaktif (link, tombol utama) pakai
   `--color-text-strong`.
 - Cream: `--color-bg-base` (warm off-white). Kartu `--color-bg-raised`.
-- Gold ornament: `--color-accent-gold`, `--color-accent-gold-weak`,
-  `--color-accent-gold-glow`. Hanya aksen garis, segel, kilau. Tidak pernah
-  interaktif (E-65).
+- Gold ornament: `--color-accent-gold` (hsl 43 78% 56%, cerah), `--color-accent-gold-weak`,
+  `--color-accent-gold-glow`. Hanya aksen garis, segel, kilau. Tidak pernah interaktif (E-65).
+- Gold teks: `--color-accent-gold-text` (hsl 43 60% 36%, kontras ≥ 4.5:1 di cream)
+  untuk eyebrow/date label kecil. Teks lain pakai `--color-text-strong/-weak`.
 - Mode: editorial dipakai seluruh SPA undangan (`theme.css` import
   `mode.editorial.css`). Admin nanti di-scope token sendiri.
+
+## Typografi
+
+- Display (heading/nama/waktu/signature): Cormorant Garamond light italic
+  (`--font-display`).
+- Body/paragraf/label/input/button: sans system (400/600). Jangan set seluruh paragraf
+  ke display.
 
 ## Aturan pakai
 
