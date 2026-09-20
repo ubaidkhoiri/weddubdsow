@@ -32,12 +32,12 @@
 - Modify: `web/src/lib/SectionSchedule.svelte:23`
 - Modify: `web/src/lib/SectionSchedule.svelte:104`
 
-- [ ] Step 1: Create `web/src/lib/MapDialog.svelte`: `let dialog = $state()` and `let src = $state('')`; the dialog is a native `<dialog>` (bind via `bind:this`); export function `openMap()` that builds `src = 'https://maps.google.com/maps?q=' + encodeURIComponent(eventDetails?.venue ?? '') + '&output=embed'` (fallback string computed inside from a `venue` prop), sets it, then `dialog.showModal()`; inside the dialog place a close `<button>` labeled `Tutup` and an external `<a href={mapsUrl}>Buka di Google Maps</a>` with `target="_blank" rel="noreferrer"`; the iframe gets `title="Peta lokasi acara"`, `loading="lazy"`, `allowfullscreen`. Use only tokens for styling, border via `var(--color-accent-gold-weak)`.
-- [ ] Step 2: In `SectionSchedule.svelte:23` replace the plain `<a>` with a `<button class="loc-btn" type="button" onclick={mapDialog.openMap}>Buka lokasi di peta</button>` and mount `<MapDialog venue={event.venue} mapsUrl={event.mapsUrl} bind:this={mapDialog} />` near it. Remove the now-unused anchor? Keep the external link inside the dialog only, so the schedule form loses its old direct link.
-- [ ] Step 3: Style `.loc-btn` token-only as a text button (accent on hover, focus-visible token) at the `SectionSchedule.svelte:104` style slot.
-- [ ] Step 4: Run `npm run build` (web).
-- [ ] Step 5: Verify with agent-browser `http://localhost:8787/?cb=map1`; on the schedule section, click the location button and evaluate `document.querySelector('dialog[open]') === null` returns false, and the iframe inside has a non-empty `src`.
-- [ ] Step 6: Commit `feat: native map dialog with lazy iframe`.
+- [x] Step 1: Create `web/src/lib/MapDialog.svelte`: `let dialog = $state()` and `let src = $state('')`; the dialog is a native `<dialog>` (bind via `bind:this`); export function `openMap()` that builds `src = 'https://maps.google.com/maps?q=' + encodeURIComponent(eventDetails?.venue ?? '') + '&output=embed'` (fallback string computed inside from a `venue` prop), sets it, then `dialog.showModal()`; inside the dialog place a close `<button>` labeled `Tutup` and an external `<a href={mapsUrl}>Buka di Google Maps</a>` with `target="_blank" rel="noreferrer"`; the iframe gets `title="Peta lokasi acara"`, `loading="lazy"`, `allowfullscreen`. Use only tokens for styling, border via `var(--color-accent-gold-weak)`.
+- [x] Step 2: In `SectionSchedule.svelte:23` replace the plain `<a>` with a `<button class="loc-btn" type="button" onclick={mapDialog.openMap}>Buka lokasi di peta</button>` and mount `<MapDialog venue={event.venue} mapsUrl={event.mapsUrl} bind:this={mapDialog} />` near it. Remove the now-unused anchor? Keep the external link inside the dialog only, so the schedule form loses its old direct link.
+- [x] Step 3: Style `.loc-btn` token-only as a text button (accent on hover, focus-visible token) at the `SectionSchedule.svelte:104` style slot.
+- [x] Step 4: Run `npm run build` (web).
+- [x] Step 5: Verify with agent-browser `http://localhost:8787/?cb=map1`; on the schedule section, click the location button and evaluate `document.querySelector('dialog[open]') === null` returns false, and the iframe inside has a non-empty `src`.
+- [x] Step 6: Commit `feat: native map dialog with lazy iframe`.
 
 ## Task 3: rsvp draft saved to localStorage → verify: web build exit 0 and a typed name survives a page reload
 
