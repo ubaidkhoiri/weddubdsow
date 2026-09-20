@@ -1,7 +1,11 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import { event } from "./lib/content";
-	import Sections from "./lib/sections.svelte";
+	import SectionCouple from "./lib/SectionCouple.svelte";
+	import SectionStory from "./lib/SectionStory.svelte";
+	import SectionSchedule from "./lib/SectionSchedule.svelte";
+	import SectionGallery from "./lib/SectionGallery.svelte";
+	import SectionClosing from "./lib/SectionClosing.svelte";
 
 	const target = new Date("2026-10-08T09:00:00+07:00").getTime();
 	let opened = $state(false);
@@ -39,6 +43,18 @@
 
 	function pad(value: number): string {
 		return String(value).padStart(2, "0");
+	}
+
+	function shareText(): string {
+		return `Undangan Ngunduh Mantu ${event.groom} & ${event.bride}, ${event.dateStart} sampai ${event.dateEnd} di ${event.venue}.`;
+	}
+
+	let musicStarted = $state(false);
+	let musicOn = $state(false);
+
+	function toggleMusic() {
+		musicStarted = true;
+		musicOn = !musicOn;
 	}
 </script>
 
@@ -85,7 +101,31 @@
 		<span class="scroll-hint" aria-hidden="true"></span>
 	</header>
 
-	<Sections />
+	<SectionCouple />
+	<SectionStory />
+	<SectionSchedule />
+	<SectionGallery />
+	<SectionClosing />
+
+	{#if musicStarted}
+		<iframe
+			class="player"
+			src="https://www.youtube-nocookie.com/embed/1892ujwIooo?autoplay={musicOn ? 1 : 0}"
+			title="Musik undangan"
+			allow="autoplay"
+			tabindex="-1"
+		></iframe>
+	{/if}
+
+	<button class="fab music" type="button" onclick={toggleMusic} aria-pressed={musicOn}>
+		{musicOn ? "Hentikan musik" : "Putar musik"}
+	</button>
+	<a
+		class="fab share"
+		href="https://wa.me/?text={encodeURIComponent(shareText())}"
+		target="_blank"
+		rel="noreferrer"
+	>Bagikan lewat WhatsApp</a>
 </div>
 
 <style>
@@ -281,6 +321,42 @@
 		border-right: 2px solid var(--color-accent-gold-weak);
 		border-bottom: 2px solid var(--color-accent-gold-weak);
 		transform: rotate(45deg);
+	}
+
+	.player {
+		position: fixed;
+		inset: auto 50% -9999px auto;
+		width: 1px;
+		height: 1px;
+		border: 0;
+	}
+
+	.fab {
+		position: fixed;
+		bottom: var(--spacing-m);
+		z-index: 10;
+		min-height: var(--size-touch-target);
+		padding: var(--spacing-s) var(--spacing-m);
+		border-radius: var(--radius-full);
+		font-size: var(--text-body);
+		text-decoration: none;
+		background: var(--color-bg-raised);
+		border: 1px solid var(--color-stroke-strong);
+		color: var(--color-text-strong);
+		box-shadow: var(--shadow-raised);
+	}
+
+	.fab:focus-visible {
+		outline: 2px solid var(--color-focus);
+		outline-offset: 2px;
+	}
+
+	.music {
+		left: var(--spacing-m);
+	}
+
+	.share {
+		right: var(--spacing-m);
 	}
 
 	@media (min-width: 431px) {
