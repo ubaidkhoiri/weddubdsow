@@ -1,5 +1,8 @@
 <script lang="ts">
+	import { onMount } from "svelte";
 	import { postRsvp, type Attendance } from "./api";
+
+	const DRAFT_KEY = "weddu-rsvp-draft";
 
 	let name = $state("");
 	let attendance = $state<Attendance | "">("");
@@ -8,6 +11,26 @@
 	let fieldErrors = $state<Record<string, string>>({});
 	let summary = $state<{ kind: "error" | "success"; text: string } | null>(null);
 	let submitting = $state(false);
+
+	function saveDraft() {
+		if (typeof localStorage === "undefined") return;
+		localStorage.setItem(DRAFT_KEY, JSON.stringify({ name, attendance, guests, phone }));
+	}
+
+	onMount(() => {
+		if (typeof localStorage === "undefined") return;
+		try {
+			const raw = localStorage.getItem(DRAFT_KEY);
+			if (!raw) return;
+			const draft = JSON.parse(raw);
+			if (typeof draft?.name === "string") name = draft.name;
+			if (["yes", "no", "maybe"].includes(draft?.attendance)) attendance = draft.attendance;
+			if (typeof draft?.guests === "string") guests = draft.guests;
+			if (typeof draft?.phone === "string") phone = draft.phone;
+		} catch {
+			localStorage.removeItem(DRAFT_KEY);
+		}
+	});
 
 	function validateClient(): boolean {
 		const errors: Record<string, string> = {};
@@ -47,6 +70,7 @@
 		});
 		submitting = false;
 		if (result.ok) {
+			localStorage.removeItem(DRAFT_KEY);
 			name = "";
 			attendance = "";
 			guests = "1";
@@ -88,6 +112,7 @@
 				autocomplete="name"
 				enterkeyhint="next"
 				bind:value={name}
+				onblur={saveDraft}
 				aria-invalid={fieldErrors.name ? "true" : undefined}
 				aria-describedby={fieldErrors.name ? "rsvp-name-err" : undefined}
 			/>
@@ -99,15 +124,15 @@
 		<fieldset class="field radios">
 			<legend>Apakah kamu bisa hadir? <span class="req">(wajib)</span></legend>
 			<label>
-				<input type="radio" name="attendance" value="yes" bind:group={attendance} />
-				<span>Ya, hadir</span>
+<input type="radio" name="attendance" value="yes" bind:group={attendance} onblur={saveDraft} />
+			<span>Ya, hadir</span>
 			</label>
 			<label>
-				<input type="radio" name="attendance" value="no" bind:group={attendance} />
+				<input type="radio" name="attendance" value="no" bind:group={attendance} onblur={saveDraft} />
 				<span>Tidak bisa hadir</span>
 			</label>
 			<label>
-				<input type="radio" name="attendance" value="maybe" bind:group={attendance} />
+				<input type="radio" name="attendance" value="maybe" bind:group={attendance} onblur={saveDraft} />
 				<span>Mungkin</span>
 			</label>
 			{#if fieldErrors.attendance}
@@ -117,7 +142,7 @@
 
 		<div class="field">
 			<label for="rsvp-guests">Jumlah tamu yang hadir <span class="req">(wajib)</span></label>
-			<select id="rsvp-guests" bind:value={guests} aria-invalid={fieldErrors.guests ? "true" : undefined}>
+			<select id="rsvp-guests" bind:value={guests} onblur={saveDraft} aria-invalid={fieldErrors.guests ? "true" : undefined}>
 				{#each [1, 2, 3, 4, 5] as count (count)}
 					<option value={count}>{count} orang</option>
 				{/each}
@@ -137,6 +162,7 @@
 				enterkeyhint="done"
 				placeholder="08xxxxxxxxxx"
 				bind:value={phone}
+				onblur={saveDraft}
 				aria-invalid={fieldErrors.phone ? "true" : undefined}
 			/>
 			{#if fieldErrors.phone}
