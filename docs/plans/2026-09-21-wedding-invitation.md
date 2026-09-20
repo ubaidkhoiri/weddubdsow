@@ -64,16 +64,16 @@
 - Create: `api/src/index.test.ts`
 - Modify: `api/wrangler.toml` (add a fallback so missing routes serve the SPA later)
 
-- [ ] Step 1: Add `vitest` as a dev dependency in `api/`.
-- [ ] Step 2: Write `api/src/lib/validate.ts` with pure functions validating rsvp input (name present and at most 120 chars, attendance in yes no maybe, guests between 1 and 5, phone optional and at most 20 chars) and message input (name present and at most 60 chars, message present and at most 500 chars).
-- [ ] Step 3: Write `api/src/routes/rsvp.ts` with a POST insertion into `guests`.
-- [ ] Step 4: Write `api/src/routes/messages.ts` with a GET that returns public messages newest first and a POST that inserts one.
-- [ ] Step 5: Write `api/src/middleware.ts` with an in-memory rate limiter keyed by client IP allowing up to 30 requests per minute per route and a JSON body parser that rejects malformed JSON with HTTP 400.
-- [ ] Step 6: Write `api/src/index.ts` mounting the Hono app: a health check, the two route modules, and a CORS header for the local Vite dev origin.
-- [ ] Step 7: Write `api/src/index.test.ts` covering validation accepts and rejects, rate limiter blocking the 31st request in a minute, and a malformed body returning HTTP 400.
-- [ ] Step 8: Run `npm test` in `api/`.
-- [ ] Step 9: Run `npm run dev` in `api/` and confirm a request to `/api/health` returns HTTP 200.
-- [ ] Step 10: Commit with message `feat: hono api for rsvp and messages`.
+- [x] Step 1: Add `vitest` as a dev dependency in `api/`.
+- [x] Step 2: Write `api/src/lib/validate.ts` with pure functions validating rsvp input (name present and at most 120 chars, attendance in yes no maybe, guests between 1 and 5, phone optional and at most 20 chars) and message input (name present and at most 60 chars, message present and at most 500 chars).
+- [x] Step 3: Write `api/src/routes/rsvp.ts` with a POST insertion into `guests`.
+- [x] Step 4: Write `api/src/routes/messages.ts` with a GET that returns public messages newest first and a POST that inserts one.
+- [x] Step 5: Write `api/src/middleware.ts` with an in-memory rate limiter keyed by client IP allowing up to 30 requests per minute per route and a JSON body parser that rejects malformed JSON with HTTP 400.
+- [x] Step 6: Write `api/src/index.ts` mounting the Hono app: a health check, the two route modules, and a CORS header for the local Vite dev origin.
+- [x] Step 7: Write `api/src/index.test.ts` covering validation accepts and rejects, rate limiter blocking the 31st request in a minute, and a malformed body returning HTTP 400.
+- [x] Step 8: Run `npm test` in `api/`.
+- [x] Step 9: Run `npm run dev` in `api/` and confirm a request to `/api/health` returns HTTP 200.
+- [x] Step 10: Commit with message `feat: hono api for rsvp and messages`.
 
 ### Task 4: Jig token layer → verify: jig.config.json exists and `npx jig-ui check` passes
 
