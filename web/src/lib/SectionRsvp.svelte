@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import { postRsvp, type Attendance } from "./api";
+	import { burstHearts } from "./confetti";
 
 	const DRAFT_KEY = "weddu-rsvp-draft";
 
@@ -70,6 +71,7 @@
 		});
 		submitting = false;
 		if (result.ok) {
+			if (attendance === "yes") burstHearts();
 			localStorage.removeItem(DRAFT_KEY);
 			name = "";
 			attendance = "";
