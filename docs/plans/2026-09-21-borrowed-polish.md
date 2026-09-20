@@ -83,9 +83,9 @@
 **Files:**
 - Modify: none (verification and release only)
 
-- [ ] Step 1: Run `npm run build` (web) and `npm test` (api).
-- [ ] Step 2: agent-browser regression on `http://localhost:8787`: post a guest book message, send an RSVP, open `#/admin`, log in with the known password, confirm the admin list renders and the invite page does not.
-- [ ] Step 3: Merge the branch into `main` (ff) and push `origin main`.
-- [ ] Step 4: Wait for the deploy workflow run to end with conclusion `success`.
-- [ ] Step 5: `Invoke-WebRequest https://api.ubdaw.workers.dev` returns HTTP 200 and the body contains `Undangan`.
-- [ ] Step 6: Commit leftover plan ticks and push.
+- [x] Step 1: Run `npm run build` (web) and `npm test` (api).
+- [x] Step 2: agent-browser regression on `http://localhost:8787`: post a guest book message, send an RSVP, open `#/admin`, log in with the known password, confirm the admin list renders and the invite page does not.
+- [x] Step 3: Merge the branch into `main` (ff) and push `origin main`.
+- [x] Step 4: Wait for the deploy workflow run to end with conclusion `success`.
+- [x] Step 5: `Invoke-WebRequest https://api.ubdaw.workers.dev` returns HTTP 200 and the body contains `Undangan`.
+- [x] Step 6: Commit leftover plan ticks and push.
