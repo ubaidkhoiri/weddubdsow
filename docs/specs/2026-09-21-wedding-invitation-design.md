@@ -1,7 +1,7 @@
 ---
 title: Wedding invitation site Ubaid & Sofia
 date: 2026-09-21
-status: draft
+status: approved
 ---
 
 # Wedding invitation site Ubaid & Sofia: Design
@@ -57,13 +57,18 @@ Pushback from design conversation: the user was offered a lighter version (singl
 - A smoke check against `wrangler dev` proving the worker returns the SPA and answers /api.
 - Manual device checklist run once on a real phone: open cover, music toggle, RSVP submit, guest book submit, admin login and message moderation.
 
+## Content decisions (from review)
+
+- Event is called Ngunduh Mantu, a Javanese wedding reception. Invitation header says Undangan Ngunduh Mantu, not wedding.
+- Event runs 7 to 8 October 2026 from 09.00 until end. Main ceremony day is 8 October.
+- Venue: Balai Desa Kalurahan Giripurwo. Maps URL: https://maps.app.goo.gl/SZFx3jEad7dZwmvi8
+- Gallery and couple photos: placeholder images from Pexels.
+- Couple personalities: Ubaid is INFJ-A, Sofia is INFJ-T. Love story and closing text lean reflective and quietly warm, written by the implementer. The letters INFJ must not appear anywhere.
+- Music: YouTube URL https://www.youtube.com/watch?v=1892ujwIooo, embedded as a YouTube iframe player.
+- Theme: jade and cream with gold accents, chosen during the jig init interview.
+- Sprite illustrations: free assets from free sources, or simple CSS shapes. No commercial assets.
+- WhatsApp share number: dummy value until the real number arrives.
+
 ## Open questions
 
-- Wedding date and venue name and address for the countdown and maps.
-- Gallery photos, couple bio text, love story timeline and closing message.
-- Music track file or URL.
-- Theme palette. Default under jig init interview: jade and cream with gold accents.
-- Illustration style for the animated sprites. Source can be user assets, licensed sprites, or simple shapes expressed as CSS animation.
-- WhatsApp number for the share button.
-
-One answer per open question is enough to start, the rest can land after the first deploy.
+None blocking. Real WhatsApp number still pending but a dummy value is fine to ship with.
