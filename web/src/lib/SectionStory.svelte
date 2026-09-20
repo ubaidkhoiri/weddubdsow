@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { story } from "./content";
+	import SectionHeading from "./SectionHeading.svelte";
 </script>
 
 <section class="section" id="story" aria-labelledby="story-h">
-	<p class="eyebrow">Kisah Kami</p>
-	<h2 id="story-h">Perjalanan Kami</h2>
+	<SectionHeading eyebrow="Kisah Kami" title="Perjalanan Kami" numeral="02" id="story-h" />
 	<ol class="timeline">
 		{#each story as step (step.title)}
 			<li class="step">
@@ -24,22 +24,6 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-stack);
-	}
-
-	.eyebrow {
-		font-size: var(--text-caption);
-		font-weight: var(--font-weight-bold);
-		letter-spacing: var(--tracking-caps);
-		text-transform: uppercase;
-		color: var(--color-text-weak);
-		margin: 0;
-	}
-
-	h2 {
-		font-size: var(--text-h2);
-		line-height: var(--leading-h2);
-		color: var(--color-text-strong);
-		margin: 0;
 	}
 
 	.timeline {
@@ -85,6 +69,7 @@
 	h3 {
 		font-size: var(--text-h3);
 		line-height: var(--leading-h3);
+		font-weight: var(--font-weight-regular);
 		color: var(--color-text-strong);
 		margin: 0;
 	}

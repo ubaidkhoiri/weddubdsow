@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { days, event } from "./content";
+	import SectionHeading from "./SectionHeading.svelte";
 </script>
 
 <section class="section" id="schedule" aria-labelledby="schedule-h">
-	<p class="eyebrow">Jadwal</p>
-	<h2 id="schedule-h">Rangkaian Acara</h2>
+	<SectionHeading eyebrow="Jadwal" title="Rangkaian Acara" numeral="03" id="schedule-h" />
 
 	<ul class="cards">
 		{#each days as day (day.title)}
@@ -29,22 +29,6 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-stack);
-	}
-
-	.eyebrow {
-		font-size: var(--text-caption);
-		font-weight: var(--font-weight-bold);
-		letter-spacing: var(--tracking-caps);
-		text-transform: uppercase;
-		color: var(--color-text-weak);
-		margin: 0;
-	}
-
-	h2 {
-		font-size: var(--text-h2);
-		line-height: var(--leading-h2);
-		color: var(--color-text-strong);
-		margin: 0;
 	}
 
 	.cards {

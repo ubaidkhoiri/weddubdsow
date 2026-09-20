@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { gallery } from "./content";
+	import SectionHeading from "./SectionHeading.svelte";
 
 	let dialog: HTMLDialogElement;
 	let active = $state<string | null>(null);
@@ -16,8 +17,7 @@
 </script>
 
 <section class="section" id="gallery" aria-labelledby="gallery-h">
-	<p class="eyebrow">Galeri</p>
-	<h2 id="gallery-h">Momen Terindah</h2>
+	<SectionHeading eyebrow="Galeri" title="Momen Terindah" numeral="04" id="gallery-h" />
 	<p class="intro">Ketuk foto untuk melihat lebih dekat.</p>
 
 	<ul class="grid">
@@ -43,22 +43,6 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-stack);
-	}
-
-	.eyebrow {
-		font-size: var(--text-caption);
-		font-weight: var(--font-weight-bold);
-		letter-spacing: var(--tracking-caps);
-		text-transform: uppercase;
-		color: var(--color-text-weak);
-		margin: 0;
-	}
-
-	h2 {
-		font-size: var(--text-h2);
-		line-height: var(--leading-h2);
-		color: var(--color-text-strong);
-		margin: 0;
 	}
 
 	.intro {
