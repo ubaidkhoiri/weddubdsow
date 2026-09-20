@@ -1,7 +1,7 @@
 ---
 title: Quiet luxury redesign undangan
 date: 2026-09-21
-status: draft
+status: approved
 ---
 
 # Quiet luxury redesign undangan: Design
