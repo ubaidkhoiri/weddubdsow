@@ -71,12 +71,12 @@
 - Modify: `web/src/lib/SectionRsvp.svelte:147-148`
 - Modify: `web/src/lib/SectionRsvp.svelte:76-80`
 
-- [ ] Step 1: Add `let sent = $state(false)`; on successful submit set `sent = true` and schedule `setTimeout(() => (sent = false), 3000)`.
-- [ ] Step 2: Replace the button label block `:147-148` so it renders `Menyimpan...` while sending, `Terkirim` after success, and `Kirim konfirmasi` otherwise, keeping `aria-busy={submitting}`.
-- [ ] Step 3: Keep the existing `role="status"` summary paragraph as the live region for the success text.
-- [ ] Step 4: Run `npm run build` (web).
-- [ ] Step 5: Verify with agent-browser after a successful submit: the button `ariaBusy` is `'false'` and a `.summary[role="status"]` element exists.
-- [ ] Step 6: Commit `feat: three-state submit button`.
+- [x] Step 1: Add `let sent = $state(false)`; on successful submit set `sent = true` and schedule `setTimeout(() => (sent = false), 3000)`.
+- [x] Step 2: Replace the button label block `:147-148` so it renders `Menyimpan...` while sending, `Terkirim` after success, and `Kirim konfirmasi` otherwise, keeping `aria-busy={submitting}`.
+- [x] Step 3: Keep the existing `role="status"` summary paragraph as the live region for the success text.
+- [x] Step 4: Run `npm run build` (web).
+- [x] Step 5: Verify with agent-browser after a successful submit: the button `ariaBusy` is `'false'` and a `.summary[role="status"]` element exists.
+- [x] Step 6: Commit `feat: three-state submit button`.
 
 ## Task 6: regression + merge + deploy → verify: web build exit 0, api `npm test` exit 0, guest flow works, admin unaffected, CI green, prod 200
 
