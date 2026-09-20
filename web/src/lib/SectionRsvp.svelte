@@ -12,6 +12,7 @@
 	let fieldErrors = $state<Record<string, string>>({});
 	let summary = $state<{ kind: "error" | "success"; text: string } | null>(null);
 	let submitting = $state(false);
+	let sent = $state(false);
 
 	function saveDraft() {
 		if (typeof localStorage === "undefined") return;
@@ -73,6 +74,8 @@
 		if (result.ok) {
 			if (attendance === "yes") burstHearts();
 			localStorage.removeItem(DRAFT_KEY);
+			sent = true;
+			setTimeout(() => (sent = false), 3000);
 			name = "";
 			attendance = "";
 			guests = "1";
@@ -173,7 +176,7 @@
 		</div>
 
 		<button class="primary" type="submit" aria-busy={submitting}>
-			{submitting ? "Menyimpan..." : "Kirim konfirmasi"}
+			{submitting ? "Menyimpan..." : sent ? "Terkirim" : "Kirim konfirmasi"}
 		</button>
 	</form>
 </section>
