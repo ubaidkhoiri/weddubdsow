@@ -59,11 +59,11 @@
 - Create: `web/src/lib/confetti.ts`
 - Modify: `web/src/lib/SectionRsvp.svelte:33-60`
 
-- [ ] Step 1: Create `web/src/lib/confetti.ts` exporting `burstHearts()`: bail out immediately when `matchMedia('(prefers-reduced-motion: reduce)').matches`; create a fixed `canvas` covering the viewport with `pointer-events: none`, `position: fixed`, `inset: 0`, `z-index` above content; spawn about 40 heart particles (SVG-style two-bezier heart path drawn per frame on a 2d context); animate with `requestAnimationFrame` roughly 60 frames, fading and rising; remove the canvas and cancel the rAF on completion.
-- [ ] Step 2: In `SectionRsvp.svelte` import `burstHearts`; in the success branch of `submit()`, only when the stored attendance equals `'yes'`, call `burstHearts()`.
-- [ ] Step 3: Run `npm run build` (web).
-- [ ] Step 4: Verify with agent-browser on `http://localhost:8787/?cb=cf1`: fill a unique name plus attendance `Ya`, submit, and within 2 seconds eval that `document.querySelectorAll('canvas').length` is at least 1.
-- [ ] Step 5: Commit `feat: canvas heart confetti on yes'.
+- [x] Step 1: Create `web/src/lib/confetti.ts` exporting `burstHearts()`: bail out immediately when `matchMedia('(prefers-reduced-motion: reduce)').matches`; create a fixed `canvas` covering the viewport with `pointer-events: none`, `position: fixed`, `inset: 0`, `z-index` above content; spawn about 40 heart particles (SVG-style two-bezier heart path drawn per frame on a 2d context); animate with `requestAnimationFrame` roughly 60 frames, fading and rising; remove the canvas and cancel the rAF on completion.
+- [x] Step 2: In `SectionRsvp.svelte` import `burstHearts`; in the success branch of `submit()`, only when the stored attendance equals `'yes'`, call `burstHearts()`.
+- [x] Step 3: Run `npm run build` (web).
+- [x] Step 4: Verify with agent-browser on `http://localhost:8787/?cb=cf1`: fill a unique name plus attendance `Ya`, submit, and within 2 seconds eval that `document.querySelectorAll('canvas').length` is at least 1.
+- [x] Step 5: Commit `feat: canvas heart confetti on yes'.
 
 ## Task 5: three-state submit button → verify: web build exit 0 and after a successful post the button is not busy and the success summary is present
 
