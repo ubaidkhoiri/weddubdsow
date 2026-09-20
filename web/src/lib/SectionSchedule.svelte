@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { days, event } from "./content";
 	import SectionHeading from "./SectionHeading.svelte";
+	import MapDialog from "./MapDialog.svelte";
+
+	let openTick = $state(0);
 </script>
 
 <section class="section" id="schedule" aria-labelledby="schedule-h">
@@ -20,8 +23,10 @@
 	<div class="venue">
 		<p class="venue-name">{event.venue}</p>
 		<p class="venue-address">{event.venueAddress}</p>
-		<a href={event.mapsUrl} target="_blank" rel="noreferrer">Buka lokasi di peta</a>
+		<button class="loc-btn" type="button" onclick={() => openTick++}>Buka lokasi di peta</button>
 	</div>
+
+	<MapDialog venue={event.venue} mapsUrl={event.mapsUrl} showTick={openTick} />
 </section>
 
 <style>
@@ -101,10 +106,28 @@
 		margin: 0;
 	}
 
-	.venue a {
-		color: var(--color-text-strong);
+	.loc-btn {
+		background: none;
+		border: 0;
+		padding: 0;
+		align-self: flex-start;
 		font-size: var(--text-body);
+		line-height: var(--leading-body);
+		color: var(--color-text-strong);
 		text-underline-offset: 4px;
 		text-decoration-thickness: 2px;
+		text-decoration-line: underline;
+		cursor: pointer;
+	}
+
+	.loc-btn:hover {
+		background: var(--color-fill);
+		text-decoration-line: none;
+		border-radius: var(--radius-control);
+	}
+
+	.loc-btn:focus-visible {
+		outline: 2px solid var(--color-focus);
+		outline-offset: 2px;
 	}
 </style>
