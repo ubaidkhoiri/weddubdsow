@@ -27,7 +27,3 @@ body {
 	font-family: var(--font-display);
 	font-weight: 300;
 }
-
-.invite p {
-	font-family: var(--font-display);
-}

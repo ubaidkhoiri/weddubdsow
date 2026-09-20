@@ -30,7 +30,7 @@
 		font-weight: var(--font-weight-bold);
 		letter-spacing: var(--tracking-caps);
 		text-transform: uppercase;
-		color: var(--color-accent-gold);
+		color: var(--color-accent-gold-text);
 		margin: 0 0 var(--spacing-2xs);
 	}
 

@@ -155,6 +155,8 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-stack);
+		padding-block: var(--spacing-section);
+		padding-inline: var(--spacing-m);
 	}
 
 	.eyebrow {

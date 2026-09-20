@@ -18,6 +18,8 @@
 		align-items: center;
 		gap: var(--spacing-stack);
 		text-align: center;
+		padding-block: var(--spacing-section);
+		padding-inline: var(--spacing-m);
 	}
 
 	.prose {

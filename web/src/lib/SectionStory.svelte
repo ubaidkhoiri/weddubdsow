@@ -24,6 +24,8 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-stack);
+		padding-block: var(--spacing-section);
+		padding-inline: var(--spacing-m);
 	}
 
 	.timeline {
@@ -32,13 +34,14 @@
 		margin: 0;
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-card);
+		gap: var(--spacing-l);
 		border-inline-start: 2px solid var(--color-accent-gold-weak);
 		padding-inline-start: var(--spacing-m);
 	}
 
 	.step {
 		position: relative;
+		padding-bottom: var(--spacing-s);
 	}
 
 	.dot {
@@ -62,7 +65,7 @@
 		font-weight: var(--font-weight-bold);
 		letter-spacing: var(--tracking-caps);
 		text-transform: uppercase;
-		color: var(--color-accent-gold);
+		color: var(--color-accent-gold-text);
 		margin: 0;
 	}
 

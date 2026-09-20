@@ -26,8 +26,8 @@
        - If the brand colour is red, amber or green, DO NOT use it for interactive
          elements (E-64) — it will collide with the system colours below. */
   --brand-h: 158;
-  --brand-s: 38%;
-  --brand-l: 34%;
+  --brand-s: 40%;
+  --brand-l: 52%;
 
   /* The solid brand colour. Interactive elements reference this (I-56).
      The variations below are alpha steps off the same hue. */
@@ -36,14 +36,14 @@
   /* ================= ELEVATION BACKGROUNDS (solid) =================
      Light comes from above: higher elevation is lighter.
      Keep the three levels visually consistent across light and dark. */
-  --color-bg-base:    oklch(0.980 0.004 95);   /* page. Off-white, not #fff (C-18). */
+  --color-bg-base:    oklch(0.985 0.004 95);   /* page. Off-white, not #fff (C-18). */
   --color-bg-raised:  oklch(1     0     0);    /* cards, panels, sticky bars        */
   --color-bg-overlay: oklch(1     0     0);    /* dialogs, popovers, dropdowns      */
 
   /* ================= NEUTRAL FOREGROUNDS (transparent) =================
      Light mode: opacities of black. Never pure black at 100% (C-18). */
-  --color-text-strong:   rgb(0 0 0 / 90%);   /* headings, body, labels   — ≥ 4.5:1 */
-  --color-text-weak:     rgb(0 0 0 / 60%);   /* supporting text          — ≥ 4.5:1 */
+  --color-text-strong:   rgb(0 0 0 / 85%);   /* headings, body, labels   — ≥ 4.5:1 */
+  --color-text-weak:     rgb(0 0 0 / 58%);   /* supporting text          — ≥ 4.5:1 */
   --color-stroke-strong: rgb(0 0 0 / 45%);   /* input/checkbox borders, icons — ≥ 3:1 */
   --color-stroke-weak:   rgb(0 0 0 / 10%);   /* dividers. Decorative, no floor.    */
   --color-fill:          rgb(0 0 0 / 4%);    /* tags, badges, secondary surfaces   */
@@ -52,16 +52,18 @@
   --color-icon-weak: var(--color-stroke-weak);
 
   /* ================= BRAND FOREGROUNDS (4 variations) ================= */
-  --color-text-brand:          hsl(var(--brand-h) var(--brand-s) var(--brand-l) / 100%);
-  --color-stroke-brand-strong: hsl(var(--brand-h) var(--brand-s) var(--brand-l) / 80%);
+  --color-text-brand:          hsl(158 35% 15% / 100%);   /* darker jade for text: meets C-19 floor */
+  --color-stroke-brand-strong: hsl(158 35% 15% / 80%);   /* meets C-19 floor */
   --color-stroke-brand-weak:   hsl(var(--brand-h) var(--brand-s) var(--brand-l) / 20%);
   --color-fill-brand:          hsl(var(--brand-h) var(--brand-s) var(--brand-l) / 5%);
   --color-on-brand:            oklch(1 0 0);   /* text on a solid brand fill */
 
   /* Ornamental gold for accent lines, seals and glints. Decorative only (E-64, E-65). */
-  --color-accent-gold:      hsl(45 72% 40%);
-  --color-accent-gold-weak: hsl(45 72% 40% / 45%);
-  --color-accent-gold-glow: hsl(45 90% 55% / 35%);
+  --color-accent-gold:      hsl(43 78% 56%);
+  --color-accent-gold-weak: hsl(43 85% 64% / 45%);
+  --color-accent-gold-glow: hsl(43 95% 68% / 40%);
+  /* Gold for small-caps text accents (eyebrows, dates): needs ≥ 4.5:1 on cream. */
+  --color-accent-gold-text: hsl(43 60% 36%);
 
   /* ================= SYSTEM COLOURS =================
      Three, with familiar traffic-light meanings. Four variations each.
@@ -183,6 +185,8 @@
 
     --brand-l: 88%;      /* lighten and desaturate the brand for dark surfaces */
     --color-on-brand: hsl(var(--brand-h) 6% 10%);
+    --color-text-brand:          hsl(158 55% 88%);
+    --color-stroke-brand-strong: hsl(158 55% 88% / 80%);
 
     /* System colours lighten and desaturate in dark mode. Only the h/s/l and
        fill-alpha vars need overriding here — the four hsl() declarations
@@ -215,6 +219,8 @@
 
     --brand-l: 88%;      /* lighten and desaturate the brand for dark surfaces */
     --color-on-brand: hsl(var(--brand-h) 6% 10%);
+    --color-text-brand:          hsl(158 55% 88%);
+    --color-stroke-brand-strong: hsl(158 55% 88% / 80%);
 
     /* System colours lighten and desaturate in dark mode. Only the h/s/l and
        fill-alpha vars need overriding here — the four hsl() declarations

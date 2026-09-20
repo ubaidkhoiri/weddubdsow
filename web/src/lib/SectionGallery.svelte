@@ -43,6 +43,8 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-stack);
+		padding-block: var(--spacing-section);
+		padding-inline: var(--spacing-m);
 	}
 
 	.intro {
@@ -58,7 +60,7 @@
 		margin: 0;
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
-		gap: var(--spacing-s);
+		gap: var(--spacing-m);
 	}
 
 	.thumb {

@@ -29,6 +29,8 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-stack);
+		padding-block: var(--spacing-section);
+		padding-inline: var(--spacing-m);
 	}
 
 	.cards {
@@ -59,7 +61,7 @@
 		font-weight: var(--font-weight-bold);
 		letter-spacing: var(--tracking-caps);
 		text-transform: uppercase;
-		color: var(--color-accent-gold);
+		color: var(--color-accent-gold-text);
 		margin: 0;
 	}
 

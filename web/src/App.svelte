@@ -275,7 +275,7 @@
 		font-weight: var(--font-weight-bold);
 		letter-spacing: var(--tracking-caps);
 		text-transform: uppercase;
-		color: var(--color-accent-gold);
+		color: var(--color-accent-gold-text);
 	}
 
 	.envelope {
@@ -314,7 +314,7 @@
 		height: 56px;
 		border-radius: var(--radius-full);
 		background: var(--color-accent-gold);
-		color: var(--color-bg-base);
+		color: var(--color-text-strong);
 		font-family: var(--font-display);
 		font-style: italic;
 		font-size: var(--text-caption);
@@ -407,7 +407,7 @@
 
 	.countdown {
 		display: flex;
-		gap: var(--spacing-s);
+		gap: var(--spacing-l);
 		margin-top: var(--spacing-m);
 	}
 
@@ -418,7 +418,6 @@
 		gap: var(--spacing-2xs);
 		min-width: 64px;
 		padding: var(--spacing-s);
-		border-top: 1px solid var(--color-accent-gold-weak);
 	}
 
 	.cell strong {
