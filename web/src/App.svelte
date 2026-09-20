@@ -24,7 +24,7 @@
 	});
 
 	$effect(() => {
-		const timer = setInterval(() => (now = Date.now()), 1000);
+		const timer = setInterval(() => (now = Date.now()), 1000 - (Date.now() % 1000));
 		return () => clearInterval(timer);
 	});
 
@@ -354,12 +354,33 @@
 
 	.hero {
 		position: relative;
+		isolation: isolate;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		gap: var(--spacing-s);
 		padding: var(--spacing-xxl) var(--spacing-m) var(--spacing-section);
 		text-align: center;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.hero::before {
+			content: "";
+			position: absolute;
+			z-index: -1;
+			inset: 0;
+			background: radial-gradient(80% 60% at 50% 30%, var(--color-fill-brand), transparent 70%);
+			animation: hero-zoom 14s ease-in-out infinite alternate;
+		}
+
+		@keyframes hero-zoom {
+			from {
+				transform: scale(1);
+			}
+			to {
+				transform: scale(1.04);
+			}
+		}
 	}
 
 	.petal-sprite--divider {
