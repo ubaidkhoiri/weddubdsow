@@ -67,16 +67,16 @@
 - Modify: `web/src/App.svelte:245-521`
 - Modify: `web/src/lib/sprites.css:41-51`
 
-- [ ] Step 1: Cover: ubah `.cover` (baris 251-262) padding jadi `var(--spacing-xl)`, tambahkan `border: 1px solid var(--color-accent-gold-weak)`.
-- [ ] Step 2: Envelope editorial: `.envelope` (279-286) hapus `background: var(--color-bg-raised)` dan `border`, ganti jadi `border: 1px solid var(--color-stroke-weak)`; `.env-body` (297-304) hapus border, tambahkan inner hairline lewat `box-shadow: inset 0 0 0 1px var(--color-accent-gold-weak)`. `.env-seal` (306-321) jadi emas dengan teks `--color-bg-base` dan `font-family: var(--font-display)` italic.
-- [ ] Step 3: Eyebrow (271-277): `color: var(--color-accent-gold)`.
-- [ ] Step 4: Hero h1 (368-379): `font-weight: 300` dan `letter-spacing: var(--tracking-h1)`; `.name` (381-384): `font-family: var(--font-display)`; `.amp` (386-389): tetap gold, `font-family: var(--font-display)`, italic.
-- [ ] Step 5: Countdown cells (409-434): `.cell` hapus `background` dan `border-radius`, ganti `border: 0`, tambah `border-top: 1px solid var(--color-accent-gold-weak)`; `strong` tetap tabular.
-- [ ] Step 6: Fab (453-466): jadi pill glass: `background: var(--color-bg-base)`, `border: 1px solid var(--color-accent-gold-weak)`, `box-shadow: none`, `backdrop-filter: blur(8px)`.
-- [ ] Step 7: Reveal lebih tenang: `web/src/lib/sprites.css:41-51` ubah `translateY(14px)` jadi `translateY(12px)`, transition `0.8s`.
-- [ ] Step 8: Run `npm run build` di web.
-- [ ] Step 9: Jalankan dev server (`npx wrangler dev --port 8787` di api, sudah berjalan) lalu agent-browser ke `http://localhost:8787`, eval computed styles: fontFamily h1, backgroundColor `.cell`, borderColor `.cover`.
-- [ ] Step 10: Commit `feat: quiet luxury cover and hero`.
+- [x] Step 1: Cover: ubah `.cover` (baris 251-262) padding jadi `var(--spacing-xl)`, tambahkan `border: 1px solid var(--color-accent-gold-weak)`.
+- [x] Step 2: Envelope editorial: `.envelope` (279-286) hapus `background: var(--color-bg-raised)` dan `border`, ganti jadi `border: 1px solid var(--color-stroke-weak)`; `.env-body` (297-304) hapus border, tambahkan inner hairline lewat `box-shadow: inset 0 0 0 1px var(--color-accent-gold-weak)`. `.env-seal` (306-321) jadi emas dengan teks `--color-bg-base` dan `font-family: var(--font-display)` italic.
+- [x] Step 3: Eyebrow (271-277): `color: var(--color-accent-gold)`.
+- [x] Step 4: Hero h1 (368-379): `font-weight: 300` dan `letter-spacing: var(--tracking-h1)`; `.name` (381-384): `font-family: var(--font-display)`; `.amp` (386-389): tetap gold, `font-family: var(--font-display)`, italic.
+- [x] Step 5: Countdown cells (409-434): `.cell` hapus `background` dan `border-radius`, ganti `border: 0`, tambah `border-top: 1px solid var(--color-accent-gold-weak)`; `strong` tetap tabular.
+- [x] Step 6: Fab (453-466): jadi pill glass: `background: var(--color-bg-base)`, `border: 1px solid var(--color-accent-gold-weak)`, `box-shadow: none`, `backdrop-filter: blur(8px)`.
+- [x] Step 7: Reveal lebih tenang: `web/src/lib/sprites.css:41-51` ubah `translateY(14px)` jadi `translateY(12px)`, transition `0.8s`.
+- [x] Step 8: Run `npm run build` di web.
+- [x] Step 9: Jalankan dev server (`npx wrangler dev --port 8787` di api, sudah berjalan) lalu agent-browser ke `http://localhost:8787`, eval computed styles: fontFamily h1, backgroundColor `.cell`, borderColor `.cover`.
+- [x] Step 10: Commit `feat: quiet luxury cover and hero`.
 
 ### Task 3: Chrome section via SectionHeading → verify: build (web) exit 0; agent-browser `document.querySelectorAll(".numeral").length` bernilai 5.
 
