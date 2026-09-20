@@ -18,12 +18,12 @@
 - Modify: `web/src/App.svelte:27`
 - Modify: `web/src/App.svelte:355-363`
 
-- [ ] Step 1: At `web/src/App.svelte:27`, change the timer to resync on the second boundary:
+- [x] Step 1: At `web/src/App.svelte:27`, change the timer to resync on the second boundary:
   `const timer = setInterval(() => (now = Date.now()), 1000 - (Date.now() % 1000));`
-- [ ] Step 2: Add a hero ambient zoom layer. After the `.hero { ... }` block (`:355-363`), insert a `::before` pseudo-element layered behind the content with `@keyframes hero-zoom` from `scale(1)` to `scale(1.04)`, 14s ease-in-out infinite alternate, background a soft radial brand glow using `var(--color-fill-brand)`, and the whole `::before` + keyframes eligible only under `@media (prefers-reduced-motion: no-preference)`.
-- [ ] Step 3: Run `npm run build` (web).
-- [ ] Step 4: Confirm the bundled css contains `hero-zoom`.
-- [ ] Step 5: Commit `feat: anti-drift countdown and hero ambience`.
+- [x] Step 2: Add a hero ambient zoom layer. After the `.hero { ... }` block (`:355-363`), insert a `::before` pseudo-element layered behind the content with `@keyframes hero-zoom` from `scale(1)` to `scale(1.04)`, 14s ease-in-out infinite alternate, background a soft radial brand glow using `var(--color-fill-brand)`, and the whole `::before` + keyframes eligible only under `@media (prefers-reduced-motion: no-preference)`.
+- [x] Step 3: Run `npm run build` (web).
+- [x] Step 4: Confirm the bundled css contains `hero-zoom`.
+- [x] Step 5: Commit `feat: anti-drift countdown and hero ambience`.
 
 ## Task 2: native dialog for the map → verify: web build exit 0 and a browser click on the location button shows an open dialog with an iframe carrying `src`
 
