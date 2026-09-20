@@ -177,14 +177,14 @@
 - Create: `.github/workflows/deploy.yml`
 - Create: deploy notes in README
 
-- [ ] Step 1: Update `api/wrangler.toml` to serve the static output from `web/dist` as the assets binding and add a fallback to the SPA entry for unmatched routes.
-- [ ] Step 2: Build the SPA with `npm run build` in `web/`.
-- [ ] Step 3: Ask the user for the Cloudflare account: run `npx wrangler whoami` and confirm the right account is selected.
-- [ ] Step 4: Deploy with `npx wrangler deploy` from `api/`.
-- [ ] Step 5: Set secrets with `npx wrangler secret put DATABASE_URL` and `npx wrangler secret put ADMIN_PASSWORD`, pasting the values the user supplies.
-- [ ] Step 6: Verify the deployment: open the worker URL, confirm the cover renders and a guest book post persists across reload.
-- [ ] Step 7: Write `.github/workflows/deploy.yml` that on push to main runs `npm ci` and `npm run build` in both packages and `npx wrangler deploy` from `api/`, using secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID.
-- [ ] Step 8: Commit with message `feat: deploy workflow`.
+- [x] Step 1: Update `api/wrangler.toml` to serve the static output from `web/dist` as the assets binding and add a fallback to the SPA entry for unmatched routes.
+- [x] Step 2: Build the SPA with `npm run build` in `web/`.
+- [x] Step 3: Ask the user for the Cloudflare account: run `npx wrangler whoami` and confirm the right account is selected.
+- [x] Step 4: Deploy with `npx wrangler deploy` from `api/`.
+- [x] Step 5: Set secrets with `npx wrangler secret put DATABASE_URL` and `npx wrangler secret put ADMIN_PASSWORD`, pasting the values the user supplies.
+- [x] Step 6: Verify the deployment: open the worker URL, confirm the cover renders and a guest book post persists across reload.
+- [x] Step 7: Write `.github/workflows/deploy.yml` that on push to main runs `npm ci` and `npm run build` in both packages and `npx wrangler deploy` from `api/`, using secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID.
+- [x] Step 8: Commit with message `feat: deploy workflow`.
 - [ ] Step 9: Hand the user the GitHub setup steps in README: create an empty public repo on github.com, add the remote, push, then add the API token as a GitHub Actions secret. The user reports back when the workflow has run once.
 
 ### Task 11: Final verification pass → verify: a fresh `git clone` can run both builds to completion
