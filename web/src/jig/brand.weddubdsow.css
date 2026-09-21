@@ -140,8 +140,8 @@
 
   /* Cover sign-off on the photo cover — cream lockup with a soft
      warm drop shadow so it stays legible over any photo. */
-  --text-monogram:       4.75rem;
-  --color-cover-sign:    #fff6eb;
+  --text-monogram:       6.25rem;
+  --color-cover-sign:    #f4f3f2;
   --color-cover-shadow:  #ac9f8e;
 
   /* ================= RADIUS — four, by element size =================
