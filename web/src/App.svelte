@@ -442,19 +442,25 @@
 		padding: var(--spacing-xl) var(--spacing-m);
 	}
 
-.cover-inner .monogram {
+.cover-inner .m-line + .m-line {
+		margin-top: calc(-1 * (var(--spacing-xs) + var(--spacing-2xs) / 2));
+	}
+
+	.cover-inner .monogram {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		font-family: var(--font-display);
-		font-style: normal;
+		font-style: italic;
 		font-weight: var(--font-weight-regular);
 		font-size: var(--text-monogram);
-		line-height: 0.95;
+		line-height: 0.87;
 		letter-spacing: 0;
 		text-align: center;
 		color: var(--color-cover-sign);
-		text-shadow: 0 2px 3px var(--color-cover-shadow), 2px 4px 6px var(--color-cover-shadow);
+		text-shadow:
+			0 1px 1px var(--color-cover-shadow),
+			1px 2px 2px var(--color-cover-shadow);
 	}
 
 	.eyebrow {
