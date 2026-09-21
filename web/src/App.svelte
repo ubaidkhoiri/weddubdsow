@@ -197,7 +197,8 @@
 		>
 			<span class="cover-inner">
 				<span class="monogram" aria-hidden="true"
-					><span class="m-u">U</span><span class="amp">&amp;</span><span class="m-s">S</span></span
+					><span class="m-line">{event.groom}</span
+					><span class="m-line">{event.bride}</span></span
 				>
 				<span class="tap-hint">Ketuk untuk membuka</span>
 			</span>
@@ -442,33 +443,18 @@
 	}
 
 .cover-inner .monogram {
-		display: inline-flex;
-		align-items: baseline;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		font-family: var(--font-display);
-		font-style: italic;
+		font-style: normal;
 		font-weight: var(--font-weight-regular);
 		font-size: var(--text-monogram);
-		line-height: 0.9;
-		letter-spacing: var(--tracking-h1);
-		color: var(--color-text-muted);
-		transform: rotate(-6deg);
-	}
-
-	.m-u {
-		transform: translateY(calc(-1 * var(--spacing-xs)));
-	}
-
-	.m-s {
-		transform: translateY(var(--spacing-s));
-	}
-
-	.monogram .amp {
-		color: var(--color-accent);
-		font-size: var(--text-monogram-amp);
-		transform: translate(
-			calc(-1 * var(--spacing-xs)),
-			calc(-1 * var(--spacing-s) - var(--spacing-xs) - var(--spacing-2xs))
-		);
+		line-height: 0.95;
+		letter-spacing: 0;
+		text-align: center;
+		color: var(--color-cover-sign);
+		text-shadow: 0 2px 3px var(--color-cover-shadow), 2px 4px 6px var(--color-cover-shadow);
 	}
 
 	.eyebrow {
