@@ -99,7 +99,7 @@
 	let musicOn = $state(false);
 	let ytPlayer: unknown = null;
 	let ytReady = false;
-	let ytStarted = false;
+	let ytStarted = $state(false);
 
 	function applyMusic(restart = false) {
 		const p = ytPlayer as any;
