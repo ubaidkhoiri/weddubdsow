@@ -2,7 +2,8 @@
 	import { onMount } from "svelte";
 	import "@lottiefiles/dotlottie-wc";
 	const ringsUrl = "/rings.lottie";
-	const prefersReduced = typeof matchMedia !== "undefined" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+	const prefersReduced =
+		typeof matchMedia !== "undefined" && matchMedia("(prefers-reduced-motion: reduce)").matches;
 	import "./lib/sprites.css";
 	import { event } from "./lib/content";
 	import Admin from "./routes/admin.svelte";
@@ -169,27 +170,49 @@
 	{/if}
 
 	<header class="hero" aria-label={event.title}>
-		<p class="eyebrow">Undangan Ngunduh Mantu</p>
-		<h1>
-			<span class="name">{event.groom}</span>
-			<span class="amp">&amp;</span>
-			<span class="name">{event.bride}</span>
-		</h1>
-		<p class="date-line">{event.dateStart} - {event.dateEnd}</p>
-		<p class="venue">{event.venue}</p>
+		<div class="card hero-title">
+			<p class="eyebrow">Undangan Ngunduh Mantu</p>
+			<h1>
+				<span class="name">{event.groom}</span>
+				<span class="amp">&amp;</span>
+				<span class="name">{event.bride}</span>
+			</h1>
+			<p class="date-line">{event.dateStart} - {event.dateEnd}</p>
+			<p class="venue">{event.venue}</p>
+		</div>
 
-		<div class="countdown" role="timer" aria-label="Hitung mundur menuju acara utama">
-			{#each [
-				{ label: "Hari", value: days },
-				{ label: "Jam", value: hours },
-				{ label: "Menit", value: minutes },
-				{ label: "Detik", value: seconds },
-			] as cell (cell.label)}
-				<span class="cell">
-					<strong>{pad(cell.value)}</strong>
-					<small>{cell.label}</small>
+		<div class="row">
+			<div class="card countdown" role="timer" aria-label="Hitung mundur menuju acara utama">
+				{#each [
+					{ label: "Hari", value: days },
+					{ label: "Jam", value: hours },
+					{ label: "Menit", value: minutes },
+					{ label: "Detik", value: seconds },
+				] as cell (cell.label)}
+					<span class="cell">
+						<strong>{pad(cell.value)}</strong>
+						<small>{cell.label}</small>
+					</span>
+				{/each}
+			</div>
+			<div class="card hero-meta">
+				<span class="crescent" aria-hidden="true">
+					<svg
+						viewBox="0 0 40 40"
+						width="32"
+						height="32"
+						fill="none"
+						stroke="var(--color-accent)"
+						stroke-width="2"
+						stroke-linecap="round"
+					>
+						<path d="M27 7a15 15 0 1 0 6 19 12.5 12.5 0 0 1-6-19Z" />
+					</svg>
 				</span>
-			{/each}
+				<p class="meta-label">Ngunduh Mantu</p>
+				<p class="meta-value">{event.mainDay}</p>
+				<p class="meta-sub">Pukul {event.mainTime} WIB</p>
+			</div>
 		</div>
 	</header>
 
@@ -203,15 +226,17 @@
 
 	<div id="yt-player" class="player" aria-hidden="true" tabindex="-1"></div>
 
-	<button class="fab music" type="button" onclick={toggleMusic} aria-pressed={musicOn}>
-		{musicOn ? "Hentikan musik" : "Putar musik"}
-	</button>
-	<a
-		class="fab share"
-		href="https://wa.me/?text={encodeURIComponent(shareText())}"
-		target="_blank"
-		rel="noreferrer"
-	>Bagikan lewat WhatsApp</a>
+	<div class="fab-layer">
+		<button class="fab music" type="button" onclick={toggleMusic} aria-pressed={musicOn}>
+			{musicOn ? "Hentikan musik" : "Putar musik"}
+		</button>
+		<a
+			class="fab share"
+			href="https://wa.me/?text={encodeURIComponent(shareText())}"
+			target="_blank"
+			rel="noreferrer"
+		>Bagikan lewat WhatsApp</a>
+	</div>
 
 	<footer class="admin-link">
 		<a href="#/admin">Admin</a>
@@ -226,6 +251,22 @@
 		flex-direction: column;
 	}
 
+	.invite {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-s);
+		padding: var(--spacing-m) var(--spacing-s) 140px;
+		min-height: 100svh;
+	}
+
+	.card {
+		background: var(--color-bg-raised);
+		border: var(--border-width-hairline) solid var(--color-stroke-strong);
+		border-radius: var(--radius-surface);
+		padding: var(--spacing-m);
+	}
+
 	.cover {
 		position: fixed;
 		inset: 0;
@@ -235,16 +276,32 @@
 		justify-content: center;
 		padding: var(--spacing-l);
 		background: var(--color-bg-base);
-		border: 1px solid var(--color-stroke-strong);
+		border: 0;
 		cursor: pointer;
+	}
+
+	.cover::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		margin: 0 auto;
+		width: 100%;
+		max-width: 393px;
+		border-inline: var(--border-width-hairline) solid var(--color-stroke-weak);
+		pointer-events: none;
 	}
 
 	.cover-inner {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: var(--spacing-l);
-		max-width: 320px;
+		gap: var(--spacing-m);
+		max-width: 340px;
+		width: 100%;
+		border: var(--border-width-hairline) solid var(--color-stroke-strong);
+		border-radius: var(--radius-surface);
+		background: var(--color-bg-raised);
+		padding: var(--spacing-xl) var(--spacing-m);
 	}
 
 	.eyebrow {
@@ -253,6 +310,7 @@
 		letter-spacing: var(--tracking-caps);
 		text-transform: uppercase;
 		color: var(--color-text-brand);
+		margin: 0;
 	}
 
 	.rings {
@@ -274,21 +332,32 @@
 	}
 
 	.tap-hint {
+		display: inline-flex;
+		align-items: center;
+		min-height: var(--size-touch-target);
+		padding: var(--spacing-s) var(--spacing-l);
+		border-radius: var(--radius-full);
 		font-size: var(--text-body);
-		color: var(--color-text-weak);
+		font-weight: var(--font-weight-bold);
+		color: var(--color-on-cta);
+		background: var(--color-cta);
 	}
 
 	.hero {
-		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-s);
+	}
+
+	.hero-title {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		gap: var(--spacing-s);
-		padding: var(--spacing-xxl) var(--spacing-m) var(--spacing-section);
 		text-align: center;
 	}
 
-	.hero h1 {
+	.hero-title h1 {
 		display: flex;
 		align-items: baseline;
 		justify-content: center;
@@ -309,7 +378,7 @@
 	}
 
 	.amp {
-		color: var(--color-text-brand);
+		color: var(--color-accent);
 		font-family: var(--font-display);
 		font-size: var(--text-h2);
 		line-height: 1;
@@ -317,7 +386,8 @@
 
 	.date-line {
 		font-size: var(--text-body);
-		color: var(--color-text-strong);
+		font-weight: var(--font-weight-bold);
+		color: var(--color-text-brand);
 		margin: 0;
 	}
 
@@ -327,26 +397,36 @@
 		margin: 0;
 	}
 
-	.countdown {
+	.row {
 		display: flex;
 		gap: var(--spacing-s);
-		margin-top: var(--spacing-m);
+	}
+
+	.row .card {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.countdown {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--spacing-2xs);
 	}
 
 	.cell {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		justify-content: center;
 		gap: var(--spacing-2xs);
-		min-width: 56px;
 		padding: var(--spacing-s);
 		border-radius: var(--radius-control);
 		background: var(--color-fill);
 	}
 
 	.cell strong {
-		font-size: var(--text-h2);
-		line-height: var(--leading-h2);
+		font-size: var(--text-h3);
+		line-height: var(--leading-h3);
 		font-weight: var(--font-weight-bold);
 		color: var(--color-text-strong);
 		font-variant-numeric: tabular-nums;
@@ -359,6 +439,42 @@
 		letter-spacing: var(--tracking-caps);
 	}
 
+	.hero-meta {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: var(--spacing-2xs);
+		text-align: center;
+	}
+
+	.crescent {
+		color: var(--color-accent);
+		margin-bottom: var(--spacing-2xs);
+	}
+
+	.meta-label {
+		font-size: var(--text-caption);
+		font-weight: var(--font-weight-bold);
+		text-transform: uppercase;
+		letter-spacing: var(--tracking-caps);
+		color: var(--color-text-weak);
+		margin: 0;
+	}
+
+	.meta-value {
+		font-size: var(--text-body);
+		font-weight: var(--font-weight-bold);
+		color: var(--color-text-strong);
+		margin: 0;
+	}
+
+	.meta-sub {
+		font-size: var(--text-caption);
+		color: var(--color-text-weak);
+		margin: 0;
+	}
+
 	.player {
 		position: fixed;
 		inset: auto 50% -9999px auto;
@@ -367,10 +483,19 @@
 		border: 0;
 	}
 
-	.fab {
+	.fab-layer {
 		position: fixed;
-		bottom: var(--spacing-m);
+		inset: 0 auto 0 50%;
+		transform: translateX(-50%);
+		width: 100%;
+		max-width: 393px;
 		z-index: 10;
+		pointer-events: none;
+	}
+
+	.fab {
+		position: absolute;
+		bottom: var(--spacing-s);
 		min-height: var(--size-touch-target);
 		padding: var(--spacing-s) var(--spacing-m);
 		border-radius: var(--radius-full);
@@ -378,10 +503,11 @@
 		font-weight: var(--font-weight-bold);
 		text-decoration: none;
 		background: var(--color-bg-raised);
-		border: 1px solid var(--color-stroke-strong);
+		border: var(--border-width-hairline) solid var(--color-stroke-strong);
 		color: var(--color-text-strong);
 		box-shadow: none;
 		cursor: pointer;
+		pointer-events: auto;
 	}
 
 	.fab:hover {
@@ -394,15 +520,15 @@
 	}
 
 	.music {
-		left: var(--spacing-m);
+		left: var(--spacing-s);
 	}
 
 	.share {
-		right: var(--spacing-m);
+		right: var(--spacing-s);
 	}
 
 	.admin-link {
-		padding: var(--spacing-l) 0 var(--spacing-section);
+		padding: var(--spacing-s) 0 0;
 		text-align: center;
 		font-size: var(--text-caption);
 	}
@@ -415,11 +541,5 @@
 	.admin-link a:focus-visible {
 		outline: 2px solid var(--color-focus);
 		outline-offset: 2px;
-	}
-
-	@media (min-width: 431px) {
-		.cover {
-			border-inline: 1px solid var(--color-stroke-strong);
-		}
 	}
 </style>

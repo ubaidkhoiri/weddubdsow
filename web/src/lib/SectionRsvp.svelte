@@ -2,6 +2,7 @@
 	import { onMount } from "svelte";
 	import { postRsvp, type Attendance } from "./api";
 	import { burstHearts } from "./confetti";
+	import SectionHeading from "./SectionHeading.svelte";
 
 	const DRAFT_KEY = "weddu-rsvp-draft";
 
@@ -98,112 +99,135 @@
 </script>
 
 <section class="section" id="rsvp" aria-labelledby="rsvp-h">
-	<p class="eyebrow">Konfirmasi</p>
-	<h2 id="rsvp-h">Konfirmasi Kehadiran</h2>
+	<SectionHeading
+		eyebrow="Konfirmasi"
+		title="Konfirmasi Kehadiran"
+		numeral="05"
+		id="rsvp-h"
+	/>
 	<p class="intro">Beri tahu kami apakah kamu bisa hadir.</p>
 
-	{#if summary}
-		<p class="summary" class:error={summary.kind === "error"} class:success={summary.kind === "success"} role="status" aria-live="polite">
-			{summary.text}
-		</p>
-	{/if}
+	<div class="card">
+		{#if summary}
+			<p
+				class="summary"
+				class:error={summary.kind === "error"}
+				class:success={summary.kind === "success"}
+				role="status"
+				aria-live="polite"
+			>
+				{summary.text}
+			</p>
+		{/if}
 
-	<form onsubmit={(e) => { e.preventDefault(); submit(); }} novalidate>
-		<div class="field">
-			<label for="rsvp-name">Nama <span class="req">(wajib)</span></label>
-			<input
-				id="rsvp-name"
-				type="text"
-				autocomplete="name"
-				enterkeyhint="next"
-				bind:value={name}
-				onblur={saveDraft}
-				aria-invalid={fieldErrors.name ? "true" : undefined}
-				aria-describedby={fieldErrors.name ? "rsvp-name-err" : undefined}
-			/>
-			{#if fieldErrors.name}
-				<p class="error" id="rsvp-name-err">{fieldErrors.name}</p>
-			{/if}
-		</div>
+		<form
+			onsubmit={(e) => {
+				e.preventDefault();
+				submit();
+			}}
+			novalidate
+		>
+			<div class="field">
+				<label for="rsvp-name">Nama <span class="req">(wajib)</span></label>
+				<input
+					id="rsvp-name"
+					type="text"
+					autocomplete="name"
+					enterkeyhint="next"
+					bind:value={name}
+					onblur={saveDraft}
+					aria-invalid={fieldErrors.name ? "true" : undefined}
+					aria-describedby={fieldErrors.name ? "rsvp-name-err" : undefined}
+				/>
+				{#if fieldErrors.name}
+					<p class="error" id="rsvp-name-err">{fieldErrors.name}</p>
+				{/if}
+			</div>
 
-		<fieldset class="field radios">
-			<legend>Apakah kamu bisa hadir? <span class="req">(wajib)</span></legend>
-			<label>
-<input type="radio" name="attendance" value="yes" bind:group={attendance} onblur={saveDraft} />
-			<span>Ya, hadir</span>
-			</label>
-			<label>
-				<input type="radio" name="attendance" value="no" bind:group={attendance} onblur={saveDraft} />
-				<span>Tidak bisa hadir</span>
-			</label>
-			<label>
-				<input type="radio" name="attendance" value="maybe" bind:group={attendance} onblur={saveDraft} />
-				<span>Mungkin</span>
-			</label>
-			{#if fieldErrors.attendance}
-				<p class="error" id="rsvp-att-err">{fieldErrors.attendance}</p>
-			{/if}
-		</fieldset>
+			<fieldset class="field radios">
+				<legend>Apakah kamu bisa hadir? <span class="req">(wajib)</span></legend>
+				<label>
+					<input
+						type="radio"
+						name="attendance"
+						value="yes"
+						bind:group={attendance}
+						onblur={saveDraft}
+					/>
+					<span>Ya, hadir</span>
+				</label>
+				<label>
+					<input
+						type="radio"
+						name="attendance"
+						value="no"
+						bind:group={attendance}
+						onblur={saveDraft}
+					/>
+					<span>Tidak bisa hadir</span>
+				</label>
+				<label>
+					<input
+						type="radio"
+						name="attendance"
+						value="maybe"
+						bind:group={attendance}
+						onblur={saveDraft}
+					/>
+					<span>Mungkin</span>
+				</label>
+				{#if fieldErrors.attendance}
+					<p class="error" id="rsvp-att-err">{fieldErrors.attendance}</p>
+				{/if}
+			</fieldset>
 
-		<div class="field">
-			<label for="rsvp-guests">Jumlah tamu yang hadir <span class="req">(wajib)</span></label>
-			<select id="rsvp-guests" bind:value={guests} onblur={saveDraft} aria-invalid={fieldErrors.guests ? "true" : undefined}>
-				{#each [1, 2, 3, 4, 5] as count (count)}
-					<option value={count}>{count} orang</option>
-				{/each}
-			</select>
-			{#if fieldErrors.guests}
-				<p class="error" id="rsvp-guests-err">{fieldErrors.guests}</p>
-			{/if}
-		</div>
+			<div class="field">
+				<label for="rsvp-guests">Jumlah tamu yang hadir <span class="req">(wajib)</span></label>
+				<select
+					id="rsvp-guests"
+					bind:value={guests}
+					onblur={saveDraft}
+					aria-invalid={fieldErrors.guests ? "true" : undefined}
+				>
+					{#each [1, 2, 3, 4, 5] as count (count)}
+						<option value={count}>{count} orang</option>
+					{/each}
+				</select>
+				{#if fieldErrors.guests}
+					<p class="error" id="rsvp-guests-err">{fieldErrors.guests}</p>
+				{/if}
+			</div>
 
-		<div class="field">
-			<label for="rsvp-phone">No. WhatsApp <span class="opt">(opsional)</span></label>
-			<input
-				id="rsvp-phone"
-				type="tel"
-				inputmode="tel"
-				autocomplete="tel"
-				enterkeyhint="done"
-				placeholder="08xxxxxxxxxx"
-				bind:value={phone}
-				onblur={saveDraft}
-				aria-invalid={fieldErrors.phone ? "true" : undefined}
-			/>
-			{#if fieldErrors.phone}
-				<p class="error" id="rsvp-phone-err">{fieldErrors.phone}</p>
-			{/if}
-		</div>
+			<div class="field">
+				<label for="rsvp-phone">No. WhatsApp <span class="opt">(opsional)</span></label>
+				<input
+					id="rsvp-phone"
+					type="tel"
+					inputmode="tel"
+					autocomplete="tel"
+					enterkeyhint="done"
+					placeholder="08xxxxxxxxxx"
+					bind:value={phone}
+					onblur={saveDraft}
+					aria-invalid={fieldErrors.phone ? "true" : undefined}
+				/>
+				{#if fieldErrors.phone}
+					<p class="error" id="rsvp-phone-err">{fieldErrors.phone}</p>
+				{/if}
+			</div>
 
-		<button class="primary" type="submit" aria-busy={submitting}>
-			{submitting ? "Menyimpan..." : sent ? "Terkirim" : "Kirim konfirmasi"}
-		</button>
-	</form>
+			<button class="primary" type="submit" aria-busy={submitting}>
+				{submitting ? "Menyimpan..." : sent ? "Terkirim" : "Kirim konfirmasi"}
+			</button>
+		</form>
+	</div>
 </section>
 
 <style>
 	.section {
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-stack);
-		padding-block: var(--spacing-section);
-		padding-inline: var(--spacing-m);
-	}
-
-	.eyebrow {
-		font-size: var(--text-caption);
-		font-weight: var(--font-weight-bold);
-		letter-spacing: var(--tracking-caps);
-		text-transform: uppercase;
-		color: var(--color-text-weak);
-		margin: 0;
-	}
-
-	h2 {
-		font-size: var(--text-h2);
-		line-height: var(--leading-h2);
-		color: var(--color-text-strong);
-		margin: 0;
+		gap: var(--spacing-s);
 	}
 
 	.intro {
@@ -211,6 +235,17 @@
 		line-height: var(--leading-body);
 		color: var(--color-text-weak);
 		margin: 0;
+		padding-inline: var(--spacing-2xs);
+	}
+
+	.card {
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-s);
+		padding: var(--spacing-m);
+		background: var(--color-bg-raised);
+		border: var(--border-width-hairline) solid var(--color-stroke-strong);
+		border-radius: var(--radius-surface);
 	}
 
 	form {
@@ -230,13 +265,13 @@
 	.summary.error {
 		color: var(--color-text-error);
 		background: var(--color-fill-error);
-		border: 1px solid var(--color-stroke-error-strong);
+		border: var(--border-width-hairline) solid var(--color-stroke-error-strong);
 	}
 
 	.summary.success {
 		color: var(--color-text-success);
 		background: var(--color-fill-success);
-		border: 1px solid var(--color-stroke-success-strong);
+		border: var(--border-width-hairline) solid var(--color-stroke-success-strong);
 	}
 
 	.field {
@@ -264,7 +299,7 @@
 		font-size: var(--text-body);
 		color: var(--color-text-strong);
 		background: var(--color-bg-base);
-		border: 1px solid var(--color-stroke-weak);
+		border: var(--border-width-hairline) solid var(--color-stroke-strong);
 		border-radius: var(--radius-control);
 	}
 
@@ -299,13 +334,17 @@
 		align-items: center;
 		gap: var(--spacing-s);
 		min-height: var(--size-touch-target);
+		padding: 0 var(--spacing-s);
+		border-radius: var(--radius-control);
+		border: var(--border-width-hairline) solid var(--color-stroke-strong);
 		font-size: var(--text-body);
+		background: var(--color-bg-base);
 	}
 
 	.radios input {
 		width: var(--size-icon);
 		height: var(--size-icon);
-		accent-color: var(--color-text-strong);
+		accent-color: var(--color-brand);
 	}
 
 	.radios input:focus-visible {
@@ -320,15 +359,15 @@
 		padding: var(--spacing-s) var(--spacing-l);
 		font-size: var(--text-body);
 		font-weight: var(--font-weight-bold);
-		color: var(--color-bg-base);
-		background: var(--color-text-strong);
+		color: var(--color-on-cta);
+		background: var(--color-cta);
 		border: 0;
 		border-radius: var(--radius-control);
 		cursor: pointer;
 	}
 
 	.primary:hover {
-		filter: brightness(1.1);
+		filter: brightness(1.05);
 	}
 
 	.primary:focus-visible {

@@ -16,9 +16,10 @@ export function burstHearts(): void {
 
 	const style = getComputedStyle(document.documentElement);
 	const colors = [
-		style.getPropertyValue("--color-text-brand").trim(),
 		style.getPropertyValue("--color-brand").trim(),
+		style.getPropertyValue("--color-accent").trim(),
 		style.getPropertyValue("--color-text-strong").trim(),
+		style.getPropertyValue("--color-text-brand").trim(),
 	].filter(Boolean);
 
 	const canvas = document.createElement("canvas");

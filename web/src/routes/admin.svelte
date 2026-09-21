@@ -197,6 +197,34 @@
 		outline-offset: 2px;
 	}
 
+	.primary {
+		align-self: stretch;
+		width: 100%;
+		min-height: var(--size-control);
+		padding: var(--spacing-s) var(--spacing-l);
+		font-size: var(--text-body);
+		font-weight: var(--font-weight-bold);
+		color: var(--color-on-brand);
+		background: var(--color-brand);
+		border: 0;
+		border-radius: var(--radius-control);
+		cursor: pointer;
+	}
+
+	.primary:hover {
+		filter: brightness(1.1);
+	}
+
+	.primary:focus-visible {
+		outline: 2px solid var(--color-focus);
+		outline-offset: 2px;
+	}
+
+	.primary:disabled {
+		opacity: var(--opacity-disabled);
+		cursor: default;
+	}
+
 	.error {
 		color: var(--color-text-error);
 		margin: 0;
@@ -240,7 +268,7 @@
 		flex-direction: column;
 		gap: var(--spacing-2xs);
 		padding: var(--spacing-s);
-		border: 1px solid var(--color-stroke-weak);
+		border: var(--border-width-hairline) solid var(--color-stroke-strong);
 		border-radius: var(--radius-surface);
 		background: var(--color-bg-raised);
 	}
@@ -272,7 +300,7 @@
 		align-items: baseline;
 		justify-content: space-between;
 		padding: var(--spacing-s);
-		border: 1px solid var(--color-stroke-weak);
+		border: var(--border-width-hairline) solid var(--color-stroke-strong);
 		border-radius: var(--radius-surface);
 		background: var(--color-bg-raised);
 	}

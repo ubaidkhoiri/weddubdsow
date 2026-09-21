@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getMessages, heartMessage, postMessage, type GuestMessage } from "./api";
+	import SectionHeading from "./SectionHeading.svelte";
 
 	let messages = $state<GuestMessage[]>([]);
 	let loading = $state(true);
@@ -60,8 +61,7 @@
 </script>
 
 <section class="section" id="messages" aria-labelledby="messages-h">
-	<p class="eyebrow">Buku Tamu</p>
-	<h2 id="messages-h">Tinggalkan Pesan</h2>
+	<SectionHeading eyebrow="Buku Tamu" title="Tinggalkan Pesan" numeral="06" id="messages-h" />
 	<p class="intro">Tuliskan doa dan ucapan untuk kedua mempelai.</p>
 
 	<form class="compose" onsubmit={(e) => { e.preventDefault(); submit(); }} novalidate>
@@ -103,8 +103,7 @@
 		</button>
 	</form>
 
-	<div class="list" aria-live="polite">
-		<h3>Pesan dari tamu</h3>
+	<div class="feed" aria-live="polite">
 		{#if loading}
 			<p class="state">Memuat pesan...</p>
 		{:else if loadError}
@@ -113,7 +112,7 @@
 		{:else if messages.length === 0}
 			<p class="state">Belum ada pesan. Jadilah yang pertama menulis.</p>
 		{:else}
-			<ul class="feed">
+			<ul class="list">
 				{#each messages as msg, index (msg.id)}
 					<li class="msg">
 						<p class="msg-name">{msg.name}</p>
@@ -140,32 +139,7 @@
 	.section {
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-stack);
-		padding-block: var(--spacing-section);
-		padding-inline: var(--spacing-m);
-	}
-
-	.eyebrow {
-		font-size: var(--text-caption);
-		font-weight: var(--font-weight-bold);
-		letter-spacing: var(--tracking-caps);
-		text-transform: uppercase;
-		color: var(--color-text-weak);
-		margin: 0;
-	}
-
-	h2 {
-		font-size: var(--text-h2);
-		line-height: var(--leading-h2);
-		color: var(--color-text-strong);
-		margin: 0;
-	}
-
-	h3 {
-		font-size: var(--text-h3);
-		line-height: var(--leading-h3);
-		color: var(--color-text-strong);
-		margin: 0;
+		gap: var(--spacing-s);
 	}
 
 	.intro {
@@ -173,14 +147,16 @@
 		line-height: var(--leading-body);
 		color: var(--color-text-weak);
 		margin: 0;
+		padding-inline: var(--spacing-2xs);
 	}
 
 	.compose {
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-m);
-		padding: var(--spacing-card);
-		border: 1px solid var(--color-stroke-weak);
+		padding: var(--spacing-m);
+		background: var(--color-bg-raised);
+		border: var(--border-width-hairline) solid var(--color-stroke-strong);
 		border-radius: var(--radius-surface);
 	}
 
@@ -189,7 +165,7 @@
 		line-height: var(--leading-body);
 		color: var(--color-text-error);
 		background: var(--color-fill-error);
-		border: 1px solid var(--color-stroke-error-strong);
+		border: var(--border-width-hairline) solid var(--color-stroke-error-strong);
 		border-radius: var(--radius-control);
 		padding: var(--spacing-s);
 		margin: 0;
@@ -218,7 +194,7 @@
 		font-size: var(--text-body);
 		color: var(--color-text-strong);
 		background: var(--color-bg-base);
-		border: 1px solid var(--color-stroke-strong);
+		border: var(--border-width-hairline) solid var(--color-stroke-strong);
 		border-radius: var(--radius-control);
 	}
 
@@ -250,15 +226,15 @@
 		padding: var(--spacing-s) var(--spacing-l);
 		font-size: var(--text-body);
 		font-weight: var(--font-weight-bold);
-		color: var(--color-bg-base);
-		background: var(--color-text-strong);
+		color: var(--color-on-cta);
+		background: var(--color-cta);
 		border: 0;
 		border-radius: var(--radius-control);
 		cursor: pointer;
 	}
 
 	.primary:hover {
-		filter: brightness(1.1);
+		filter: brightness(1.05);
 	}
 
 	.primary:focus-visible {
@@ -266,7 +242,7 @@
 		outline-offset: 2px;
 	}
 
-	.list {
+	.feed {
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-s);
@@ -276,6 +252,7 @@
 		font-size: var(--text-body);
 		color: var(--color-text-weak);
 		margin: 0;
+		padding-inline: var(--spacing-2xs);
 	}
 
 	.state.error {
@@ -287,9 +264,10 @@
 		min-height: var(--size-control);
 		padding: var(--spacing-xs) var(--spacing-m);
 		font-size: var(--text-body);
-		color: var(--color-text-strong);
-		background: var(--color-bg-raised);
-		border: 1px solid var(--color-stroke-strong);
+		font-weight: var(--font-weight-bold);
+		color: var(--color-on-brand);
+		background: var(--color-brand);
+		border: 0;
 		border-radius: var(--radius-control);
 	}
 
@@ -298,7 +276,7 @@
 		outline-offset: 2px;
 	}
 
-	.feed {
+	.list {
 		list-style: none;
 		padding: 0;
 		margin: 0;
@@ -311,8 +289,10 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-2xs);
-		padding: var(--spacing-s);
-		border: 1px solid var(--color-stroke-weak);
+		padding: var(--spacing-m);
+		background: var(--color-bg-raised);
+		border: var(--border-width-hairline) solid var(--color-stroke-strong);
+		border-radius: var(--radius-surface);
 	}
 
 	.msg-name {
@@ -341,8 +321,9 @@
 		min-height: var(--size-touch-target);
 		padding: 0 var(--spacing-xs);
 		font-size: var(--text-body);
+		font-weight: var(--font-weight-bold);
 		font-family: inherit;
-		color: var(--color-text-weak);
+		color: var(--color-text-strong);
 		background: transparent;
 		border: 0;
 		border-radius: var(--radius-control);
@@ -355,6 +336,6 @@
 	}
 
 	.heart span {
-		color: var(--color-text-brand);
+		color: var(--color-brand);
 	}
 </style>

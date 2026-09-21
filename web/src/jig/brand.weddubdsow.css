@@ -11,52 +11,65 @@
    the next, and dark mode has three.
 
    Brand colour decided in the approved spec (2026-09-21-minimal-islamic-editorial):
-   minimal islamic editorial. Warm cream base, muted rose accent, near-black text.
-   Rose is hue 0, a red family, so per E-64 it is decorative ONLY; interactive
-   elements use --color-text-strong. Edits happen here — `jig update` will not touch this file. */
+   card-based invitation in the RamadhanTracker visual language. Cool paper-grey page,
+   raised white cards with a 1px ink ring, teal as the primary accent, muted gold
+   secondary. Teal is hue 165, a green family, so per E-64 it is decorative/primary
+   ONLY for surfaces and fills; interactive text elements use --color-text-strong
+   unless there is an on-brand fill. Edits happen here — `jig update` will not touch this file. */
 
 :root {
   color-scheme: light;
 
   /* ================= BRAND =================
      One brand colour. It marks decorative elements (I-56).
-     Intentionally near-black primary; rose is decorative only (E-64).
+     Teal 165 family, friendly travel-app energy, not wedding-gold.
      Requirements when you set it:
        - If the brand colour is red, amber or green, DO NOT use it for interactive
          elements (E-64) — it will collide with the system colours below. */
-  --brand-h: 0;
-  --brand-s: 66%;
-  --brand-l: 66%;
+  --brand-h: 165;
+  --brand-s: 69%;
+  --brand-l: 27%;
 
   /* The solid brand colour. Decorative references this (E-64). */
   --color-brand: hsl(var(--brand-h) var(--brand-s) var(--brand-l));
 
   /* ================= ELEVATION BACKGROUNDS (solid) =================
      Light comes from above: higher elevation is lighter.
-     Warm cream page, plain white raised surfaces (C-18). */
-  --color-bg-base:    oklch(0.984 0.006 88);   /* page #FAF8F4. Off-white, not #fff (C-18). */
-  --color-bg-raised:  oklch(1     0     0);    /* cards, panels, sticky bars #FFFFFF        */
-  --color-bg-overlay: oklch(1     0     0);    /* dialogs, popovers, dropdowns             */
+     Paper-grey page, plain white raised surfaces (C-18). */
+  --color-bg-base:    #f9f7f4;         /* page warm paper            */
+  --color-bg-raised:  oklch(1 0 0);    /* cards, panels #FFFFFF      */
+  --color-bg-overlay: oklch(1 0 0);    /* dialogs, popovers          */
 
   /* ================= NEUTRAL FOREGROUNDS (transparent) =================
      Light mode: opacities of black. Never pure black at 100% (C-18).
      Muted is decorative-only; weak is the readable floor. */
-  --color-text-strong:   rgb(0 0 0 / 88%);   /* #252522 headings, body — ≥ 4.5:1 */
-  --color-text-weak:     rgb(0 0 0 / 59%);   /* #77746D supporting text — ≥ 4.5:1 */
-  --color-text-muted:    rgb(0 0 0 / 58%);   /* captions — ≥ 4.5:1 on fill (C-19) */
+  --color-text-strong:   #2c2c2c;      /* headings, body — ≥ 4.5:1 */
+  --color-text-weak:     #65615b;      /* supporting text — ≥ 4.5:1 */
+  --color-text-muted:    #6e6963;      /* captions — ≥ 4.5:1 (C-19) */
   --color-stroke-strong: rgb(0 0 0 / 45%);   /* input/checkbox borders, icons — ≥ 3:1 */
-  --color-stroke-weak:   #E8E4DC;            /* dividers #E8E4DC. Decorative, no floor. */
-  --color-fill:          rgb(0 0 0 / 4%);    /* tags, badges, secondary surfaces   */
+  --color-stroke-weak:   #11111114;    /* dividers, card ring. Decorative, no floor. */
+  --color-fill:          #f0ece6;      /* tags, badges, secondary surfaces */
 
   --color-icon:      var(--color-stroke-strong);
   --color-icon-weak: var(--color-stroke-weak);
 
   /* ================= BRAND FOREGROUNDS (4 variations) ================= */
-  --color-text-brand:          hsl(0 34% 49%);   /* #A95353 accent-dark for text: meets C-19 floor */
-  --color-stroke-brand-strong: #A95353;          /* accent-dark stroke, ≥ 3:1 */
+  --color-text-brand:          hsl(var(--brand-h) var(--brand-s) var(--brand-l));   /* teal text: meets C-19 floor */
+  --color-stroke-brand-strong: hsl(var(--brand-h) var(--brand-s) var(--brand-l));   /* teal stroke, ≥ 3:1 */
   --color-stroke-brand-weak:   hsl(var(--brand-h) var(--brand-s) var(--brand-l) / 20%);
-  --color-fill-brand:          hsl(4 55% 91%);   /* #F5DFDC accent-soft wash */
-  --color-on-brand:            rgb(0 0 0 / 88%); /* text on a solid brand fill */
+  --color-fill-brand:          hsl(var(--brand-h) 69% 93%);   /* teal-soft wash */
+  --color-on-brand:            #ffffff;   /* text on a solid brand fill */
+
+  /* ================= SECONDARY ACCENT + CTA =================
+     Muted gold: RamadhanTracker --accent family, decorative only (I-56/E-64).
+     CTA: the sunshine-yellow confirm action of the whole invite, with ink text.
+     Not a system colour; it never signals feedback. */
+  --accent-h: 38;  --accent-s: 46%;  --accent-l: 61%;
+  --color-accent:            hsl(var(--accent-h) var(--accent-s) var(--accent-l)); /* #c9a96e */
+  --color-fill-accent:       hsl(var(--accent-h) 60% 94%);
+  --color-stroke-accent-weak: hsl(var(--accent-h) var(--accent-s) var(--accent-l) / 25%);
+  --color-cta:         #ffdf38;   /* warm yellow confirm fill */
+  --color-on-cta:      #2c2c2c;   /* ink text on CTA */
 
   /* ================= SYSTEM COLOURS =================
      Three, with familiar traffic-light meanings. Four variations each.
@@ -66,12 +79,13 @@
        - text (100%)          >= 4.5:1 against --color-bg-base AND --color-bg-raised
        - stroke-strong (80%)  >= 3:1 against the same two, composited
        - stroke-weak and fill are decorative and have no floor
+
      Each colour is one h/s/l triple (plus a fill alpha, which differs between
      light and dark) referenced by all four variations below, so changing the
      colour means changing it in one place instead of 4–5. */
-  --error-h:   0;   --error-s:   71%; --error-l:   44%; --error-fill-a:   5%;
+  --error-h:   0;   --error-s:   75%; --error-l:   44%; --error-fill-a:   5%;
   --warning-h: 42;  --warning-s: 82%; --warning-l:  29%; --warning-fill-a: 5%;
-  --success-h: 162; --success-s: 95%; --success-l: 23%; --success-fill-a: 5%;
+  --success-h: 165; --success-s: 69%; --success-l: 27%; --success-fill-a: 5%;
   /* info is NOT in the reference's set of three. Kept as an optional fourth. */
   --info-h:    220; --info-s:    70%; --info-l:    42%; --info-fill-a:    5%;
 
@@ -99,7 +113,7 @@
      Transparent overlays, so hover and press need no new colours and work on
      every surface and in both modes. Layer these OVER the element. */
   --color-state-hover: var(--color-fill);         /* 4%  light / 6%  dark */
-  --color-state-press: var(--color-stroke-weak);  /* 10% light / 12% dark */
+  --color-state-press: rgb(0 0 0 / 10%);          /* 10% light / 12% dark */
   --opacity-disabled: 0.38;
 
   --color-focus: var(--color-text-strong);
@@ -117,18 +131,18 @@
   --focus-ring-offset: 2px;
 
   /* ================= TYPE =================
-     DM Sans, the Minimal Islamic Editorial primary face. One family for
+     Outfit, the card-based invitation primary face. One family for
      text and display; hierarchy comes from size, spacing, weight, colour. */
-  --font-text:    "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-text:    "Outfit", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Outfit", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono:    ui-monospace, "SF Mono", "Cascadia Code", monospace;
   --font-numeric-features: "tnum" 1, "lnum" 1;
 
   /* ================= RADIUS — four, by element size =================
-     Controls 12–14, cards 16–20, large containers 20–24, no pill except
+     Controls 12, cards 14, large containers 16, no pill except
      tags/status/compact indicators (mode selects control/surface). */
   --radius-sm:   12px;   /* buttons, inputs, checkboxes */
-  --radius-md:   16px;   /* cards, panels                       */
+  --radius-md:   14px;   /* cards, panels                       */
   --radius-lg:   20px;   /* large surfaces, hero media          */
   --radius-full: 9999px;
 
@@ -136,7 +150,7 @@
      Shadow colour is derived from the text colour, not pure black, so it sits in
      the palette. Subtle only: 2px/12px at 4% and 8px/24px at 6%, warm grey.
      `--shadow-none` is the explicit absence a mode selects when its elevation is
-     stroke-led; every mode currently does, via `--shadow-surface`. */
+     stroke-led. Every mode currently does, via `--shadow-surface`. */
   --shadow-none:    none;
   --shadow-raised:  0 2px 12px rgb(30 25 20 / 4%);
   --shadow-overlay: 0 8px 24px rgb(30 25 20 / 6%);
@@ -167,16 +181,18 @@
 
     --brand-l: 70%;      /* lighten and desaturate the brand for dark surfaces */
     --color-on-brand: hsl(var(--brand-h) 40% 10%);
-    --color-text-brand:          hsl(0 55% 78%);
-    --color-stroke-brand-strong: hsl(0 55% 78% / 80%);
+    --color-text-brand:          hsl(var(--brand-h) 55% 74%);
+    --color-stroke-brand-strong: hsl(var(--brand-h) 55% 74% / 80%);
+    --color-stroke-brand-weak:   hsl(var(--brand-h) 55% 84% / 20%);
+    --color-fill-brand:          hsl(var(--brand-h) 55% 30% / 18%);
 
     /* System colours lighten and desaturate in dark mode. Only the h/s/l and
        fill-alpha vars need overriding here — the four hsl() declarations
        above pick the new values up automatically. */
     --error-h:   0;   --error-s:   60%; --error-l:   72%; --error-fill-a:   8%;
     --warning-h: 42;  --warning-s: 70%; --warning-l:  70%; --warning-fill-a: 8%;
-    --success-h: 162; --success-s: 45%; --success-l: 66%; --success-fill-a: 8%;
-    --info-h:    220; --info-s:    55%; --info-l:    74%; --info-fill-a:    8%;
+    --success-h: 165; --success-s: 45%; --success-l:  66%; --success-fill-a: 8%;
+    --info-h:    220; --info-s:    55%; --info-l:    74%; --info-fill-a: 8%;
 
     --shadow-raised:  none;
     --shadow-overlay: 0 8px 24px -8px rgb(0 0 0 / 60%);

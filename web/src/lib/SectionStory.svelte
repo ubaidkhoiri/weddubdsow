@@ -12,7 +12,7 @@
 				<div class="body">
 					<p class="date">{step.date}</p>
 					<h3>{step.title}</h3>
-					<p>{step.text}</p>
+					<p class="text">{step.text}</p>
 				</div>
 			</li>
 		{/each}
@@ -23,36 +23,44 @@
 	.section {
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-stack);
-		padding-block: var(--spacing-section);
-		padding-inline: var(--spacing-m);
+		gap: var(--spacing-s);
 	}
 
 	.timeline {
 		list-style: none;
-		padding: 0;
+		padding: var(--spacing-m);
 		margin: 0;
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-l);
-		border-inline-start: var(--border-width-strong) solid var(--color-stroke-brand-weak);
-		padding-inline-start: var(--spacing-m);
+		background: var(--color-bg-raised);
+		border: var(--border-width-hairline) solid var(--color-stroke-strong);
+		border-radius: var(--radius-surface);
 	}
 
 	.step {
 		position: relative;
-		padding-bottom: var(--spacing-s);
+		padding-inline-start: var(--spacing-l);
+	}
+
+	.step:not(:last-child)::before {
+		content: "";
+		position: absolute;
+		left: 5px;
+		top: 22px;
+		bottom: -24px;
+		width: var(--border-width-hairline);
+		background: var(--color-stroke-weak);
 	}
 
 	.dot {
 		position: absolute;
-		left: calc(var(--spacing-m) * -1 - 4px);
+		left: 0;
 		top: 6px;
-		width: 8px;
-		height: 8px;
+		width: 10px;
+		height: 10px;
 		border-radius: var(--radius-full);
-		background: var(--color-text-brand);
-		transform: translateX(-50%);
+		background: var(--color-accent);
 	}
 
 	.body {
@@ -73,16 +81,15 @@
 	h3 {
 		font-size: var(--text-h3);
 		line-height: var(--leading-h3);
-		font-weight: var(--font-weight-regular);
+		font-weight: var(--font-weight-bold);
 		color: var(--color-text-strong);
 		margin: 0;
 	}
 
-	.body p:last-child {
-		font-size: var(--text-prose);
-		line-height: var(--leading-prose);
+	.text {
+		font-size: var(--text-body);
+		line-height: var(--leading-body);
 		color: var(--color-text-weak);
-		max-width: var(--measure-prose);
 		margin: 0;
 	}
 </style>

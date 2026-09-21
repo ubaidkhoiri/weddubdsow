@@ -18,17 +18,22 @@
 
 <section class="section" id="gallery" aria-labelledby="gallery-h">
 	<SectionHeading eyebrow="Galeri" title="Momen Terindah" numeral="04" id="gallery-h" />
-	<p class="intro">Ketuk foto untuk melihat lebih dekat.</p>
-
-	<ul class="grid">
-		{#each gallery as photo (photo.src)}
-			<li>
-				<button class="thumb" type="button" onclick={() => openPhoto(photo.src)} aria-label={photo.alt}>
-					<img src={photo.src} alt={photo.alt} loading="lazy" />
-				</button>
-			</li>
-		{/each}
-	</ul>
+	<div class="card">
+		<ul class="grid">
+			{#each gallery as photo (photo.src)}
+				<li>
+					<button
+						class="thumb"
+						type="button"
+						onclick={() => openPhoto(photo.src)}
+						aria-label={photo.alt}
+					>
+						<img src={photo.src} alt={photo.alt} loading="lazy" />
+					</button>
+				</li>
+			{/each}
+		</ul>
+	</div>
 
 	<dialog bind:this={dialog} onclose={closePhoto} class="lightbox">
 		{#if active}
@@ -42,16 +47,14 @@
 	.section {
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-stack);
-		padding-block: var(--spacing-section);
-		padding-inline: var(--spacing-m);
+		gap: var(--spacing-s);
 	}
 
-	.intro {
-		font-size: var(--text-body);
-		line-height: var(--leading-body);
-		color: var(--color-text-weak);
-		margin: 0;
+	.card {
+		padding: var(--spacing-s);
+		background: var(--color-bg-raised);
+		border: var(--border-width-hairline) solid var(--color-stroke-strong);
+		border-radius: var(--radius-surface);
 	}
 
 	.grid {
@@ -60,15 +63,15 @@
 		margin: 0;
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
-		gap: var(--spacing-m);
+		gap: var(--spacing-xs);
 	}
 
 	.thumb {
 		display: block;
 		width: 100%;
 		padding: 0;
-		border: 1px solid var(--color-stroke-weak);
-		border-radius: var(--radius-sm);
+		border: 0;
+		border-radius: var(--radius-control);
 		background: transparent;
 		cursor: pointer;
 	}
@@ -78,7 +81,7 @@
 		width: 100%;
 		aspect-ratio: 3 / 4;
 		object-fit: cover;
-		padding: var(--spacing-2xs);
+		border-radius: var(--radius-control);
 	}
 
 	.thumb:focus-visible {
@@ -90,10 +93,9 @@
 		width: min(90vw, 430px);
 		max-width: none;
 		padding: var(--spacing-s);
-		border: 0;
+		border: var(--border-width-hairline) solid var(--color-stroke-strong);
 		border-radius: var(--radius-surface);
 		background: var(--color-bg-overlay);
-		box-shadow: var(--shadow-raised);
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-s);
@@ -104,7 +106,7 @@
 		width: 100%;
 		max-height: 70svh;
 		object-fit: contain;
-		border-radius: var(--radius-sm);
+		border-radius: var(--radius-control);
 	}
 
 	.close {
@@ -112,10 +114,11 @@
 		min-height: var(--size-touch-target);
 		padding: var(--spacing-xs) var(--spacing-m);
 		font-size: var(--text-body);
-		color: var(--color-text-strong);
-		background: var(--color-bg-base);
-		border: 1px solid var(--color-stroke-strong);
+		color: var(--color-on-brand);
+		background: var(--color-brand);
+		border: 0;
 		border-radius: var(--radius-control);
+		cursor: pointer;
 	}
 
 	.close:focus-visible {

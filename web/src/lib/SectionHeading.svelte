@@ -8,21 +8,31 @@
 </script>
 
 <div class="heading">
-	{#if eyebrow}
-		<p class="eyebrow">{eyebrow}</p>
-	{/if}
-	<h2 {id}>{title}</h2>
-	{#if numeral}
-		<span class="numeral" aria-hidden="true">{numeral}</span>
-	{/if}
+	<div class="head-row">
+		<div>
+			{#if eyebrow}
+				<p class="eyebrow">{eyebrow}</p>
+			{/if}
+			<h2 {id}>{title}</h2>
+		</div>
+		{#if numeral}
+			<span class="numeral" aria-hidden="true">{numeral}</span>
+		{/if}
+	</div>
 </div>
 
 <style>
 	.heading {
-		position: relative;
+		padding-inline: var(--spacing-2xs);
 		padding-top: var(--spacing-xs);
-		padding-bottom: var(--spacing-s);
-		border-bottom: 1px solid var(--color-stroke-weak);
+		padding-bottom: var(--spacing-xs);
+	}
+
+	.head-row {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: var(--spacing-s);
 	}
 
 	.eyebrow {
@@ -40,13 +50,11 @@
 	}
 
 	.numeral {
-		position: absolute;
-		top: 0;
-		right: 0;
 		font-family: var(--font-display);
-		font-size: var(--text-h1);
-		line-height: var(--leading-h1);
-		color: var(--color-stroke-brand-weak);
+		font-size: var(--text-body);
+		font-weight: var(--font-weight-bold);
+		color: var(--color-accent);
 		font-variant-numeric: tabular-nums;
+		line-height: 1.5;
 	}
 </style>
