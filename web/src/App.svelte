@@ -370,7 +370,6 @@
 				color-mix(in srgb, var(--color-bg-base) 30%, transparent)
 			),
 			url("/bgcover.png") center / cover no-repeat;
-		animation: intro-fade-in var(--duration-slow) var(--ease-out) both;
 	}
 
 	.intro.closing {
@@ -390,23 +389,10 @@
 	}
 
 	@media (prefers-reduced-motion: no-preference) {
-		@keyframes intro-fade-in {
-			from {
-				opacity: 0;
-			}
-			to {
-				opacity: 1;
-			}
-		}
-
 		@keyframes intro-fade-out {
 			to {
 				opacity: 0;
 			}
-		}
-
-		.cover {
-			animation: intro-fade-in var(--duration-slow) var(--ease-out) both;
 		}
 	}
 
@@ -458,21 +444,11 @@
 		font-family: var(--font-display);
 		font-style: italic;
 		font-weight: var(--font-weight-regular);
-		font-size: calc(var(--text-h1) * 2);
+		font-size: calc(var(--text-h1) * 3);
 		line-height: 0.9;
 		letter-spacing: var(--tracking-h1);
 		color: var(--color-text-strong);
 		transform: rotate(-6deg);
-		animation: cover-in-fade var(--duration-slow) var(--ease-out) 250ms both;
-	}
-
-	@keyframes cover-in-fade {
-		from {
-			opacity: 0;
-		}
-		to {
-			opacity: 1;
-		}
 	}
 
 	.m-u {
@@ -485,7 +461,7 @@
 
 	.monogram .amp {
 		color: var(--color-accent);
-		font-size: calc(var(--text-h1) * 2 + var(--spacing-xs));
+		font-size: var(--text-h2);
 		transform: translateY(var(--spacing-2xs));
 	}
 
@@ -522,45 +498,6 @@
 	}
 
 	@media (prefers-reduced-motion: no-preference) {
-		.cover-inner > * {
-			animation: cover-in var(--duration-slow) var(--ease-out) both;
-		}
-
-		.cover-inner > *:nth-child(1) {
-			animation-delay: 100ms;
-		}
-
-		.cover-inner > *:nth-child(2) {
-			animation-delay: 200ms;
-		}
-
-		.cover-inner > *:nth-child(3) {
-			animation-delay: 300ms;
-		}
-
-		.cover-inner > *:nth-child(4) {
-			animation-delay: 400ms;
-		}
-
-		.cover-inner > *:nth-child(5) {
-			animation-delay: 500ms;
-		}
-
-		.cover-inner > *:nth-child(6) {
-			animation-delay: 600ms;
-		}
-
-		@keyframes cover-in {
-			from {
-				opacity: 0;
-				transform: translateY(var(--spacing-s));
-			}
-			to {
-				opacity: 1;
-				transform: none;
-			}
-		}
-
 		@keyframes cover-out {
 			to {
 				opacity: 0;
