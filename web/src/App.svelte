@@ -200,7 +200,11 @@
 					><span class="m-line">{event.groom}</span
 					><span class="m-line">{event.bride}</span></span
 				>
-				<span class="tap-hint">Ketuk untuk membuka</span>
+				<span class="tap-hint"
+					><span class="h-word">Ketuk</span>
+					<span class="h-word">untuk</span>
+					<span class="h-word">membuka</span></span
+				>
 			</span>
 		</button>
 		{/if}
@@ -414,7 +418,9 @@
 
 	@media (prefers-reduced-motion: no-preference) {
 		.rings--intro {
-			animation: intro-ring-in var(--duration-slow) var(--ease-out) both;
+			animation:
+				intro-ring-in var(--duration-slow) var(--ease-out) both,
+				intro-lottie-out 600ms var(--ease-out) 3.4s both;
 		}
 
 		@keyframes intro-ring-in {
@@ -425,6 +431,12 @@
 			to {
 				opacity: 1;
 				transform: none;
+			}
+		}
+
+		@keyframes intro-lottie-out {
+			to {
+				opacity: 0;
 			}
 		}
 	}
@@ -461,6 +473,58 @@
 		text-shadow:
 			0 1px 1px var(--color-cover-shadow),
 			1px 2px 2px var(--color-cover-shadow);
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.cover-inner .monogram {
+			animation: mono-float var(--duration-ambient-slow) var(--ease-in-out) infinite;
+		}
+
+		@keyframes mono-float {
+			0%,
+			100% {
+				transform: translateY(0);
+			}
+			50% {
+				transform: translateY(calc(-1 * var(--spacing-s)));
+			}
+		}
+
+		.cover-inner .m-line,
+		.tap-hint .h-word {
+			animation: mono-word-in var(--duration-base) var(--ease-out) both;
+		}
+
+		.cover-inner .m-line:nth-child(1) {
+			animation-delay: 200ms;
+		}
+
+		.cover-inner .m-line:nth-child(2) {
+			animation-delay: 500ms;
+		}
+
+		.tap-hint .h-word:nth-child(1) {
+			animation-delay: 800ms;
+		}
+
+		.tap-hint .h-word:nth-child(2) {
+			animation-delay: 1100ms;
+		}
+
+		.tap-hint .h-word:nth-child(3) {
+			animation-delay: 1400ms;
+		}
+
+		@keyframes mono-word-in {
+			from {
+				opacity: 0;
+				transform: translateY(var(--spacing-s));
+			}
+			to {
+				opacity: 1;
+				transform: none;
+			}
+		}
 	}
 
 	.eyebrow {
