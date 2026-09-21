@@ -630,14 +630,22 @@
 		font-style: italic;
 		font-weight: var(--font-weight-regular);
 		font-size: var(--text-monogram);
-		line-height: calc(var(--text-monogram) - var(--spacing-xxl));
-		color: color-mix(in srgb, var(--color-text-strong) 20%, transparent);
-		padding-top: var(--spacing-s);
-		padding-inline: var(--spacing-xs);
+		line-height: var(--spacing-page-mono-line);
+		color: var(--color-cover-sign);
+		margin-block: var(--spacing-page-top) var(--spacing-page-bottom);
+		padding-inline: var(--spacing-page-mono-edges);
 	}
 
 	.page-mono .m-line {
 		display: block;
+	}
+
+	.page-mono .m-line:first-child {
+		transform: translateX(calc(-1 * var(--spacing-page-mono-edges)));
+	}
+
+	.page-mono .m-line:last-child {
+		transform: translateX(var(--spacing-page-mono-edges));
 	}
 
 	.hero-title {

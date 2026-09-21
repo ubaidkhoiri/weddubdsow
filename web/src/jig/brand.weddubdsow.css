@@ -41,6 +41,10 @@
   --color-bg-overlay: oklch(1 0 0);    /* dialogs, popovers          */
   --color-bg-glass:   color-mix(in srgb, var(--color-bg-raised) 16%, transparent); /* frosted cards di atas foto */
   --spacing-page-inset: 20%;          /* halaman foto: margin pagar konten 60% di tengah */
+  --spacing-page-top: 200px;          /* monogram hero: jarak atas    */
+  --spacing-page-bottom: 100px;       /* monogram hero: jarak bawah   */
+  --spacing-page-mono-edges: var(--spacing-xl); /* monogram U/S: offset kiri-kanan */
+  --spacing-page-mono-line: calc(var(--text-monogram) - 60px); /* line-height 100px-60px=-60px gap */
 
   /* ================= NEUTRAL FOREGROUNDS (transparent) =================
      Light mode: opacities of black. Never pure black at 100% (C-18).
