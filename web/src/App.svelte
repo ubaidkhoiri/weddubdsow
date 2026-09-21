@@ -667,7 +667,7 @@
 		font-weight: var(--font-weight-regular);
 		font-size: var(--text-monogram);
 		line-height: var(--spacing-page-mono-line);
-		color: var(--color-cover-sign);
+		color: var(--color-text-strong);
 		margin-block: var(--spacing-page-top) var(--spacing-page-bottom);
 		padding-inline: var(--spacing-page-mono-edges);
 	}
@@ -683,22 +683,22 @@
 		text-align: center;
 		gap: var(--spacing-s);
 		padding-block: var(--spacing-l);
-		color: var(--color-cover-sign);
+		color: var(--color-text-strong);
 	}
 
 	.ic-arab {
 		margin: 0;
 		font-family: var(--font-text);
-		font-size: var(--text-body);
+		font-size: var(--text-caption);
 		line-height: var(--leading-body);
 	}
 
 	.ic-prose {
 		margin: 0;
 		font-family: var(--font-text);
-		font-size: var(--text-body);
-		line-height: var(--leading-prose);
-		color: color-mix(in srgb, var(--color-cover-sign) 88%, transparent);
+		font-size: var(--text-caption);
+		line-height: var(--leading-body);
+		color: var(--color-text-weak);
 	}
 
 	.ic-name {
@@ -706,31 +706,32 @@
 		font-family: var(--font-display);
 		font-style: italic;
 		font-weight: var(--font-weight-regular);
-		font-size: var(--text-h2);
-		line-height: var(--leading-h2);
+		font-size: var(--text-h3);
+		line-height: var(--leading-h3);
+		color: var(--color-text-strong);
 	}
 
 	.ic-parents {
 		margin: 0;
 		font-family: var(--font-text);
-		font-size: var(--text-body);
+		font-size: var(--text-caption);
 		line-height: var(--leading-body);
-		color: color-mix(in srgb, var(--color-cover-sign) 80%, transparent);
+		color: var(--color-text-weak);
 	}
 
 	.ic-amp {
 		margin: 0;
 		font-family: var(--font-display);
 		font-style: italic;
-		font-size: var(--text-h3);
-		color: var(--color-accent);
+		font-size: var(--text-caption);
+		color: var(--color-text-brand);
 	}
 
 	.ic-divider {
 		display: block;
 		width: 100%;
 		height: var(--border-width-hairline);
-		background: color-mix(in srgb, var(--color-cover-sign) 25%, transparent);
+		background: var(--color-stroke-weak);
 		margin-block: var(--spacing-xs);
 	}
 
@@ -741,28 +742,31 @@
 		font-weight: var(--font-weight-bold);
 		letter-spacing: var(--tracking-caps);
 		text-transform: uppercase;
-		color: color-mix(in srgb, var(--color-cover-sign) 70%, transparent);
+		color: var(--color-text-muted);
 	}
 
-	.ic-dates,
-	.ic-time {
+	.ic-dates {
 		margin: 0;
 		font-family: var(--font-display);
 		font-style: italic;
 		font-size: var(--text-h3);
 		line-height: var(--leading-h3);
+		color: var(--color-text-strong);
 	}
 
 	.ic-time {
+		margin: 0;
 		font-family: var(--font-text);
-		font-size: var(--text-body);
+		font-size: var(--text-caption);
+		line-height: var(--leading-body);
+		color: var(--color-text-weak);
 	}
 
 	.ic-map {
 		font-family: var(--font-text);
-		font-size: var(--text-body);
+		font-size: var(--text-caption);
 		font-weight: var(--font-weight-bold);
-		color: var(--color-accent);
+		color: var(--color-text-brand);
 		text-decoration: underline;
 		text-underline-offset: var(--spacing-2xs);
 	}
@@ -774,8 +778,9 @@
 
 	.ic-signlabel {
 		margin: 0;
-		font-size: var(--text-body);
-		color: color-mix(in srgb, var(--color-cover-sign) 75%, transparent);
+		font-family: var(--font-text);
+		font-size: var(--text-caption);
+		color: var(--color-text-weak);
 	}
 
 	.ic-signature {
@@ -784,6 +789,7 @@
 		font-style: italic;
 		font-size: var(--text-h3);
 		line-height: var(--leading-h3);
+		color: var(--color-text-strong);
 	}
 
 	.page-mono .m-line:first-child {
