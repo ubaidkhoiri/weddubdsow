@@ -18,12 +18,23 @@
 	const target = new Date("2026-10-08T09:00:00+07:00").getTime();
 	let opened = $state(false);
 	let closing = $state(false);
+	let phase = $state(prefersReduced ? "cover" : "intro");
 	let now = $state(Date.now());
 	let isAdmin = $state(false);
 
 	$effect(() => {
 		if (typeof document === "undefined") return;
 		document.body.classList.toggle("is-locked", !opened);
+	});
+
+	let introTimer: ReturnType<typeof setTimeout> | null = null;
+
+	onMount(() => {
+		if (phase !== "intro") return;
+		introTimer = setTimeout(() => (phase = "cover"), 4200);
+		return () => {
+			if (introTimer) clearTimeout(introTimer);
+		};
 	});
 
 	onMount(() => {
@@ -107,12 +118,12 @@
 	function buildYtPlayer() {
 		const w = window as any;
 		ytPlayer = new w.YT.Player("yt-player", {
-			videoId: "1892ujwIooo",
+			videoId: "y1cBhJLNNXU",
 			playerVars: {
 				autoplay: 1,
 				mute: 1,
 				loop: 1,
-				playlist: "1892ujwIooo",
+				playlist: "y1cBhJLNNXU",
 				playsinline: 1,
 				controls: 0,
 				rel: 0,
@@ -159,6 +170,13 @@
 	{:else}
 	<div class="invite">
 	{#if !opened}
+		{#if phase === "intro"}
+			<div class="intro" role="status" aria-label="Undangan Ngunduh Mantu">
+				<span class="rings rings--intro" aria-hidden="true">
+					<dotlottie-wc src={ringsUrl} autoplay={!prefersReduced} loop></dotlottie-wc>
+				</span>
+			</div>
+		{:else}
 		<button
 			class="cover"
 			class:closing
@@ -174,12 +192,10 @@
 					<span class="name">{event.bride}</span>
 				</span>
 				<span class="greeting">{inviteMessage}</span>
-				<span class="rings" aria-hidden="true">
-					<dotlottie-wc src={ringsUrl} autoplay={!prefersReduced} loop></dotlottie-wc>
-				</span>
 				<span class="tap-hint">Ketuk untuk membuka</span>
 			</span>
 		</button>
+		{/if}
 	{/if}
 
 	<header class="hero" aria-label={event.title}>
@@ -291,6 +307,60 @@
 		background: var(--color-bg-base);
 		border: 0;
 		cursor: pointer;
+	}
+
+	.intro {
+		position: fixed;
+		inset: 0;
+		z-index: 21;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: var(--spacing-m);
+		padding: var(--spacing-l);
+		background: var(--color-bg-base);
+	}
+
+	.intro::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		margin: 0 auto;
+		width: 100%;
+		max-width: 393px;
+		border-inline: var(--border-width-hairline) solid var(--color-stroke-weak);
+		pointer-events: none;
+	}
+
+	.rings--intro {
+		width: 208px;
+		height: 208px;
+		color: var(--color-text-strong);
+	}
+
+	.rings--intro dotlottie-wc {
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		filter: invert(1);
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.rings--intro {
+			animation: intro-ring-in var(--duration-slow) var(--ease-out) both;
+		}
+
+		@keyframes intro-ring-in {
+			from {
+				opacity: 0;
+				transform: scale(0.9);
+			}
+			to {
+				opacity: 1;
+				transform: none;
+			}
+		}
 	}
 
 	.cover::before {
