@@ -52,7 +52,7 @@
 	.numeral {
 		font-family: var(--font-display);
 		font-size: var(--text-body);
-		font-weight: var(--font-weight-bold);
+		font-weight: var(--font-weight-regular);
 		color: var(--color-accent);
 		font-variant-numeric: tabular-nums;
 		line-height: 1.5;

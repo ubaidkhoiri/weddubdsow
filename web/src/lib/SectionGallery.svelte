@@ -53,7 +53,7 @@
 	.card {
 		padding: var(--spacing-s);
 		background: var(--color-bg-raised);
-		border: var(--border-width-hairline) solid var(--color-stroke-strong);
+		border: var(--border-width-hairline) solid var(--color-stroke-weak);
 		border-radius: var(--radius-surface);
 	}
 
@@ -93,7 +93,7 @@
 		width: min(90vw, 430px);
 		max-width: none;
 		padding: var(--spacing-s);
-		border: var(--border-width-hairline) solid var(--color-stroke-strong);
+		border: var(--border-width-hairline) solid var(--color-stroke-weak);
 		border-radius: var(--radius-surface);
 		background: var(--color-bg-overlay);
 		display: flex;

@@ -34,7 +34,7 @@
 		flex-direction: column;
 		gap: var(--spacing-l);
 		background: var(--color-bg-raised);
-		border: var(--border-width-hairline) solid var(--color-stroke-strong);
+		border: var(--border-width-hairline) solid var(--color-stroke-weak);
 		border-radius: var(--radius-surface);
 	}
 

@@ -42,7 +42,7 @@
 		padding: var(--spacing-l) var(--spacing-m);
 		text-align: center;
 		background: var(--color-bg-raised);
-		border: var(--border-width-hairline) solid var(--color-stroke-strong);
+		border: var(--border-width-hairline) solid var(--color-stroke-weak);
 		border-radius: var(--radius-surface);
 	}
 
@@ -66,7 +66,7 @@
 
 	.couple {
 		font-family: var(--font-display);
-		font-weight: var(--font-weight-bold);
+		font-weight: var(--font-weight-regular);
 		font-size: var(--text-h3);
 		line-height: var(--leading-h3);
 		color: var(--color-text-brand);

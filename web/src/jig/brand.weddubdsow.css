@@ -46,7 +46,7 @@
   --color-text-strong:   #2c2c2c;      /* headings, body — ≥ 4.5:1 */
   --color-text-weak:     #65615b;      /* supporting text — ≥ 4.5:1 */
   --color-text-muted:    #6e6963;      /* captions — ≥ 4.5:1 (C-19) */
-  --color-stroke-strong: rgb(0 0 0 / 45%);   /* input/checkbox borders, icons — ≥ 3:1 */
+  --color-stroke-strong: #817c74;         /* soft warm grey — kontrol legible, ≥ 3:1 */
   --color-stroke-weak:   #11111114;    /* dividers, card ring. Decorative, no floor. */
   --color-fill:          #f0ece6;      /* tags, badges, secondary surfaces */
 
@@ -134,7 +134,7 @@
      Outfit, the card-based invitation primary face. One family for
      text and display; hierarchy comes from size, spacing, weight, colour. */
   --font-text:    "Outfit", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "Outfit", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Instrument Serif", "Outfit", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono:    ui-monospace, "SF Mono", "Cascadia Code", monospace;
   --font-numeric-features: "tnum" 1, "lnum" 1;
 

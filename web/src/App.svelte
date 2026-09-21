@@ -326,7 +326,7 @@
 
 	.card {
 		background: var(--color-bg-raised);
-		border: var(--border-width-hairline) solid var(--color-stroke-strong);
+		border: var(--border-width-hairline) solid var(--color-stroke-weak);
 		border-radius: var(--radius-surface);
 		padding: var(--spacing-m);
 	}
@@ -416,22 +416,23 @@
 		gap: var(--spacing-m);
 		max-width: 340px;
 		width: 100%;
-		border: var(--border-width-hairline) solid var(--color-stroke-strong);
+		border: var(--border-width-hairline) solid var(--color-stroke-weak);
 		border-radius: var(--radius-surface);
 		background: var(--color-bg-raised);
 		padding: var(--spacing-xl) var(--spacing-m);
 	}
 
-	.cover-names {
+.cover-names {
 		display: flex;
 		align-items: baseline;
 		justify-content: center;
 		flex-wrap: wrap;
 		gap: var(--spacing-s);
 		margin: 0;
+		font-family: var(--font-display);
 		font-size: var(--text-h1);
 		line-height: var(--leading-h1);
-		font-weight: var(--font-weight-bold);
+		font-weight: var(--font-weight-regular);
 		letter-spacing: var(--tracking-h1);
 		color: var(--color-text-strong);
 	}
@@ -564,7 +565,7 @@
 		gap: var(--spacing-s);
 		font-size: var(--text-h1);
 		line-height: var(--leading-h1);
-		font-weight: var(--font-weight-bold);
+		font-weight: var(--font-weight-regular);
 		letter-spacing: var(--tracking-h1);
 		color: var(--color-text-strong);
 		margin: 0;
@@ -759,7 +760,7 @@
 		height: var(--size-touch-target);
 		border-radius: var(--radius-full);
 		background: var(--color-bg-raised);
-		border: var(--border-width-hairline) solid var(--color-stroke-strong);
+		border: var(--border-width-hairline) solid var(--color-stroke-weak);
 		color: var(--color-text-strong);
 		text-decoration: none;
 		pointer-events: auto;

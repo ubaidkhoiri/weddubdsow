@@ -185,7 +185,7 @@
 	.login input {
 		min-height: var(--size-touch-target);
 		padding: var(--spacing-s);
-		border: 1px solid var(--color-stroke-strong);
+		border: 1px solid var(--color-stroke-weak);
 		border-radius: var(--radius-control);
 		background: var(--color-bg-base);
 		color: var(--color-text-strong);
@@ -268,7 +268,7 @@
 		flex-direction: column;
 		gap: var(--spacing-2xs);
 		padding: var(--spacing-s);
-		border: var(--border-width-hairline) solid var(--color-stroke-strong);
+		border: var(--border-width-hairline) solid var(--color-stroke-weak);
 		border-radius: var(--radius-surface);
 		background: var(--color-bg-raised);
 	}
@@ -300,7 +300,7 @@
 		align-items: baseline;
 		justify-content: space-between;
 		padding: var(--spacing-s);
-		border: var(--border-width-hairline) solid var(--color-stroke-strong);
+		border: var(--border-width-hairline) solid var(--color-stroke-weak);
 		border-radius: var(--radius-surface);
 		background: var(--color-bg-raised);
 	}

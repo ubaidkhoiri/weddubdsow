@@ -45,3 +45,9 @@ body.is-locked #app {
 	min-height: 100svh;
 	background: var(--color-bg-base);
 }
+
+.invite :is(h1, h2, h3) {
+	font-family: var(--font-display);
+	font-weight: 400;
+	letter-spacing: 0;
+}
