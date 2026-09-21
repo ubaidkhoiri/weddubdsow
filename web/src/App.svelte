@@ -28,10 +28,14 @@
 	});
 
 	let introTimer: ReturnType<typeof setTimeout> | null = null;
+	let introClosing = $state(false);
 
 	onMount(() => {
 		if (phase !== "intro") return;
-		introTimer = setTimeout(() => (phase = "cover"), 4200);
+		introTimer = setTimeout(() => {
+			introClosing = true;
+			introTimer = setTimeout(() => (phase = "cover"), 650);
+		}, 3550);
 		return () => {
 			if (introTimer) clearTimeout(introTimer);
 		};
@@ -171,7 +175,12 @@
 	<div class="invite">
 	{#if !opened}
 		{#if phase === "intro"}
-			<div class="intro" role="status" aria-label="Undangan Ngunduh Mantu">
+			<div
+				class="intro"
+				class:closing={introClosing}
+				role="status"
+				aria-label="Undangan Ngunduh Mantu"
+			>
 				<span class="rings rings--intro" aria-hidden="true">
 					<dotlottie-wc src={ringsUrl} autoplay={!prefersReduced} loop></dotlottie-wc>
 				</span>
@@ -355,7 +364,18 @@
 		justify-content: center;
 		gap: var(--spacing-m);
 		padding: var(--spacing-l);
-		background: var(--color-bg-base);
+		background:
+			linear-gradient(
+				color-mix(in srgb, var(--color-bg-base) 30%, transparent),
+				color-mix(in srgb, var(--color-bg-base) 30%, transparent)
+			),
+			url("/bgcover.png") center / cover no-repeat;
+		animation: intro-fade-in var(--duration-slow) var(--ease-out) both;
+	}
+
+	.intro.closing {
+		pointer-events: none;
+		animation: intro-fade-out 650ms var(--ease-out) forwards;
 	}
 
 	.intro::before {
@@ -367,6 +387,27 @@
 		max-width: 393px;
 		border-inline: var(--border-width-hairline) solid var(--color-stroke-weak);
 		pointer-events: none;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		@keyframes intro-fade-in {
+			from {
+				opacity: 0;
+			}
+			to {
+				opacity: 1;
+			}
+		}
+
+		@keyframes intro-fade-out {
+			to {
+				opacity: 0;
+			}
+		}
+
+		.cover {
+			animation: intro-fade-in var(--duration-slow) var(--ease-out) both;
+		}
 	}
 
 	.rings--intro {
@@ -400,14 +441,14 @@
 	}
 
 	.cover-inner {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		gap: var(--spacing-l);
 		max-width: 340px;
 		width: 100%;
-		min-height: 66svh;
+		min-height: 100svh;
 		padding: var(--spacing-xl) var(--spacing-m);
 	}
 
@@ -417,7 +458,7 @@
 		font-family: var(--font-display);
 		font-style: italic;
 		font-weight: var(--font-weight-regular);
-		font-size: var(--text-h1);
+		font-size: calc(var(--text-h1) * 2);
 		line-height: 0.9;
 		letter-spacing: var(--tracking-h1);
 		color: var(--color-text-strong);
@@ -444,7 +485,7 @@
 
 	.monogram .amp {
 		color: var(--color-accent);
-		font-size: calc(var(--text-h1) + var(--spacing-xs));
+		font-size: calc(var(--text-h1) * 2 + var(--spacing-xs));
 		transform: translateY(var(--spacing-2xs));
 	}
 
@@ -529,12 +570,16 @@
 	}
 
 	.tap-hint {
+		position: absolute;
+		inset-inline: 0;
+		bottom: calc(var(--spacing-xl) * 2);
 		display: inline-flex;
 		align-items: center;
+		justify-content: center;
 		min-height: var(--size-touch-target);
 		padding: var(--spacing-2xs) var(--spacing-s);
 		font-family: var(--font-text);
-		font-size: calc(var(--text-caption) - var(--spacing-2xs) / 2);
+		font-size: calc(var(--text-caption) - var(--spacing-2xs));
 		font-weight: var(--font-weight-regular);
 		letter-spacing: var(--tracking-caps);
 		text-transform: uppercase;
@@ -549,10 +594,10 @@
 		@keyframes hint-blink {
 			0%,
 			100% {
-				opacity: 0.45;
+				opacity: 0.25;
 			}
 			50% {
-				opacity: 1;
+				opacity: 0.6;
 			}
 		}
 	}
