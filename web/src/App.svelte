@@ -5,7 +5,7 @@
 	const prefersReduced =
 		typeof matchMedia !== "undefined" && matchMedia("(prefers-reduced-motion: reduce)").matches;
 	import "./lib/sprites.css";
-	import { event } from "./lib/content";
+	import { event, couple, inviteMessage } from "./lib/content";
 	import Admin from "./routes/admin.svelte";
 	import SectionCouple from "./lib/SectionCouple.svelte";
 	import SectionStory from "./lib/SectionStory.svelte";
@@ -17,8 +17,14 @@
 
 	const target = new Date("2026-10-08T09:00:00+07:00").getTime();
 	let opened = $state(false);
+	let closing = $state(false);
 	let now = $state(Date.now());
 	let isAdmin = $state(false);
+
+	$effect(() => {
+		if (typeof document === "undefined") return;
+		document.body.classList.toggle("is-locked", !opened);
+	});
 
 	onMount(() => {
 		const syncHash = () => (isAdmin = location.hash === "#/admin");
@@ -66,7 +72,15 @@
 	});
 
 	function openInvite() {
-		opened = true;
+		if (closing) return;
+		if (prefersReduced) {
+			opened = true;
+		} else {
+			closing = true;
+			window.setTimeout(() => {
+				opened = true;
+			}, 300);
+		}
 		musicOn = true;
 		applyMusic(true);
 		try {
@@ -158,9 +172,21 @@
 	{:else}
 	<div class="invite">
 	{#if !opened}
-		<button class="cover" type="button" onclick={openInvite} aria-label="Buka undangan">
+		<button
+			class="cover"
+			class:closing
+			type="button"
+			onclick={openInvite}
+			aria-label="Buka undangan"
+		>
 			<span class="cover-inner">
 				<span class="eyebrow">Undangan Ngunduh Mantu</span>
+				<span class="cover-names" aria-label={`${event.groom} dan ${event.bride}`}>
+					<span class="name">{event.groom}</span>
+					<span class="amp">&amp;</span>
+					<span class="name">{event.bride}</span>
+				</span>
+				<span class="greeting">{inviteMessage}</span>
 				<span class="rings" aria-hidden="true">
 					<dotlottie-wc src={ringsUrl} autoplay={!prefersReduced} loop></dotlottie-wc>
 				</span>
@@ -304,6 +330,34 @@
 		padding: var(--spacing-xl) var(--spacing-m);
 	}
 
+	.cover-names {
+		display: flex;
+		align-items: baseline;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: var(--spacing-s);
+		margin: 0;
+		font-size: var(--text-h1);
+		line-height: var(--leading-h1);
+		font-weight: var(--font-weight-bold);
+		letter-spacing: var(--tracking-h1);
+		color: var(--color-text-strong);
+	}
+
+	.cover-names .amp {
+		color: var(--color-accent);
+		font-size: var(--text-h2);
+	}
+
+	.greeting {
+		max-width: 28ch;
+		margin-inline: auto;
+		text-align: center;
+		font-size: var(--text-body);
+		line-height: 1.5;
+		color: var(--color-text-weak);
+	}
+
 	.eyebrow {
 		font-size: var(--text-caption);
 		font-weight: var(--font-weight-bold);
@@ -329,6 +383,59 @@
 	.cover:focus-visible {
 		outline: 2px solid var(--color-focus);
 		outline-offset: -4px;
+	}
+
+	.cover.closing {
+		pointer-events: none;
+		animation: cover-out var(--duration-slow) var(--ease-out) forwards;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.cover-inner > * {
+			animation: cover-in var(--duration-slow) var(--ease-out) both;
+		}
+
+		.cover-inner > *:nth-child(1) {
+			animation-delay: 100ms;
+		}
+
+		.cover-inner > *:nth-child(2) {
+			animation-delay: 200ms;
+		}
+
+		.cover-inner > *:nth-child(3) {
+			animation-delay: 300ms;
+		}
+
+		.cover-inner > *:nth-child(4) {
+			animation-delay: 400ms;
+		}
+
+		.cover-inner > *:nth-child(5) {
+			animation-delay: 500ms;
+		}
+
+		.cover-inner > *:nth-child(6) {
+			animation-delay: 600ms;
+		}
+
+		@keyframes cover-in {
+			from {
+				opacity: 0;
+				transform: translateY(var(--spacing-s));
+			}
+			to {
+				opacity: 1;
+				transform: none;
+			}
+		}
+
+		@keyframes cover-out {
+			to {
+				opacity: 0;
+				visibility: hidden;
+			}
+		}
 	}
 
 	.tap-hint {

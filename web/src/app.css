@@ -4,9 +4,14 @@
   box-sizing: border-box;
 }
 
-html,
-body {
-  margin: 0;
+html {
+	margin: 0;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+	display: none;
 }
 
 body {
@@ -16,6 +21,22 @@ body {
 	background: var(--color-bg-base);
 	font-family: var(--font-text);
 	-webkit-font-smoothing: antialiased;
+	overflow-x: hidden;
+}
+
+body.is-locked,
+body.is-locked #app {
+	overflow: hidden;
+	height: 100svh;
+}
+
+* {
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+	display: none;
 }
 
 #app {
