@@ -155,9 +155,11 @@
 		flex-direction: column;
 		gap: var(--spacing-m);
 		padding: var(--spacing-m);
-		background: var(--color-bg-raised);
+		background: var(--color-bg-glass);
 		border: var(--border-width-hairline) solid var(--color-stroke-weak);
 		border-radius: var(--radius-surface);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
 	}
 
 	.post-error {
@@ -290,9 +292,11 @@
 		flex-direction: column;
 		gap: var(--spacing-2xs);
 		padding: var(--spacing-m);
-		background: var(--color-bg-raised);
+		background: var(--color-bg-glass);
 		border: var(--border-width-hairline) solid var(--color-stroke-weak);
 		border-radius: var(--radius-surface);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
 	}
 
 	.msg-name {

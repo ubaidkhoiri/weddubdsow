@@ -25,10 +25,12 @@
 	$effect(() => {
 		if (typeof document === "undefined") return;
 		document.body.classList.toggle("is-locked", !opened);
+		document.body.classList.toggle("is-bg", pageBgReady);
 	});
 
 	let introTimer: ReturnType<typeof setTimeout> | null = null;
 	let bgReady = $state(false);
+	let pageBgReady = $state(false);
 
 	onMount(() => {
 		if (phase !== "intro") return;
@@ -60,6 +62,10 @@
 		const preload = new Image();
 		preload.onload = () => (bgReady = true);
 		preload.src = "/bgcover.png";
+
+		const preloadPage = new Image();
+		preloadPage.onload = () => (pageBgReady = true);
+		preloadPage.src = "/bg01.jpg";
 
 		const revealObserver = new IntersectionObserver(
 			(entries) => {
@@ -332,15 +338,17 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-s);
-		padding: var(--spacing-m) var(--spacing-s) 140px;
+		padding: 0 var(--spacing-page-inset) 140px;
 		min-height: 100svh;
 	}
 
 	.card {
-		background: var(--color-bg-raised);
+		background: var(--color-bg-glass);
 		border: var(--border-width-hairline) solid var(--color-stroke-weak);
 		border-radius: var(--radius-surface);
 		padding: var(--spacing-m);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
 	}
 
 	.cover {
@@ -659,6 +667,7 @@
 
 	.row {
 		display: flex;
+		flex-direction: column;
 		gap: var(--spacing-s);
 	}
 
@@ -681,7 +690,9 @@
 		gap: var(--spacing-2xs);
 		padding: var(--spacing-s);
 		border-radius: var(--radius-control);
-		background: var(--color-fill);
+		background: var(--color-bg-glass);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
 	}
 
 	.cell strong {

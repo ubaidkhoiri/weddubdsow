@@ -18,10 +18,30 @@ body {
 	display: flex;
 	justify-content: center;
 	margin: 0;
-	background: var(--color-bg-base);
+	background-color: var(--color-bg-base);
 	font-family: var(--font-text);
 	-webkit-font-smoothing: antialiased;
 	overflow-x: hidden;
+}
+
+body::after {
+	content: "";
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	background:
+		linear-gradient(
+			color-mix(in srgb, var(--color-bg-base) 30%, transparent),
+			color-mix(in srgb, var(--color-bg-base) 30%, transparent)
+		),
+		url("/bg01.jpg") center / cover no-repeat;
+	opacity: 0;
+	transition: opacity var(--duration-slow) var(--ease-out);
+	pointer-events: none;
+}
+
+body.is-bg::after {
+	opacity: 1;
 }
 
 body.is-locked,
@@ -43,7 +63,7 @@ body.is-locked #app {
 	width: 100%;
 	max-width: 393px;
 	min-height: 100svh;
-	background: var(--color-bg-base);
+	background: transparent;
 }
 
 .invite :is(h1, h2, h3) {

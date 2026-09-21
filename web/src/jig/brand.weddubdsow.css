@@ -39,6 +39,8 @@
   --color-bg-base:    #f9f7f4;         /* page warm paper            */
   --color-bg-raised:  oklch(1 0 0);    /* cards, panels #FFFFFF      */
   --color-bg-overlay: oklch(1 0 0);    /* dialogs, popovers          */
+  --color-bg-glass:   color-mix(in srgb, var(--color-bg-raised) 16%, transparent); /* frosted cards di atas foto */
+  --spacing-page-inset: 20%;          /* halaman foto: margin pagar konten 60% di tengah */
 
   /* ================= NEUTRAL FOREGROUNDS (transparent) =================
      Light mode: opacities of black. Never pure black at 100% (C-18).

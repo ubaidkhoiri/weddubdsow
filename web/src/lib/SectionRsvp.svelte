@@ -243,9 +243,11 @@
 		flex-direction: column;
 		gap: var(--spacing-s);
 		padding: var(--spacing-m);
-		background: var(--color-bg-raised);
+		background: var(--color-bg-glass);
 		border: var(--border-width-hairline) solid var(--color-stroke-weak);
 		border-radius: var(--radius-surface);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
 	}
 
 	form {
