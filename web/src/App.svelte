@@ -5,7 +5,7 @@
 	const prefersReduced =
 		typeof matchMedia !== "undefined" && matchMedia("(prefers-reduced-motion: reduce)").matches;
 	import "./lib/sprites.css";
-	import { event, couple, inviteMessage } from "./lib/content";
+	import { event } from "./lib/content";
 	import Admin from "./routes/admin.svelte";
 	import SectionCouple from "./lib/SectionCouple.svelte";
 	import SectionStory from "./lib/SectionStory.svelte";
@@ -185,13 +185,7 @@
 			aria-label="Buka undangan"
 		>
 			<span class="cover-inner">
-				<span class="eyebrow">Undangan Ngunduh Mantu</span>
-				<span class="cover-names" aria-label={`${event.groom} dan ${event.bride}`}>
-					<span class="name">{event.groom}</span>
-					<span class="amp">&amp;</span>
-					<span class="name">{event.bride}</span>
-				</span>
-				<span class="greeting">{inviteMessage}</span>
+				<span class="monogram" aria-hidden="true"><span class="m-u">U</span><span class="m-s">S</span></span>
 				<span class="tap-hint">Ketuk untuk membuka</span>
 			</span>
 		</button>
@@ -405,7 +399,7 @@
 		margin: 0 auto;
 		width: 100%;
 		max-width: 393px;
-		border-inline: var(--border-width-hairline) solid var(--color-stroke-weak);
+		background: url("/bgcover.png") center / cover no-repeat;
 		pointer-events: none;
 	}
 
@@ -413,42 +407,43 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: var(--spacing-m);
+		justify-content: center;
+		gap: var(--spacing-l);
 		max-width: 340px;
 		width: 100%;
-		border: var(--border-width-hairline) solid var(--color-stroke-weak);
-		border-radius: var(--radius-surface);
-		background: var(--color-bg-raised);
+		min-height: 66svh;
 		padding: var(--spacing-xl) var(--spacing-m);
 	}
 
-.cover-names {
-		display: flex;
+.cover-inner .monogram {
+		display: inline-flex;
 		align-items: baseline;
-		justify-content: center;
-		flex-wrap: wrap;
-		gap: var(--spacing-s);
-		margin: 0;
 		font-family: var(--font-display);
-		font-size: var(--text-h1);
-		line-height: var(--leading-h1);
+		font-style: italic;
 		font-weight: var(--font-weight-regular);
+		font-size: var(--text-h1);
+		line-height: 0.9;
 		letter-spacing: var(--tracking-h1);
 		color: var(--color-text-strong);
+		transform: rotate(-6deg);
+		animation: cover-in-fade var(--duration-slow) var(--ease-out) 250ms both;
 	}
 
-	.cover-names .amp {
-		color: var(--color-accent);
-		font-size: var(--text-h2);
+	@keyframes cover-in-fade {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
 	}
 
-	.greeting {
-		max-width: 28ch;
-		margin-inline: auto;
-		text-align: center;
-		font-size: var(--text-body);
-		line-height: 1.5;
-		color: var(--color-text-weak);
+	.m-u {
+		transform: translateY(calc(-1 * var(--spacing-xs)));
+	}
+
+	.m-s {
+		transform: translateY(var(--spacing-s));
 	}
 
 	.eyebrow {
@@ -536,11 +531,28 @@
 		align-items: center;
 		min-height: var(--size-touch-target);
 		padding: var(--spacing-s) var(--spacing-l);
-		border-radius: var(--radius-full);
-		font-size: var(--text-body);
-		font-weight: var(--font-weight-bold);
-		color: var(--color-on-cta);
-		background: var(--color-cta);
+		font-family: var(--font-text);
+		font-size: var(--text-caption);
+		font-weight: var(--font-weight-regular);
+		letter-spacing: var(--tracking-caps);
+		text-transform: uppercase;
+		color: var(--color-text-weak);
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.tap-hint {
+			animation: hint-blink 3.2s var(--ease-in-out) infinite;
+		}
+
+		@keyframes hint-blink {
+			0%,
+			100% {
+				opacity: 0.45;
+			}
+			50% {
+				opacity: 1;
+			}
+		}
 	}
 
 	.hero {
