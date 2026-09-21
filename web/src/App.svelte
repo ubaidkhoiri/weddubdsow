@@ -397,6 +397,8 @@
 	}
 
 	.rings--intro {
+		position: relative;
+		z-index: 1;
 		width: 208px;
 		height: 208px;
 		color: var(--color-text-strong);
@@ -428,6 +430,7 @@
 
 	.cover-inner {
 		position: relative;
+		z-index: 1;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
