@@ -221,6 +221,42 @@
 			<span class="m-line">U</span>
 			<span class="m-line">S</span>
 		</span>
+
+		<div class="invite-copy">
+			<p class="ic-arab">ألسلام عليكم ورحمة الله وبركاته</p>
+			<p class="ic-prose">
+				Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Dengan
+				memohon rahmat dan ridho-Nya, kami bermaksud mengundang Bapak/Ibu/Saudara/i dalam
+				acara Syukuran Pernikahan (Ngunduh Mantu) putra-putri kami:
+			</p>
+
+			<p class="ic-name">{event.groom}</p>
+			<p class="ic-parents">Putra dari Bapak Amin &amp; Ibu Dwi Suprihatin R</p>
+
+			<p class="ic-amp">dengan</p>
+
+			<p class="ic-name">{event.bride}</p>
+			<p class="ic-parents">Putri dari Bapak Agung Pitana &amp; Ibu Karmini</p>
+
+			<span class="ic-divider" aria-hidden="true"></span>
+
+			<p class="ic-label">Resepsi Ngunduh Mantu</p>
+			<p class="ic-dates">7-8 November 2026</p>
+			<p class="ic-time">09.00 - 14.00</p>
+
+			<p class="ic-label">Lokasi</p>
+			<p class="ic-dates">{event.venue}</p>
+			<a class="ic-map" href={event.mapsUrl} target="_blank" rel="noreferrer">Buka di Google Maps</a>
+
+			<p class="ic-prose">
+				Ungkapan terima kasih yang tulus dari kami atas kehadiran serta doa restu
+				Bapak/Ibu/Saudara/i sekalian. Wassalamu&rsquo;alaikum Warahmatullahi Wabarakatuh.
+			</p>
+
+			<p class="ic-signlabel">Kami yang berbahagia,</p>
+			<p class="ic-signature">Keluarga Besar Amin</p>
+		</div>
+
 		<div class="card hero-title">
 			<p class="eyebrow">Undangan Ngunduh Mantu</p>
 			<h1>
@@ -638,6 +674,116 @@
 
 	.page-mono .m-line {
 		display: block;
+	}
+
+	.invite-copy {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: var(--spacing-s);
+		padding-block: var(--spacing-l);
+		color: var(--color-cover-sign);
+	}
+
+	.ic-arab {
+		margin: 0;
+		font-family: var(--font-text);
+		font-size: var(--text-body);
+		line-height: var(--leading-body);
+	}
+
+	.ic-prose {
+		margin: 0;
+		font-family: var(--font-text);
+		font-size: var(--text-body);
+		line-height: var(--leading-prose);
+		color: color-mix(in srgb, var(--color-cover-sign) 88%, transparent);
+	}
+
+	.ic-name {
+		margin: 0;
+		font-family: var(--font-display);
+		font-style: italic;
+		font-weight: var(--font-weight-regular);
+		font-size: var(--text-h2);
+		line-height: var(--leading-h2);
+	}
+
+	.ic-parents {
+		margin: 0;
+		font-family: var(--font-text);
+		font-size: var(--text-body);
+		line-height: var(--leading-body);
+		color: color-mix(in srgb, var(--color-cover-sign) 80%, transparent);
+	}
+
+	.ic-amp {
+		margin: 0;
+		font-family: var(--font-display);
+		font-style: italic;
+		font-size: var(--text-h3);
+		color: var(--color-accent);
+	}
+
+	.ic-divider {
+		display: block;
+		width: 100%;
+		height: var(--border-width-hairline);
+		background: color-mix(in srgb, var(--color-cover-sign) 25%, transparent);
+		margin-block: var(--spacing-xs);
+	}
+
+	.ic-label {
+		margin: 0;
+		font-family: var(--font-text);
+		font-size: var(--text-caption);
+		font-weight: var(--font-weight-bold);
+		letter-spacing: var(--tracking-caps);
+		text-transform: uppercase;
+		color: color-mix(in srgb, var(--color-cover-sign) 70%, transparent);
+	}
+
+	.ic-dates,
+	.ic-time {
+		margin: 0;
+		font-family: var(--font-display);
+		font-style: italic;
+		font-size: var(--text-h3);
+		line-height: var(--leading-h3);
+	}
+
+	.ic-time {
+		font-family: var(--font-text);
+		font-size: var(--text-body);
+	}
+
+	.ic-map {
+		font-family: var(--font-text);
+		font-size: var(--text-body);
+		font-weight: var(--font-weight-bold);
+		color: var(--color-accent);
+		text-decoration: underline;
+		text-underline-offset: var(--spacing-2xs);
+	}
+
+	.ic-map:focus-visible {
+		outline: 2px solid var(--color-focus);
+		outline-offset: var(--spacing-2xs);
+	}
+
+	.ic-signlabel {
+		margin: 0;
+		font-size: var(--text-body);
+		color: color-mix(in srgb, var(--color-cover-sign) 75%, transparent);
+	}
+
+	.ic-signature {
+		margin: 0;
+		font-family: var(--font-display);
+		font-style: italic;
+		font-size: var(--text-h3);
+		line-height: var(--leading-h3);
 	}
 
 	.page-mono .m-line:first-child {
