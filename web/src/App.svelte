@@ -45,14 +45,6 @@
 	const seconds = $derived(Math.floor((remaining % 60_000) / 1000));
 
 	onMount(() => {
-		try {
-			if (localStorage.getItem("weddu-opened") === "1") {
-				opened = true;
-			}
-		} catch {
-			/* localStorage unavailable, cover stays */
-		}
-
 		const revealObserver = new IntersectionObserver(
 			(entries) => {
 				for (const entry of entries) {
@@ -83,11 +75,6 @@
 		}
 		musicOn = true;
 		applyMusic(true);
-		try {
-			localStorage.setItem("weddu-opened", "1");
-		} catch {
-			/* ignore */
-		}
 	}
 
 	function pad(value: number): string {
