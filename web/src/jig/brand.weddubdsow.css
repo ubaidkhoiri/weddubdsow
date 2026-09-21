@@ -138,6 +138,12 @@
   --font-mono:    ui-monospace, "SF Mono", "Cascadia Code", monospace;
   --font-numeric-features: "tnum" 1, "lnum" 1;
 
+  /* Cover monogram — fixed display sizes for the U&S lockup on the
+     photo cover. Kept literal here because the photo cover is a
+     fixed-composition brand asset, not responsive layout. */
+  --text-monogram:       130px;
+  --text-monogram-amp:   36px;
+
   /* ================= RADIUS — four, by element size =================
      Controls 12, cards 14, large containers 16, no pill except
      tags/status/compact indicators (mode selects control/surface). */

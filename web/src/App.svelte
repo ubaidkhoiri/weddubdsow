@@ -28,14 +28,11 @@
 	});
 
 	let introTimer: ReturnType<typeof setTimeout> | null = null;
-	let introClosing = $state(false);
+	let bgReady = $state(false);
 
 	onMount(() => {
 		if (phase !== "intro") return;
-		introTimer = setTimeout(() => {
-			introClosing = true;
-			introTimer = setTimeout(() => (phase = "cover"), 650);
-		}, 3550);
+		introTimer = setTimeout(() => (phase = "cover"), 4200);
 		return () => {
 			if (introTimer) clearTimeout(introTimer);
 		};
@@ -60,6 +57,10 @@
 	const seconds = $derived(Math.floor((remaining % 60_000) / 1000));
 
 	onMount(() => {
+		const preload = new Image();
+		preload.onload = () => (bgReady = true);
+		preload.src = "/bgcover.png";
+
 		const revealObserver = new IntersectionObserver(
 			(entries) => {
 				for (const entry of entries) {
@@ -177,7 +178,7 @@
 		{#if phase === "intro"}
 			<div
 				class="intro"
-				class:closing={introClosing}
+				class:bg-ready={bgReady}
 				role="status"
 				aria-label="Undangan Ngunduh Mantu"
 			>
@@ -189,6 +190,7 @@
 		<button
 			class="cover"
 			class:closing
+			class:bg-ready={bgReady}
 			type="button"
 			onclick={openInvite}
 			aria-label="Buka undangan"
@@ -344,14 +346,30 @@
 		align-items: center;
 		justify-content: center;
 		padding: var(--spacing-l);
+		background-color: var(--color-bg-base);
+		border: 0;
+		cursor: pointer;
+	}
+
+	.cover::after,
+	.intro::after {
+		content: "";
+		position: absolute;
+		inset: 0;
 		background:
 			linear-gradient(
 				color-mix(in srgb, var(--color-bg-base) 30%, transparent),
 				color-mix(in srgb, var(--color-bg-base) 30%, transparent)
 			),
 			url("/bgcover.png") center / cover no-repeat;
-		border: 0;
-		cursor: pointer;
+		opacity: 0;
+		transition: opacity var(--duration-slow) var(--ease-out);
+		pointer-events: none;
+	}
+
+	.cover.bg-ready::after,
+	.intro.bg-ready::after {
+		opacity: 1;
 	}
 
 	.intro {
@@ -364,17 +382,7 @@
 		justify-content: center;
 		gap: var(--spacing-m);
 		padding: var(--spacing-l);
-		background:
-			linear-gradient(
-				color-mix(in srgb, var(--color-bg-base) 30%, transparent),
-				color-mix(in srgb, var(--color-bg-base) 30%, transparent)
-			),
-			url("/bgcover.png") center / cover no-repeat;
-	}
-
-	.intro.closing {
-		pointer-events: none;
-		animation: intro-fade-out 650ms var(--ease-out) forwards;
+		background-color: var(--color-bg-base);
 	}
 
 	.intro::before {
@@ -386,14 +394,6 @@
 		max-width: 393px;
 		border-inline: var(--border-width-hairline) solid var(--color-stroke-weak);
 		pointer-events: none;
-	}
-
-	@media (prefers-reduced-motion: no-preference) {
-		@keyframes intro-fade-out {
-			to {
-				opacity: 0;
-			}
-		}
 	}
 
 	.rings--intro {
@@ -444,10 +444,10 @@
 		font-family: var(--font-display);
 		font-style: italic;
 		font-weight: var(--font-weight-regular);
-		font-size: calc(var(--text-h1) * 3);
+		font-size: var(--text-monogram);
 		line-height: 0.9;
 		letter-spacing: var(--tracking-h1);
-		color: var(--color-text-strong);
+		color: var(--color-text-muted);
 		transform: rotate(-6deg);
 	}
 
@@ -461,8 +461,11 @@
 
 	.monogram .amp {
 		color: var(--color-accent);
-		font-size: var(--text-h2);
-		transform: translateY(var(--spacing-2xs));
+		font-size: var(--text-monogram-amp);
+		transform: translate(
+			calc(-1 * var(--spacing-xs)),
+			calc(-1 * var(--spacing-s) - var(--spacing-xs) - var(--spacing-2xs))
+		);
 	}
 
 	.eyebrow {
@@ -509,7 +512,7 @@
 	.tap-hint {
 		position: absolute;
 		inset-inline: 0;
-		bottom: calc(var(--spacing-xl) * 2);
+		bottom: 31.25%;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
