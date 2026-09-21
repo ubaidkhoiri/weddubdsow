@@ -118,12 +118,12 @@
 	function buildYtPlayer() {
 		const w = window as any;
 		ytPlayer = new w.YT.Player("yt-player", {
-			videoId: "y1cBhJLNNXU",
+			videoId: "-Y9VtoPvtuM",
 			playerVars: {
 				autoplay: 1,
 				mute: 1,
 				loop: 1,
-				playlist: "y1cBhJLNNXU",
+				playlist: "-Y9VtoPvtuM",
 				playsinline: 1,
 				controls: 0,
 				rel: 0,
@@ -256,15 +256,50 @@
 	<div id="yt-player" class="player" aria-hidden="true" tabindex="-1"></div>
 
 	<div class="fab-layer">
-		<button class="fab music" type="button" onclick={toggleMusic} aria-pressed={musicOn}>
-			{musicOn ? "Hentikan musik" : "Putar musik"}
-		</button>
+		{#if ytStarted}
+			<div class="now-playing" role="group" aria-label="Pemutar musik">
+				<button
+					class="np-toggle"
+					type="button"
+					onclick={toggleMusic}
+					aria-pressed={musicOn}
+					aria-label={musicOn ? "Jeda musik" : "Putar musik"}
+				>
+					{#if musicOn}
+						<svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
+							<rect x="4" y="4" width="4" height="12" rx="1" />
+							<rect x="12" y="4" width="4" height="12" rx="1" />
+						</svg>
+					{:else}
+						<svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
+							<path d="M6 4.5v11l9-5.5z" />
+						</svg>
+					{/if}
+				</button>
+				<span class="np-meta">
+					<strong class="np-title">Honesty</strong>
+					<small class="np-artist">Pink Sweat$</small>
+				</span>
+				<span class="np-marquee" aria-hidden="true">
+					<svg viewBox="0 0 20 20" width="16" height="16" fill="none">
+						<circle cx="10" cy="10" r="7" />
+						<path d="M10 6v4l2.5 2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+					</svg>
+				</span>
+			</div>
+		{/if}
 		<a
-			class="fab share"
+			class="share"
 			href="https://wa.me/?text={encodeURIComponent(shareText())}"
 			target="_blank"
 			rel="noreferrer"
-		>Bagikan lewat WhatsApp</a>
+			aria-label="Bagikan undangan lewat WhatsApp"
+			title="Bagikan lewat WhatsApp"
+		>
+			<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+				<path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.94L2 22l5.2-1.5A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.09.89.9-3-.2-.31a8.2 8.2 0 1 1 6.88 3.75Zm4.53-6.14c-.25-.12-1.46-.72-1.68-.8-.23-.09-.4-.13-.56.12-.17.25-.64.8-.78.97-.14.16-.29.18-.53.06-.25-.12-1.04-.39-1.99-1.23-.73-.66-1.23-1.46-1.38-1.71-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.13-.56-1.34-.76-1.84-.2-.49-.41-.42-.56-.43h-.48c-.16 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.6.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.2-.58.2-1.07.14-1.18-.06-.1-.23-.16-.48-.28Z" />
+			</svg>
+		</a>
 	</div>
 
 	<footer class="admin-link">
@@ -649,46 +684,94 @@
 
 	.fab-layer {
 		position: fixed;
-		inset: 0 auto 0 50%;
+		inset: auto 0 0 50%;
 		transform: translateX(-50%);
 		width: 100%;
 		max-width: 393px;
 		z-index: 10;
+		padding: 0 var(--spacing-s) var(--spacing-s);
+		display: flex;
+		flex-direction: column-reverse;
+		align-items: flex-end;
+		gap: var(--spacing-s);
 		pointer-events: none;
 	}
 
-	.fab {
-		position: absolute;
-		bottom: var(--spacing-s);
-		min-height: var(--size-touch-target);
-		padding: var(--spacing-s) var(--spacing-m);
+	.now-playing {
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-s);
+		width: 100%;
+		padding: var(--spacing-2xs) var(--spacing-s);
 		border-radius: var(--radius-full);
-		font-size: var(--text-body);
-		font-weight: var(--font-weight-bold);
-		text-decoration: none;
-		background: var(--color-bg-raised);
-		border: var(--border-width-hairline) solid var(--color-stroke-strong);
-		color: var(--color-text-strong);
-		box-shadow: none;
-		cursor: pointer;
+		background: var(--color-text-strong);
+		color: var(--color-bg-raised);
 		pointer-events: auto;
 	}
 
-	.fab:hover {
-		background: var(--color-fill);
+	.np-toggle {
+		display: grid;
+		place-items: center;
+		width: var(--size-control);
+		height: var(--size-control);
+		border: 0;
+		border-radius: var(--radius-full);
+		background: var(--color-bg-raised);
+		color: var(--color-text-strong);
+		cursor: pointer;
+		flex-shrink: 0;
 	}
 
-	.fab:focus-visible {
-		outline: 2px solid var(--color-focus);
+	.np-toggle:focus-visible {
+		outline: 2px solid var(--color-bg-raised);
 		outline-offset: 2px;
 	}
 
-	.music {
-		left: var(--spacing-s);
+	.np-meta {
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+		min-width: 0;
+	}
+
+	.np-title {
+		font-size: var(--text-body);
+		font-weight: var(--font-weight-bold);
+		line-height: 1.2;
+	}
+
+	.np-artist {
+		font-size: var(--text-caption);
+		color: var(--color-stroke-weak);
+	}
+
+	.np-marquee {
+		margin-left: auto;
+		opacity: 0.7;
+		display: grid;
+		place-items: center;
 	}
 
 	.share {
-		right: var(--spacing-s);
+		display: grid;
+		place-items: center;
+		width: var(--size-touch-target);
+		height: var(--size-touch-target);
+		border-radius: var(--radius-full);
+		background: var(--color-bg-raised);
+		border: var(--border-width-hairline) solid var(--color-stroke-strong);
+		color: var(--color-text-strong);
+		text-decoration: none;
+		pointer-events: auto;
+	}
+
+	.share:hover {
+		background: var(--color-fill);
+	}
+
+	.share:focus-visible {
+		outline: 2px solid var(--color-focus);
+		outline-offset: 2px;
 	}
 
 	.admin-link {

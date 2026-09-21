@@ -11,7 +11,7 @@ export const event = {
 	venue: "Balai Desa Kalurahan Giripurwo",
 	venueAddress: "Balai Desa Kalurahan Giripurwo, Giripurwo, Kulon Progo",
 	mapsUrl: "https://maps.app.goo.gl/SZFx3jEad7dZwmvi8",
-	musicUrl: "https://www.youtube.com/watch?v=y1cBhJLNNXU",
+	musicUrl: "https://www.youtube.com/watch?v=-Y9VtoPvtuM",
 	whatsappNumber: "62800000000000",
 	closingLine: "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak Ibu Saudara berkenan hadir untuk memberikan doa restu.",
 };
