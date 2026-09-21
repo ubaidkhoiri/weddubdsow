@@ -414,7 +414,7 @@
 		height: 100%;
 		overflow: hidden;
 		filter: invert(1);
-		opacity: 0.3;
+		opacity: 0.7;
 	}
 
 	@media (prefers-reduced-motion: no-preference) {
