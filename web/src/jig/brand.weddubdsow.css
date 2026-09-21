@@ -43,8 +43,8 @@
   --spacing-page-inset: 20%;          /* halaman foto: margin pagar konten 60% di tengah */
   --spacing-page-top: 60px;           /* monogram hero: jarak atas    */
   --spacing-page-bottom: 60px;        /* monogram hero: jarak bawah   */
-  --spacing-page-mono-edges: 6px;     /* monogram U/S: offset kiri-kanan */
-  --spacing-page-mono-line: calc(var(--text-monogram) - 60px); /* line-height 100px-60px=-60px gap */
+  --spacing-page-mono-edges: 4px;     /* monogram U/S: offset kiri-kanan */
+  --spacing-page-mono-line: calc(var(--text-monogram) - 66px); /* line-height 100px-66px=-66px gap */
 
   /* ================= NEUTRAL FOREGROUNDS (transparent) =================
      Light mode: opacities of black. Never pure black at 100% (C-18).
