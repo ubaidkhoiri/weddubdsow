@@ -443,7 +443,7 @@
 	}
 
 .cover-inner .m-line + .m-line {
-		margin-top: calc(-1 * (var(--spacing-xs) + var(--spacing-2xs) / 2));
+		margin-top: calc(-1 * var(--spacing-s));
 	}
 
 	.cover-inner .monogram {
