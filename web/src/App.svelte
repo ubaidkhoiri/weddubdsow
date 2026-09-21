@@ -185,7 +185,9 @@
 			aria-label="Buka undangan"
 		>
 			<span class="cover-inner">
-				<span class="monogram" aria-hidden="true"><span class="m-u">U</span><span class="m-s">S</span></span>
+				<span class="monogram" aria-hidden="true"
+					><span class="m-u">U</span><span class="amp">&amp;</span><span class="m-s">S</span></span
+				>
 				<span class="tap-hint">Ketuk untuk membuka</span>
 			</span>
 		</button>
@@ -333,7 +335,12 @@
 		align-items: center;
 		justify-content: center;
 		padding: var(--spacing-l);
-		background: var(--color-bg-base);
+		background:
+			linear-gradient(
+				color-mix(in srgb, var(--color-bg-base) 30%, transparent),
+				color-mix(in srgb, var(--color-bg-base) 30%, transparent)
+			),
+			url("/bgcover.png") center / cover no-repeat;
 		border: 0;
 		cursor: pointer;
 	}
@@ -392,17 +399,6 @@
 		}
 	}
 
-	.cover::before {
-		content: "";
-		position: absolute;
-		inset: 0;
-		margin: 0 auto;
-		width: 100%;
-		max-width: 393px;
-		background: url("/bgcover.png") center / cover no-repeat;
-		pointer-events: none;
-	}
-
 	.cover-inner {
 		display: flex;
 		flex-direction: column;
@@ -444,6 +440,12 @@
 
 	.m-s {
 		transform: translateY(var(--spacing-s));
+	}
+
+	.monogram .amp {
+		color: var(--color-accent);
+		font-size: calc(var(--text-h1) + var(--spacing-xs));
+		transform: translateY(var(--spacing-2xs));
 	}
 
 	.eyebrow {
@@ -530,9 +532,9 @@
 		display: inline-flex;
 		align-items: center;
 		min-height: var(--size-touch-target);
-		padding: var(--spacing-s) var(--spacing-l);
+		padding: var(--spacing-2xs) var(--spacing-s);
 		font-family: var(--font-text);
-		font-size: var(--text-caption);
+		font-size: calc(var(--text-caption) - var(--spacing-2xs) / 2);
 		font-weight: var(--font-weight-regular);
 		letter-spacing: var(--tracking-caps);
 		text-transform: uppercase;
