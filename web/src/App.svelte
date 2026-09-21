@@ -79,7 +79,7 @@
 			closing = true;
 			window.setTimeout(() => {
 				opened = true;
-			}, 300);
+			}, 750);
 		}
 		musicOn = true;
 		applyMusic(true);
@@ -387,7 +387,7 @@
 
 	.cover.closing {
 		pointer-events: none;
-		animation: cover-out var(--duration-slow) var(--ease-out) forwards;
+		animation: cover-out 700ms var(--ease-out) forwards;
 	}
 
 	@media (prefers-reduced-motion: no-preference) {
