@@ -217,6 +217,10 @@
 	{/if}
 
 	<header class="hero" aria-label={event.title}>
+		<span class="page-mono" aria-hidden="true">
+			<span class="m-line">U</span>
+			<span class="m-line">S</span>
+		</span>
 		<div class="card hero-title">
 			<p class="eyebrow">Undangan Ngunduh Mantu</p>
 			<h1>
@@ -615,6 +619,25 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-s);
+	}
+
+	.page-mono {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		font-family: var(--font-display);
+		font-style: italic;
+		font-weight: var(--font-weight-regular);
+		font-size: var(--text-monogram);
+		line-height: calc(var(--text-monogram) - var(--spacing-xxl));
+		color: color-mix(in srgb, var(--color-text-strong) 20%, transparent);
+		padding-top: var(--spacing-s);
+		padding-inline: var(--spacing-xs);
+	}
+
+	.page-mono .m-line {
+		display: block;
 	}
 
 	.hero-title {
