@@ -619,27 +619,27 @@
 
 		.cover:not(.pre) .cover-inner .m-line,
 		.cover:not(.pre) .tap-hint .h-word {
-			animation: mono-word-in 700ms var(--ease-out) both;
+			animation: mono-word-in var(--duration-base) var(--ease-out) both;
 		}
 
 		.cover-inner .m-line:nth-child(1) {
-			animation-delay: 300ms;
+			animation-delay: 200ms;
 		}
 
 		.cover-inner .m-line:nth-child(2) {
-			animation-delay: 1100ms;
+			animation-delay: 500ms;
 		}
 
 		.tap-hint .h-word:nth-child(1) {
-			animation-delay: 1900ms;
+			animation-delay: 800ms;
 		}
 
 		.tap-hint .h-word:nth-child(2) {
-			animation-delay: 2700ms;
+			animation-delay: 1100ms;
 		}
 
 		.tap-hint .h-word:nth-child(3) {
-			animation-delay: 3500ms;
+			animation-delay: 1400ms;
 		}
 
 		@keyframes mono-word-in {
