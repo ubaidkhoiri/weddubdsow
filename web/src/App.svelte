@@ -260,7 +260,7 @@
 			<p class="ic-prose-lead">
 				<em>Maha Suci Allah</em> yang telah menciptakan makhluk-Nya
 				<em>berpasang-pasangan</em>. Dengan memohon rahmat dan ridho-Nya, kami bermaksud
-				mengundang Bapak/Ibu/Saudara/i dalam acara Syukuran Pernikahan (Ngunduh Mantu)
+				mengundang Bapak/Ibu/Saudara/i dalam acara <em>Syukuran Pernikahan (Ngunduh Mantu)</em>
 				putra-putri kami:
 			</p>
 		</div>
