@@ -759,12 +759,9 @@
 		flex-direction: column;
 		align-items: center;
 		gap: var(--spacing-2xs);
-		padding: var(--spacing-s) var(--spacing-m);
-		background: var(--color-bg-glass);
-		border: var(--border-width-hairline) solid var(--color-stroke-weak);
-		border-radius: var(--radius-full);
-		backdrop-filter: blur(8px);
-		-webkit-backdrop-filter: blur(8px);
+		padding: 0;
+		background: transparent;
+		border: 0;
 	}
 
 	.ic-name {
