@@ -249,7 +249,7 @@
 				<span class="m-line">U</span>
 				<span class="m-line">S</span>
 			</span>
-			<p class="page-names">{event.groom} & {event.bride}</p>
+			<p class="page-names">{event.groom}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{event.bride}</p>
 		</div>
 
 		<div class="invite-copy">
@@ -750,9 +750,10 @@
 		font-family: var(--font-display);
 		font-style: italic;
 		font-weight: var(--font-weight-regular);
-		font-size: var(--text-h3);
-		line-height: var(--leading-h3);
+		font-size: var(--text-body);
+		line-height: var(--leading-body);
 		color: var(--color-text-strong);
+		white-space: nowrap;
 	}
 
 	.page-mono .m-line {
