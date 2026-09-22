@@ -848,20 +848,6 @@
 		color: var(--color-text-strong);
 	}
 
-	.ic-parents .ic-amp {
-		position: relative;
-		z-index: 1;
-		margin-bottom: calc(-1 * var(--spacing-xs));
-	}
-
-	.ic-parents .folks {
-		padding: var(--spacing-s) var(--spacing-m) var(--spacing-xs);
-		background: var(--color-bg-glass);
-		border: var(--border-width-hairline) solid var(--color-stroke-weak);
-		border-radius: var(--radius-full);
-		backdrop-filter: blur(8px);
-		-webkit-backdrop-filter: blur(8px);
-	}
 	.ic-parents {
 		display: flex;
 		flex-direction: column;
@@ -876,7 +862,7 @@
 
 	.ic-parents strong {
 		font-weight: var(--font-weight-bold);
-		color: var(--color-text-strong);
+		color: var(--color-text-weak);
 	}
 
 	.ic-amp {
