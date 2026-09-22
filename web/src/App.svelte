@@ -264,7 +264,7 @@
 
 		<div class="invite-copy">
 			<div class="ic-couple">
-				<p class="ic-name">{event.groom}</p>
+				<p class="ic-name">Ubaid Khoiri</p>
 				<p class="ic-parents">
 					<span class="ic-amp">Putra dari</span>
 					<span class="folks"
@@ -275,7 +275,7 @@
 			</div>
 			<p class="ic-amp">dengan</p>
 			<div class="ic-couple">
-				<p class="ic-name">{event.bride}</p>
+				<p class="ic-name">Almar'atus Sofia T.</p>
 				<p class="ic-parents">
 					<span class="ic-amp">Putri dari</span>
 					<span class="folks"
