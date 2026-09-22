@@ -621,23 +621,23 @@
 		}
 
 		.cover-inner .m-line:nth-child(1) {
-			animation-delay: 800ms;
+			animation-delay: 400ms;
 		}
 
 		.cover-inner .m-line:nth-child(2) {
-			animation-delay: 1400ms;
+			animation-delay: 750ms;
 		}
 
 		.tap-hint .h-word:nth-child(1) {
-			animation-delay: 2000ms;
+			animation-delay: 1100ms;
 		}
 
 		.tap-hint .h-word:nth-child(2) {
-			animation-delay: 2400ms;
+			animation-delay: 1450ms;
 		}
 
 		.tap-hint .h-word:nth-child(3) {
-			animation-delay: 2800ms;
+			animation-delay: 1800ms;
 		}
 
 		@keyframes mono-word-in {
