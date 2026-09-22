@@ -760,6 +760,26 @@
 		display: block;
 	}
 
+	@media (prefers-reduced-motion: no-preference) {
+		.page-mono .m-line:first-child {
+			animation: mono-drift 4.7s var(--ease-in-out) infinite;
+		}
+
+		.page-mono .m-line:last-child {
+			animation: mono-drift 6.3s var(--ease-in-out) -3.1s infinite;
+		}
+
+		@keyframes mono-drift {
+			0%,
+			100% {
+				translate: 0 0;
+			}
+			50% {
+				translate: 0 -3px;
+			}
+		}
+	}
+
 	.invite-copy {
 		display: flex;
 		flex-direction: column;
