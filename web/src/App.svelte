@@ -255,9 +255,10 @@
 		<div class="invite-copy">
 			<p class="ic-arab">ألسلام عليكم ورحمة الله وبركاته</p>
 			<p class="ic-prose-lead">
-				Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Dengan
-				memohon rahmat dan ridho-Nya, kami bermaksud mengundang Bapak/Ibu/Saudara/i dalam
-				acara Syukuran Pernikahan (Ngunduh Mantu) putra-putri kami:
+				<strong>Maha Suci Allah</strong> yang telah menciptakan makhluk-Nya
+				<em>berpasang-pasangan</em>. Dengan memohon rahmat dan ridho-Nya, kami bermaksud
+				mengundang Bapak/Ibu/Saudara/i dalam acara
+				<strong>Syukuran Pernikahan (Ngunduh Mantu)</strong> putra-putri kami:
 			</p>
 		</div>
 
@@ -792,10 +793,16 @@
 
 	.ic-arab {
 		margin: 0;
+		padding: var(--spacing-xs) var(--spacing-m);
 		font-family: var(--font-text);
 		font-size: var(--text-invite-arab);
 		line-height: var(--leading-body);
-		color: var(--color-text-muted);
+		color: var(--color-text-strong);
+		background: var(--color-bg-glass);
+		border: var(--border-width-hairline) solid var(--color-stroke-weak);
+		border-radius: var(--radius-full);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
 	}
 
 	.ic-prose-lead {
@@ -804,6 +811,15 @@
 		font-size: var(--text-invite-prose);
 		line-height: var(--leading-body);
 		color: var(--color-text-weak);
+	}
+
+	.ic-prose-lead strong {
+		font-weight: var(--font-weight-bold);
+		color: var(--color-text-strong);
+	}
+
+	.ic-prose-lead em {
+		color: var(--color-text-strong);
 	}
 
 	.ic-couple {
