@@ -489,7 +489,8 @@
 		background-color: var(--color-bg-base);
 	}
 
-	.intro::before {
+	.intro::before,
+	.cover::before {
 		content: "";
 		position: absolute;
 		inset: 0;

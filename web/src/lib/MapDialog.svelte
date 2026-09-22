@@ -17,7 +17,9 @@
 		<h3 id="map-title">Lokasi Acara</h3>
 		<button class="close" type="button" onclick={() => dialog?.close()} aria-label="Tutup peta">Tutup</button>
 	</div>
-	<iframe title="Peta lokasi acara" src={src} loading="lazy" allowfullscreen></iframe>
+	{#if src}
+		<iframe title="Peta lokasi acara" src={src} loading="lazy" allowfullscreen></iframe>
+	{/if}
 	<p class="map-link">
 		<a href={mapsUrl} target="_blank" rel="noreferrer">Buka di Google Maps</a>
 	</p>

@@ -91,6 +91,10 @@
 		outline-offset: 2px;
 	}
 
+	.lightbox:not([open]) {
+		display: none;
+	}
+
 	.lightbox {
 		width: min(90vw, 430px);
 		max-width: none;
