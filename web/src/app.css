@@ -29,15 +29,25 @@ body::after {
 	position: fixed;
 	inset: 0;
 	z-index: 0;
-	background-image:
-		linear-gradient(var(--color-photo-tint), var(--color-photo-tint)),
-		url("/bg01.jpg");
+	background-image: linear-gradient(var(--color-photo-tint), var(--color-photo-tint));
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
 	opacity: 0;
 	transition: opacity var(--duration-slow) var(--ease-out);
 	pointer-events: none;
+}
+
+html.bg-jpg body::after {
+	background-image:
+		linear-gradient(var(--color-photo-tint), var(--color-photo-tint)),
+		url("/bg01.jpg");
+}
+
+html.bg-webp body::after {
+	background-image:
+		linear-gradient(var(--color-photo-tint), var(--color-photo-tint)),
+		url("/bg01.webp");
 }
 
 body.is-bg::after {

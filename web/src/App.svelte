@@ -86,8 +86,13 @@
 
 		const preloadPage = new Image();
 		preloadPage.onload = () => (pageBgReady = true);
-		preloadPage.onerror = () => (pageBgReady = true);
-		preloadPage.src = "/bg01.jpg";
+		preloadPage.onerror = () => {
+			const fallbackPage = new Image();
+			fallbackPage.onload = () => (pageBgReady = true);
+			fallbackPage.onerror = () => (pageBgReady = true);
+			fallbackPage.src = "/bg01.jpg";
+		};
+		preloadPage.src = "/bg01.webp";
 
 		const revealObserver = new IntersectionObserver(
 			(entries) => {
