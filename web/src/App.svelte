@@ -786,10 +786,12 @@
 	@media (prefers-reduced-motion: no-preference) {
 		.page-mono .m-line:first-child {
 			animation: mono-drift 4.7s var(--ease-in-out) infinite;
+			will-change: translate;
 		}
 
 		.page-mono .m-line:last-child {
 			animation: mono-drift 6.3s var(--ease-in-out) -3.1s infinite;
+			will-change: translate;
 		}
 
 		@keyframes mono-drift {
