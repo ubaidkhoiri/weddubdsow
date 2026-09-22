@@ -30,8 +30,10 @@ body::after {
 	top: 0;
 	left: 0;
 	right: 0;
-	height: 100vh;
-	height: 100lvh;
+  height: 100vh;
+  height: 100lvh;
+  transform: scale(1.08);
+  transform-origin: center top;
 	z-index: 0;
 	background-image: linear-gradient(var(--color-photo-tint), var(--color-photo-tint));
 	background-position: center;
