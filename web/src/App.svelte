@@ -64,12 +64,29 @@
 	const seconds = $derived(Math.floor((remaining % 60_000) / 1000));
 
 	onMount(() => {
+		const root = document.documentElement;
 		const preload = new Image();
-		preload.onload = () => (bgReady = true);
-		preload.src = "/bgcover.png";
+		preload.onload = () => {
+			root.classList.add("bg-webp");
+			bgReady = true;
+		};
+		preload.onerror = () => {
+			const fallback = new Image();
+			fallback.onload = () => {
+				root.classList.add("bg-jpg");
+				bgReady = true;
+			};
+			fallback.onerror = () => {
+				root.classList.add("bg-jpg");
+				bgReady = true;
+			};
+			fallback.src = "/bgcover.jpg";
+		};
+		preload.src = "/bgcover.webp";
 
 		const preloadPage = new Image();
 		preloadPage.onload = () => (pageBgReady = true);
+		preloadPage.onerror = () => (pageBgReady = true);
 		preloadPage.src = "/bg01.jpg";
 
 		const revealObserver = new IntersectionObserver(
@@ -426,15 +443,27 @@
 		content: "";
 		position: absolute;
 		inset: 0;
-		background:
-			linear-gradient(
-				color-mix(in srgb, var(--color-bg-base) 30%, transparent),
-				color-mix(in srgb, var(--color-bg-base) 30%, transparent)
-			),
-			url("/bgcover.png") center / cover no-repeat;
+		background-image: linear-gradient(var(--color-photo-tint), var(--color-photo-tint));
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
 		opacity: 0;
 		transition: opacity var(--duration-slow) var(--ease-out);
 		pointer-events: none;
+	}
+
+	:global(html.bg-jpg) .cover::after,
+	:global(html.bg-jpg) .intro::after {
+		background-image:
+			linear-gradient(var(--color-photo-tint), var(--color-photo-tint)),
+			url("/bgcover.jpg");
+	}
+
+	:global(html.bg-webp) .cover::after,
+	:global(html.bg-webp) .intro::after {
+		background-image:
+			linear-gradient(var(--color-photo-tint), var(--color-photo-tint)),
+			url("/bgcover.webp");
 	}
 
 	.cover.bg-ready::after,

@@ -39,7 +39,8 @@
   --color-bg-base:    #f9f7f4;         /* page warm paper            */
   --color-bg-raised:  oklch(1 0 0);    /* cards, panels #FFFFFF      */
   --color-bg-overlay: oklch(1 0 0);    /* dialogs, popovers          */
-  --color-bg-glass:   color-mix(in srgb, var(--color-bg-raised) 16%, transparent); /* frosted cards di atas foto */
+  --color-bg-glass:   rgba(255, 255, 255, 0.16); /* frosted cards di atas foto (rgba, biar jalan di iOS <16.2) */
+  --color-photo-tint: rgba(249, 247, 244, 0.3); /* overlay foto: bg-base 30% pre-mixed (color-mix tak didukung iOS 16.1) */
   --spacing-page-inset: 20%;          /* halaman foto: margin pagar konten 60% di tengah */
   --spacing-page-top: 60px;           /* monogram hero: jarak atas    */
   --spacing-page-bottom: 60px;        /* monogram hero: jarak bawah   */
