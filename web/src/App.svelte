@@ -255,10 +255,10 @@
 		<div class="invite-copy">
 			<p class="ic-arab">ألسلام عليكم ورحمة الله وبركاته</p>
 			<p class="ic-prose-lead">
-				<strong>Maha Suci Allah</strong> yang telah menciptakan makhluk-Nya
+				<em>Maha Suci Allah</em> yang telah menciptakan makhluk-Nya
 				<em>berpasang-pasangan</em>. Dengan memohon rahmat dan ridho-Nya, kami bermaksud
-				mengundang Bapak/Ibu/Saudara/i dalam acara
-				<strong>Syukuran Pernikahan (Ngunduh Mantu)</strong> putra-putri kami:
+				mengundang Bapak/Ibu/Saudara/i dalam acara Syukuran Pernikahan (Ngunduh Mantu)
+				putra-putri kami:
 			</p>
 		</div>
 
@@ -812,16 +812,12 @@
 	}
 
 	.ic-prose-lead {
-		margin: 0;
+		margin: var(--spacing-s) 0 0;
 		font-family: var(--font-text);
-		font-size: var(--text-invite-prose);
+		font-size: var(--text-invite-arab);
 		line-height: var(--leading-body);
 		color: var(--color-text-weak);
-	}
-
-	.ic-prose-lead strong {
-		font-weight: var(--font-weight-bold);
-		color: var(--color-text-strong);
+		text-align: justify;
 	}
 
 	.ic-prose-lead em {
