@@ -218,6 +218,7 @@
 			aria-label="Buka undangan"
 			inert={phase === "intro"}
 		>
+			{#key phase}
 			<span class="cover-inner">
 				<span class="monogram" aria-hidden="true"
 					><span class="m-line">{event.groom}</span
@@ -229,6 +230,7 @@
 					<span class="h-word">membuka</span></span
 				>
 			</span>
+			{/key}
 		</button>
 		{#if phase === "intro"}
 			<div
