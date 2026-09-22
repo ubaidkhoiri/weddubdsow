@@ -52,6 +52,23 @@
 		return () => window.removeEventListener("hashchange", syncHash);
 	});
 
+	onMount(() => {
+		let scrollTimer: ReturnType<typeof setTimeout> | null = null;
+		const onScroll = () => {
+			document.body.classList.add("is-scrolling");
+			if (scrollTimer) clearTimeout(scrollTimer);
+			scrollTimer = setTimeout(() => {
+				document.body.classList.remove("is-scrolling");
+				scrollTimer = null;
+			}, 150);
+		};
+		window.addEventListener("scroll", onScroll, { passive: true });
+		return () => {
+			window.removeEventListener("scroll", onScroll);
+			if (scrollTimer) clearTimeout(scrollTimer);
+		};
+	});
+
 	$effect(() => {
 		const timer = setInterval(() => (now = Date.now()), 1000 - (Date.now() % 1000));
 		return () => clearInterval(timer);
@@ -758,6 +775,7 @@
 		color: var(--color-cover-sign);
 		margin: 0;
 		padding-inline: var(--spacing-page-mono-edges);
+		contain: layout style;
 	}
 
 	.page-names {
@@ -802,6 +820,10 @@
 			50% {
 				translate: 0 -3px;
 			}
+		}
+
+		body.is-scrolling .page-mono .m-line {
+			animation-play-state: paused;
 		}
 	}
 
