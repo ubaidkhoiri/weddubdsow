@@ -456,7 +456,6 @@
 		background-color: var(--color-bg-base);
 		border: 0;
 		cursor: pointer;
-		transition: opacity 300ms var(--ease-out);
 	}
 
 	.cover.pre {
