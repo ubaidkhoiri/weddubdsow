@@ -244,10 +244,13 @@
 	{/if}
 
 	<header class="hero" aria-label={event.title}>
-		<span class="page-mono" aria-hidden="true">
-			<span class="m-line">U</span>
-			<span class="m-line">S</span>
-		</span>
+		<div class="mono-stage">
+			<span class="page-mono" aria-hidden="true">
+				<span class="m-line">U</span>
+				<span class="m-line">S</span>
+			</span>
+			<p class="page-names">{event.groom} & {event.bride}</p>
+		</div>
 
 		<div class="invite-copy">
 			<p class="ic-arab">ألسلام عليكم ورحمة الله وبركاته</p>
@@ -709,7 +712,17 @@
 		gap: var(--spacing-s);
 	}
 
+	.mono-stage {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-block: var(--spacing-page-top) var(--spacing-page-bottom);
+	}
+
 	.page-mono {
+		position: relative;
+		z-index: 0;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -720,8 +733,26 @@
 		font-size: var(--text-monogram);
 		line-height: var(--spacing-page-mono-line);
 		color: var(--color-cover-sign);
-		margin-block: var(--spacing-page-top) var(--spacing-page-bottom);
+		margin: 0;
 		padding-inline: var(--spacing-page-mono-edges);
+	}
+
+	.page-names {
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0;
+		padding-inline: var(--spacing-m);
+		text-align: center;
+		font-family: var(--font-display);
+		font-style: italic;
+		font-weight: var(--font-weight-regular);
+		font-size: var(--text-h3);
+		line-height: var(--leading-h3);
+		color: var(--color-text-strong);
 	}
 
 	.page-mono .m-line {
