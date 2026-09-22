@@ -601,7 +601,7 @@
 	}
 
 	@media (prefers-reduced-motion: no-preference) {
-		.cover-inner .monogram {
+		.cover:not(.pre) .cover-inner .monogram {
 			animation: mono-float var(--duration-ambient-slow) var(--ease-in-out) infinite;
 		}
 
@@ -615,8 +615,8 @@
 			}
 		}
 
-		.cover-inner .m-line,
-		.tap-hint .h-word {
+		.cover:not(.pre) .cover-inner .m-line,
+		.cover:not(.pre) .tap-hint .h-word {
 			animation: mono-word-in 700ms var(--ease-out) both;
 		}
 
