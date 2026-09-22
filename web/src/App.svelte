@@ -266,7 +266,7 @@
 			<div class="ic-couple">
 				<p class="ic-name">{event.groom}</p>
 				<p class="ic-parents">
-					<span class="rel">Putra dari</span>
+					<span class="ic-amp">Putra dari</span>
 					<span class="folks"
 						>Bapak <strong>{groomParent.father}</strong> &amp; Ibu
 						<strong>{groomParent.mother}</strong></span
@@ -277,7 +277,7 @@
 			<div class="ic-couple">
 				<p class="ic-name">{event.bride}</p>
 				<p class="ic-parents">
-					<span class="rel">Putri dari</span>
+					<span class="ic-amp">Putri dari</span>
 					<span class="folks"
 						>Bapak <strong>{brideParent.father}</strong> &amp; Ibu
 						<strong>{brideParent.mother}</strong></span
@@ -852,20 +852,12 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: var(--spacing-2xs);
+		gap: 0;
 		margin: 0;
 		font-family: var(--font-text);
 		font-size: var(--text-invite-parents);
 		line-height: var(--leading-body);
 		color: var(--color-text-weak);
-	}
-
-	.ic-parents .rel {
-		font-size: var(--text-caption);
-		font-weight: var(--font-weight-bold);
-		letter-spacing: var(--tracking-caps);
-		text-transform: uppercase;
-		color: var(--color-text-muted);
 	}
 
 	.ic-parents strong {
