@@ -622,23 +622,23 @@
 			animation: mono-word-in var(--duration-base) var(--ease-out) both;
 		}
 
-		.cover-inner .m-line:nth-child(1) {
+		.cover:not(.pre) .cover-inner .m-line:nth-child(1) {
 			animation-delay: 200ms;
 		}
 
-		.cover-inner .m-line:nth-child(2) {
+		.cover:not(.pre) .cover-inner .m-line:nth-child(2) {
 			animation-delay: 500ms;
 		}
 
-		.tap-hint .h-word:nth-child(1) {
+		.cover:not(.pre) .tap-hint .h-word:nth-child(1) {
 			animation-delay: 800ms;
 		}
 
-		.tap-hint .h-word:nth-child(2) {
+		.cover:not(.pre) .tap-hint .h-word:nth-child(2) {
 			animation-delay: 1100ms;
 		}
 
-		.tap-hint .h-word:nth-child(3) {
+		.cover:not(.pre) .tap-hint .h-word:nth-child(3) {
 			animation-delay: 1400ms;
 		}
 
