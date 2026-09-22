@@ -724,7 +724,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		margin-block: var(--spacing-page-top) var(--spacing-page-bottom);
+		margin: 300px 0 var(--spacing-page-bottom);
 	}
 
 	.page-mono {
@@ -867,6 +867,10 @@
 		font-style: italic;
 		font-size: var(--text-invite-prose);
 		color: var(--color-text-brand);
+	}
+
+	.invite-copy > .ic-amp {
+		margin-block: 50px;
 	}
 
 	.ic-divider {
