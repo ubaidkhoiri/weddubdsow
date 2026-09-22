@@ -57,7 +57,7 @@
   --color-text-weak:     #65615b;      /* supporting text — ≥ 4.5:1 */
   --color-text-muted:    #6e6963;      /* captions — ≥ 4.5:1 (C-19) */
   --color-stroke-strong: #817c74;         /* soft warm grey — kontrol legible, ≥ 3:1 */
-  --color-stroke-weak:   rgba(255, 255, 255, 0.6); /* outline terang di atas card: lebih cerah dari card */
+  --color-stroke-weak:   rgba(255, 255, 255, 0.4); /* outline terang di atas card: lebih cerah dari card */
   --color-fill:          #f0ece6;      /* tags, badges, secondary surfaces */
 
   --color-icon:      var(--color-stroke-strong);
