@@ -6,6 +6,11 @@
 		typeof matchMedia !== "undefined" && matchMedia("(prefers-reduced-motion: reduce)").matches;
 	import "./lib/sprites.css";
 	import { event } from "./lib/content";
+
+	const groomParent = { father: "Amin", mother: "Dwi Suprihatin R" };
+	const brideParent = { father: "Agung Pitana", mother: "Karmini" };
+	const inviteDates = "7-8 November 2026";
+	const inviteHours = "09.00 - 14.00";
 	import Admin from "./routes/admin.svelte";
 	import SectionCouple from "./lib/SectionCouple.svelte";
 	import SectionStory from "./lib/SectionStory.svelte";
@@ -224,25 +229,37 @@
 
 		<div class="invite-copy">
 			<p class="ic-arab">ألسلام عليكم ورحمة الله وبركاته</p>
-			<p class="ic-prose">
+			<p class="ic-prose-lead">
 				Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Dengan
 				memohon rahmat dan ridho-Nya, kami bermaksud mengundang Bapak/Ibu/Saudara/i dalam
 				acara Syukuran Pernikahan (Ngunduh Mantu) putra-putri kami:
 			</p>
+		</div>
 
-			<p class="ic-name">{event.groom}</p>
-			<p class="ic-parents">Putra dari Bapak Amin &amp; Ibu Dwi Suprihatin R</p>
-
+		<div class="invite-copy">
+			<div class="ic-couple">
+				<p class="ic-name">{event.groom}</p>
+				<p class="ic-parents">
+					Putra dari Bapak <strong>{groomParent.father}</strong> &amp; Ibu
+					<strong>{groomParent.mother}</strong>
+				</p>
+			</div>
 			<p class="ic-amp">dengan</p>
+			<div class="ic-couple">
+				<p class="ic-name">{event.bride}</p>
+				<p class="ic-parents">
+					Putri dari Bapak <strong>{brideParent.father}</strong> &amp; Ibu
+					<strong>{brideParent.mother}</strong>
+				</p>
+			</div>
+		</div>
 
-			<p class="ic-name">{event.bride}</p>
-			<p class="ic-parents">Putri dari Bapak Agung Pitana &amp; Ibu Karmini</p>
-
+		<div class="invite-copy">
 			<span class="ic-divider" aria-hidden="true"></span>
 
 			<p class="ic-label">Resepsi Ngunduh Mantu</p>
-			<p class="ic-dates">7-8 November 2026</p>
-			<p class="ic-time">09.00 - 14.00</p>
+			<p class="ic-dates">{inviteDates}</p>
+			<p class="ic-time">{inviteHours}</p>
 
 			<p class="ic-label">Lokasi</p>
 			<p class="ic-dates">{event.venue}</p>
@@ -667,7 +684,7 @@
 		font-weight: var(--font-weight-regular);
 		font-size: var(--text-monogram);
 		line-height: var(--spacing-page-mono-line);
-		color: var(--color-text-strong);
+		color: var(--color-cover-sign);
 		margin-block: var(--spacing-page-top) var(--spacing-page-bottom);
 		padding-inline: var(--spacing-page-mono-edges);
 	}
@@ -682,23 +699,37 @@
 		align-items: center;
 		text-align: center;
 		gap: var(--spacing-s);
-		padding-block: var(--spacing-l);
+		padding-block: var(--spacing-s);
 		color: var(--color-text-strong);
 	}
 
 	.ic-arab {
 		margin: 0;
 		font-family: var(--font-text);
-		font-size: var(--text-caption);
+		font-size: var(--text-invite-arab);
 		line-height: var(--leading-body);
+		color: var(--color-text-muted);
 	}
 
-	.ic-prose {
+	.ic-prose-lead {
 		margin: 0;
 		font-family: var(--font-text);
-		font-size: var(--text-caption);
+		font-size: var(--text-invite-prose);
 		line-height: var(--leading-body);
 		color: var(--color-text-weak);
+	}
+
+	.ic-couple {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--spacing-2xs);
+		padding: var(--spacing-s) var(--spacing-m);
+		background: var(--color-bg-glass);
+		border: var(--border-width-hairline) solid var(--color-stroke-weak);
+		border-radius: var(--radius-full);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
 	}
 
 	.ic-name {
@@ -714,16 +745,21 @@
 	.ic-parents {
 		margin: 0;
 		font-family: var(--font-text);
-		font-size: var(--text-caption);
+		font-size: var(--text-invite-parents);
 		line-height: var(--leading-body);
 		color: var(--color-text-weak);
+	}
+
+	.ic-parents strong {
+		font-weight: var(--font-weight-bold);
+		color: var(--color-text-strong);
 	}
 
 	.ic-amp {
 		margin: 0;
 		font-family: var(--font-display);
 		font-style: italic;
-		font-size: var(--text-caption);
+		font-size: var(--text-invite-prose);
 		color: var(--color-text-brand);
 	}
 
@@ -776,10 +812,18 @@
 		outline-offset: var(--spacing-2xs);
 	}
 
+	.ic-prose {
+		margin: 0;
+		font-family: var(--font-text);
+		font-size: var(--text-invite-prose);
+		line-height: var(--leading-body);
+		color: var(--color-text-weak);
+	}
+
 	.ic-signlabel {
 		margin: 0;
 		font-family: var(--font-text);
-		font-size: var(--text-caption);
+		font-size: var(--text-invite-prose);
 		color: var(--color-text-weak);
 	}
 

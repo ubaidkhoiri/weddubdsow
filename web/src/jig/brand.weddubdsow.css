@@ -45,6 +45,9 @@
   --spacing-page-bottom: 60px;        /* monogram hero: jarak bawah   */
   --spacing-page-mono-edges: 4px;     /* monogram U/S: offset kiri-kanan */
   --spacing-page-mono-line: calc(var(--text-monogram) - 66px); /* line-height 100px-66px=-66px gap */
+  --text-invite-arab: 11px;           /* blok undangan: salam arab      */
+  --text-invite-prose: 12px;          /* blok undangan: paragraf Maha Suci */
+  --text-invite-parents: 13px;        /* blok undangan: Putra/Putri dari */
 
   /* ================= NEUTRAL FOREGROUNDS (transparent) =================
      Light mode: opacities of black. Never pure black at 100% (C-18).
