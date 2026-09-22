@@ -208,25 +208,15 @@
 	{:else}
 	<div class="invite">
 	{#if !opened}
-		{#if phase === "intro"}
-			<div
-				class="intro"
-				class:bg-ready={bgReady}
-				role="status"
-				aria-label="Undangan Ngunduh Mantu"
-			>
-				<span class="rings rings--intro" aria-hidden="true">
-					<dotlottie-wc src={ringsUrl} autoplay={!prefersReduced} loop></dotlottie-wc>
-				</span>
-			</div>
-		{:else}
 		<button
 			class="cover"
 			class:closing
+			class:pre={phase === "intro"}
 			class:bg-ready={bgReady}
 			type="button"
 			onclick={openInvite}
 			aria-label="Buka undangan"
+			inert={phase === "intro"}
 		>
 			<span class="cover-inner">
 				<span class="monogram" aria-hidden="true"
@@ -240,6 +230,17 @@
 				>
 			</span>
 		</button>
+		{#if phase === "intro"}
+			<div
+				class="intro"
+				class:bg-ready={bgReady}
+				role="status"
+				aria-label="Undangan Ngunduh Mantu"
+			>
+				<span class="rings rings--intro" aria-hidden="true">
+					<dotlottie-wc src={ringsUrl} autoplay={!prefersReduced} loop></dotlottie-wc>
+				</span>
+			</div>
 		{/if}
 	{/if}
 
@@ -442,7 +443,11 @@
 
 	.cover {
 		position: fixed;
-		inset: 0;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 100vh;
+		height: 100lvh;
 		z-index: 20;
 		display: flex;
 		align-items: center;
@@ -451,6 +456,12 @@
 		background-color: var(--color-bg-base);
 		border: 0;
 		cursor: pointer;
+		transition: opacity 300ms var(--ease-out);
+	}
+
+	.cover.pre {
+		opacity: 0;
+		pointer-events: none;
 	}
 
 	.cover::after,
@@ -488,7 +499,11 @@
 
 	.intro {
 		position: fixed;
-		inset: 0;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 100vh;
+		height: 100lvh;
 		z-index: 21;
 		display: flex;
 		flex-direction: column;
