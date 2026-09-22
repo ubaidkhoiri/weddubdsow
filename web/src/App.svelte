@@ -724,7 +724,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		margin: 300px 0 var(--spacing-page-bottom);
+		margin: 150px 0 var(--spacing-page-bottom);
 	}
 
 	.page-mono {
@@ -870,7 +870,8 @@
 	}
 
 	.invite-copy > .ic-amp {
-		margin-block: 50px;
+		margin-block: 20px;
+		color: var(--color-text-muted);
 	}
 
 	.ic-divider {
