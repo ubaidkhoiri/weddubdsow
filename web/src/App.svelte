@@ -271,6 +271,11 @@
 				<span class="m-line">S</span>
 			</span>
 			<p class="page-names">{event.groom}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{event.bride}</p>
+			<span class="spark-layer" aria-hidden="true"
+				><span class="spark">+</span><span class="spark">+</span
+				><span class="spark">+</span><span class="spark">+</span
+				><span class="spark">+</span><span class="spark">+</span></span
+			>
 		</div>
 
 		<div class="invite-copy">
@@ -764,6 +769,84 @@
 	.hero > .ic-arab--top {
 		align-self: center;
 		margin-top: var(--spacing-l);
+	}
+
+	.spark-layer {
+		position: absolute;
+		inset: -10% -15%;
+		z-index: 2;
+		pointer-events: none;
+	}
+
+	.spark {
+		position: absolute;
+		font-family: var(--font-text);
+		font-size: var(--text-body);
+		line-height: 1;
+		color: var(--color-text-weak);
+		opacity: 0.25;
+	}
+
+	.spark:nth-child(1) {
+		top: 6%;
+		left: 12%;
+	}
+	.spark:nth-child(2) {
+		top: 0;
+		right: 16%;
+	}
+	.spark:nth-child(3) {
+		top: 42%;
+		left: 0;
+	}
+	.spark:nth-child(4) {
+		top: 38%;
+		right: 2%;
+	}
+	.spark:nth-child(5) {
+		bottom: 8%;
+		left: 20%;
+	}
+	.spark:nth-child(6) {
+		bottom: 2%;
+		right: 22%;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.spark {
+			animation: spark-float 5s var(--ease-in-out) infinite alternate;
+		}
+		.spark:nth-child(2) {
+			animation-duration: 6.4s;
+			animation-delay: -2s;
+		}
+		.spark:nth-child(3) {
+			animation-duration: 7.2s;
+			animation-delay: -4.5s;
+		}
+		.spark:nth-child(4) {
+			animation-duration: 5.6s;
+			animation-delay: -1.2s;
+		}
+		.spark:nth-child(5) {
+			animation-duration: 6.8s;
+			animation-delay: -3.4s;
+		}
+		.spark:nth-child(6) {
+			animation-duration: 6s;
+			animation-delay: -5.1s;
+		}
+
+		@keyframes spark-float {
+			from {
+				transform: translateY(5px) rotate(0deg);
+				opacity: 0.2;
+			}
+			to {
+				transform: translateY(-7px) rotate(90deg);
+				opacity: 0.75;
+			}
+		}
 	}
 
 	.page-mono {
