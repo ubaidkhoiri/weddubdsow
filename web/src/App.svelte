@@ -763,7 +763,6 @@
 		align-items: center;
 		justify-content: center;
 		margin: 150px 0 var(--spacing-page-bottom);
-		transform: scale(1.3);
 	}
 
 	.hero > .ic-arab--top {
@@ -788,28 +787,28 @@
 	}
 
 	.spark:nth-child(1) {
-		top: 6%;
-		left: 12%;
+		top: 5%;
+		left: 10%;
 	}
 	.spark:nth-child(2) {
 		top: 0;
-		right: 16%;
+		right: 12%;
 	}
 	.spark:nth-child(3) {
-		top: 42%;
-		left: 0;
+		top: 18%;
+		left: 2%;
 	}
 	.spark:nth-child(4) {
-		top: 38%;
-		right: 2%;
+		top: 18%;
+		right: 4%;
 	}
 	.spark:nth-child(5) {
-		bottom: 8%;
-		left: 20%;
+		bottom: 5%;
+		left: 14%;
 	}
 	.spark:nth-child(6) {
-		bottom: 2%;
-		right: 22%;
+		bottom: 0;
+		right: 16%;
 	}
 
 	@media (prefers-reduced-motion: no-preference) {
@@ -859,8 +858,8 @@
 		font-family: var(--font-display);
 		font-style: italic;
 		font-weight: var(--font-weight-regular);
-		font-size: var(--text-monogram);
-		line-height: var(--spacing-page-mono-line);
+		font-size: calc(var(--text-monogram) * 1.3);
+		line-height: calc(var(--spacing-page-mono-line) * 1.3);
 		color: var(--color-cover-sign);
 		margin: 0;
 		padding-inline: var(--spacing-page-mono-edges);
@@ -880,7 +879,7 @@
 		font-family: var(--font-display);
 		font-style: italic;
 		font-weight: var(--font-weight-regular);
-		font-size: var(--text-body);
+		font-size: calc(var(--text-body) * 1.25);
 		line-height: var(--leading-body);
 		color: var(--color-text-strong);
 		white-space: nowrap;
