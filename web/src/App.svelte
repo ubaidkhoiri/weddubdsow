@@ -264,6 +264,7 @@
 	{/if}
 
 	<header class="hero" aria-label={event.title}>
+		<p class="ic-arab ic-arab--top">ألسلام عليكم ورحمة الله وبركاته</p>
 		<div class="mono-stage">
 			<span class="page-mono" aria-hidden="true">
 				<span class="m-line">U</span>
@@ -273,7 +274,6 @@
 		</div>
 
 		<div class="invite-copy">
-			<p class="ic-arab">ألسلام عليكم ورحمة الله وبركاته</p>
 			<p class="ic-prose-lead">
 				<em>Maha Suci Allah</em> yang telah menciptakan makhluk-Nya
 				<em>berpasang-pasangan</em>. Dengan memohon rahmat dan ridho-Nya, kami bermaksud
@@ -758,6 +758,12 @@
 		align-items: center;
 		justify-content: center;
 		margin: 150px 0 var(--spacing-page-bottom);
+		transform: scale(1.3);
+	}
+
+	.hero > .ic-arab--top {
+		align-self: center;
+		margin-top: var(--spacing-l);
 	}
 
 	.page-mono {
