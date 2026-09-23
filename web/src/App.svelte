@@ -787,63 +787,62 @@
 	}
 
 	.spark:nth-child(1) {
-		top: 5%;
-		left: 10%;
+		top: 2%;
+		left: 18%;
 	}
 	.spark:nth-child(2) {
-		top: 0;
-		right: 12%;
+		top: 10%;
+		right: 8%;
 	}
 	.spark:nth-child(3) {
-		top: 18%;
-		left: 2%;
+		top: 32%;
+		left: 4%;
 	}
 	.spark:nth-child(4) {
-		top: 18%;
-		right: 4%;
+		top: 32%;
+		right: 6%;
 	}
 	.spark:nth-child(5) {
-		bottom: 5%;
-		left: 14%;
+		bottom: 6%;
+		left: 24%;
 	}
 	.spark:nth-child(6) {
-		bottom: 0;
-		right: 16%;
+		bottom: 10%;
+		right: 20%;
 	}
 
 	@media (prefers-reduced-motion: no-preference) {
 		.spark {
-			animation: spark-float 5s var(--ease-in-out) infinite alternate;
+			animation: spark-turn 800ms var(--ease-out) infinite;
 		}
 		.spark:nth-child(2) {
-			animation-duration: 6.4s;
-			animation-delay: -2s;
+			animation-delay: 130ms;
 		}
 		.spark:nth-child(3) {
-			animation-duration: 7.2s;
-			animation-delay: -4.5s;
+			animation-delay: 260ms;
 		}
 		.spark:nth-child(4) {
-			animation-duration: 5.6s;
-			animation-delay: -1.2s;
+			animation-delay: 390ms;
 		}
 		.spark:nth-child(5) {
-			animation-duration: 6.8s;
-			animation-delay: -3.4s;
+			animation-delay: 520ms;
 		}
 		.spark:nth-child(6) {
-			animation-duration: 6s;
-			animation-delay: -5.1s;
+			animation-delay: 650ms;
 		}
 
-		@keyframes spark-float {
-			from {
-				transform: translateY(5px) rotate(0deg);
-				opacity: 0.2;
+		@keyframes spark-turn {
+			0% {
+				transform: rotate(0deg);
+				opacity: 0.25;
 			}
-			to {
-				transform: translateY(-7px) rotate(90deg);
-				opacity: 0.75;
+			25% {
+				transform: rotate(90deg);
+				opacity: 0.8;
+			}
+			100% {
+				transform: rotate(90deg);
+				opacity: 0.25;
 			}
 		}
 	}
