@@ -780,10 +780,11 @@
 	.spark {
 		position: absolute;
 		font-family: var(--font-text);
+		font-weight: 300;
 		font-size: var(--text-body);
 		line-height: 1;
 		color: var(--color-text-weak);
-		opacity: 0.25;
+		opacity: 0.5;
 	}
 
 	.spark:nth-child(1) {
@@ -813,36 +814,33 @@
 
 	@media (prefers-reduced-motion: no-preference) {
 		.spark {
-			animation: spark-turn 800ms var(--ease-out) infinite;
+			animation: spark-turn 2500ms linear infinite;
 		}
 		.spark:nth-child(2) {
-			animation-delay: 130ms;
+			animation-delay: 400ms;
 		}
 		.spark:nth-child(3) {
-			animation-delay: 260ms;
+			animation-delay: 800ms;
 		}
 		.spark:nth-child(4) {
-			animation-delay: 390ms;
+			animation-delay: 1200ms;
 		}
 		.spark:nth-child(5) {
-			animation-delay: 520ms;
+			animation-delay: 1600ms;
 		}
 		.spark:nth-child(6) {
-			animation-delay: 650ms;
+			animation-delay: 2000ms;
 		}
 
 		@keyframes spark-turn {
 			0% {
 				transform: rotate(0deg);
-				opacity: 0.25;
 			}
-			25% {
+			20% {
 				transform: rotate(90deg);
-				opacity: 0.8;
 			}
 			100% {
 				transform: rotate(90deg);
-				opacity: 0.25;
 			}
 		}
 	}
