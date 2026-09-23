@@ -24,8 +24,11 @@
 		},
 	];
 
-	const hint = "Ketuk kartu buat kenal mereka lebih dalem";
-	const hintWords = hint.split(" ");
+	const hint = "Ketuk kartu untuk kenal mereka lebih dalem";
+	const hintLines = [
+		["Ketuk", "kartu", "untuk"],
+		["kenal", "mereka", "lebih", "dalem"],
+	];
 
 	let flip: string | null = $state(null);
 	const photo = (seed: string) => `https://picsum.photos/seed/${seed}/520/520?grayscale`;
@@ -67,11 +70,16 @@
 		{/each}
 	</div>
 	<p class="jewel-hint" aria-label={hint}>
-		{#each hintWords as word, i}
-			<span class="w" aria-hidden="true" style="--wd: {i}">{word}</span>
-			{#if i < hintWords.length - 1}
-				{" "}
-			{/if}
+		{#each hintLines as line, li}
+			<span class="line" aria-hidden="true">
+				{#each line as word, wi}
+					{@const i = (li === 0 ? 0 : hintLines[0].length) + wi}
+					<span class="w" style="--wd: {i}">{word}</span>
+					{#if wi < line.length - 1}
+						{" "}
+					{/if}
+				{/each}
+			</span>
 		{/each}
 	</p>
 </section>
@@ -96,6 +104,8 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 12px;
+		/* Gutter kecil: sudut kartu miring tidak keluar viewport kepotong pin. */
+		padding-inline: 10px;
 	}
 
 	.flip {
@@ -105,6 +115,7 @@
 		text-align: left;
 		cursor: pointer;
 		perspective: 1000px;
+		-webkit-perspective: 1000px;
 		/* Tinggi ikut konten depan. Back overlay absolut, tidak nambah tinggi. */
 		height: auto;
 		align-self: start;
@@ -146,6 +157,8 @@
 		position: relative;
 		display: block;
 		transform-style: preserve-3d;
+		-webkit-transform-style: preserve-3d;
+		will-change: transform;
 		transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
@@ -177,6 +190,8 @@
 	.tilt-r {
 		transform: rotate(2deg);
 	}
+
+	/* Foto tanpa rotasi sendiri: ikut kartu, sudut selalu identik. */
 
 	.float {
 		display: block;
@@ -241,7 +256,20 @@
 		color: var(--jewel-cream);
 		transform: rotateY(180deg);
 		overflow: hidden;
+		/* Tutup fringe aliasing tepi: outline sewarna bg ikut radius. */
+		outline: 1px solid var(--jewel-rust);
+		outline-offset: -1px;
 	}
+
+	.back.tilt-l {
+		transform: rotateY(180deg) rotate(2deg);
+	}
+
+	.back.tilt-r {
+		transform: rotateY(180deg) rotate(-2deg);
+	}
+
+	/* Belakang sengaja lurus (axis-aligned, no gerigi). Depan tetap miring. */
 
 	.back-name {
 		text-align: center;
@@ -261,14 +289,20 @@
 	}
 
 	.jewel-hint {
-		margin: 30px 0 0;
+		margin: 44px 0 0;
 		text-align: center;
 		font-family: var(--font-text);
 		font-weight: var(--font-weight-regular);
-		font-size: 9px;
+		font-size: 8px;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
 		color: var(--jewel-ink-soft);
-		/* Napas lembut loop, mulai setelah kata terakhir tampil. */
-		animation: hint-breathe 3s ease-in-out 2.4s infinite;
+		/* Kedip lembut loop, gaya tap-hint cover. */
+		animation: hint-blink 3.2s var(--ease-in-out) infinite;
+	}
+
+	.jewel-hint .line {
+		display: block;
 	}
 
 	.jewel-hint .w {
@@ -286,13 +320,13 @@
 		transition-delay: calc(0.8s + var(--wd) * 0.12s);
 	}
 
-	@keyframes hint-breathe {
+	@keyframes hint-blink {
 		0%,
 		100% {
-			opacity: 1;
+			opacity: 0.25;
 		}
 		50% {
-			opacity: 0.55;
+			opacity: 0.6;
 		}
 	}
 

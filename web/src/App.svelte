@@ -7,8 +7,6 @@
 	import "./lib/sprites.css";
 	import { event } from "./lib/content";
 
-	const groomParent = { father: "Amin", mother: "Dwi Suprihatin R" };
-	const brideParent = { father: "Agung Pitana", mother: "Karmini" };
 	const inviteDates = "8 November 2026";
 	const inviteHours = "09.00 - 13.00";
 	import Admin from "./routes/admin.svelte";
@@ -20,6 +18,7 @@
 	import SectionMessages from "./lib/SectionMessages.svelte";
 	import SectionClosing from "./lib/SectionClosing.svelte";
 	import CoupleFlip from "./lib/CoupleFlip.svelte";
+	import MomentKita from "./lib/MomentKita.svelte";
 
 	const target = new Date("2026-11-08T09:00:00+07:00").getTime();
 	let opened = $state(false);
@@ -132,6 +131,113 @@
 
 	let sceneEl: HTMLElement | null = $state(null);
 	let swapped = $state(false);
+	let named = $state(false);
+	const arabBadge = "ألسلام عليكم ورحمة الله وبركاته";
+	let currentTitle = $state(arabBadge);
+	const activeKey = $derived(currentTitle === arabBadge ? "__arab" : currentTitle);
+
+	type NavIcon = { key: string; label: string; outline: string; solid: string };
+	const navIcons: NavIcon[] = [
+		{
+			key: "__arab",
+			label: "Awal",
+			outline:
+				'<path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/>',
+			solid:
+				'<path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z"/><path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z"/>',
+		},
+		{
+			key: "Momen Kita",
+			label: "Momen Kita",
+			outline:
+				'<path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z"/>',
+			solid:
+				'<path d="M12 9a3.75 3.75 0 1 0 0 7.5A3.75 3.75 0 0 0 12 9Z"/><path fill-rule="evenodd" d="M9.344 3.071a49.52 49.52 0 0 1 5.312 0c.967.052 1.83.585 2.332 1.39l.821 1.317c.24.383.645.643 1.11.71.386.054.77.113 1.152.177 1.432.239 2.429 1.493 2.429 2.909V18a3 3 0 0 1-3 3h-15a3 3 0 0 1-3-3V9.574c0-1.416.997-2.67 2.429-2.909.382-.064.766-.123 1.151-.178a1.56 1.56 0 0 0 1.11-.71l.822-1.315a2.942 2.942 0 0 1 2.332-1.39ZM6.75 12.75a5.25 5.25 0 1 1 10.5 0 5.25 5.25 0 0 1-10.5 0Zm12-1.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd"/>',
+		},
+		{
+			key: "Sepasang Mempelai",
+			label: "Sepasang Mempelai",
+			outline:
+				'<path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>',
+			solid:
+				'<path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"/>',
+		},
+		{
+			key: "Perjalanan Kami",
+			label: "Perjalanan Kami",
+			outline:
+				'<path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/>',
+			solid:
+				'<path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z"/>',
+		},
+		{
+			key: "Rangkaian Acara",
+			label: "Rangkaian Acara",
+			outline:
+				'<path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z"/>',
+			solid:
+				'<path d="M12.75 12.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM7.5 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM8.25 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM9.75 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM10.5 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM12.75 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM14.25 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM15 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM16.5 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM15 12.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM16.5 13.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"/><path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75Zm13.5 9a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5Z" clip-rule="evenodd"/>',
+		},
+		{
+			key: "Momen Terindah",
+			label: "Momen Terindah",
+			outline:
+				'<path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>',
+			solid:
+				'<path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 0 1 2.25-2.25h16.5A2.25 2.25 0 0 1 22.5 6v12a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 18V6ZM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0 0 21 18v-1.94l-2.69-2.689a1.5 1.5 0 0 0-2.12 0l-.88.879.97.97a.75.75 0 1 1-1.06 1.06l-5.16-5.159a1.5 1.5 0 0 0-2.12 0L3 16.061Zm10.125-7.81a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clip-rule="evenodd"/>',
+		},
+		{
+			key: "Konfirmasi Kehadiran",
+			label: "Konfirmasi Kehadiran",
+			outline: '<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/>',
+			solid:
+				'<path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"/>',
+		},
+		{
+			key: "Tinggalkan Pesan",
+			label: "Tinggalkan Pesan",
+			outline:
+				'<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 0 1 1.037-.443 48.282 48.282 0 0 0 5.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"/>',
+			solid:
+				'<path fill-rule="evenodd" d="M4.848 2.771A49.144 49.144 0 0 1 12 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97-1.94.284-3.916.455-5.922.505a.39.39 0 0 0-.266.112L8.78 21.53A.75.75 0 0 1 7.5 21v-3.955a48.842 48.842 0 0 1-2.652-.316c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97Z" clip-rule="evenodd"/>',
+		},
+		{
+			key: "Doa dan Restu",
+			label: "Doa dan Restu",
+			outline:
+				'<path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"/>',
+			solid:
+				'<path fill-rule="evenodd" d="M9 4.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.75 3.75 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813A3.75 3.75 0 0 0 7.466 7.89l.813-2.846A.75.75 0 0 1 9 4.5ZM18 1.5a.75.75 0 0 1 .728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 0 1 0 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 0 1-1.456 0l-.258-1.036a2.625 2.625 0 0 0-1.91-1.91l-1.036-.258a.75.75 0 0 1 0-1.456l1.036-.258a2.625 2.625 0 0 0 1.91-1.91l.258-1.036A.75.75 0 0 1 18 1.5ZM16.5 15a.75.75 0 0 1 .712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 0 1 0 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 0 1-1.422 0l-.395-1.183a1.5 1.5 0 0 0-.948-.948l-1.183-.395a.75.75 0 0 1 0-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0 1 16.5 15Z" clip-rule="evenodd"/>',
+		},
+	];
+
+	function jumpTo(key: string) {
+		if (typeof window === "undefined") return;
+		const behavior = prefersReduced ? "auto" : "smooth";
+		if (key === "__arab") {
+			window.scrollTo({ top: 0, behavior });
+			return;
+		}
+		document.querySelector(`[data-title="${key}"]`)?.scrollIntoView({ behavior, block: "start" });
+	}
+
+	onMount(() => {
+		const spy = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (entry.isIntersecting) {
+						const t = (entry.target as HTMLElement).dataset.title;
+						currentTitle = !t || t === "__arab" ? arabBadge : t;
+					}
+				}
+			},
+			{ rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+		);
+		for (const el of document.querySelectorAll("[data-title]")) {
+			spy.observe(el);
+		}
+		return () => spy.disconnect();
+	});
 
 	onMount(() => {
 		if (prefersReduced) return;
@@ -142,6 +248,7 @@
 			const total = sceneEl.offsetHeight - window.innerHeight;
 			const p = total > 0 ? Math.min(1, Math.max(0, -sceneEl.getBoundingClientRect().top / total)) : 0;
 			swapped = p > 0.12;
+			named = p > 0.55;
 		};
 		const onScroll = () => {
 			if (!ticking) {
@@ -296,7 +403,6 @@
 
 	<header class="hero" aria-label={event.title}>
 	{#if prefersReduced}
-		<p class="ic-arab ic-arab--top">ألسلام عليكم ورحمة الله وبركاته</p>
 		<div class="mono-stage">
 			<span class="page-mono" aria-hidden="true">
 				<span class="m-line">U</span>
@@ -306,9 +412,8 @@
 		</div>
 		<CoupleFlip active />
 	{:else}
-		<section class="scene" bind:this={sceneEl} class:swapped aria-label="Ubaid dan Sofia">
+		<section class="scene" bind:this={sceneEl} class:swapped class:named aria-label="Ubaid dan Sofia" data-title="__arab">
 			<div class="pin">
-				<p class="ic-arab ic-arab--top">ألسلام عليكم ورحمة الله وبركاته</p>
 				<div class="swap">
 					<div class="mono-stage" aria-hidden={swapped}>
 						<span class="page-mono" aria-hidden="true">
@@ -317,46 +422,68 @@
 						</span>
 						<p class="page-names">{event.groom}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{event.bride}</p>
 					</div>
-					<div class="flipwrap" aria-hidden={!swapped}>
-						<CoupleFlip active={swapped} />
+					<div class="flipwrap" aria-hidden={!swapped || named}>
+						<CoupleFlip active={swapped && !named} />
+					</div>
+					<div class="nameswap" aria-hidden={!named}>
+						<div class="n-line">
+							<div class="ic-couple">
+								<p class="ic-name">
+									<span class="w" style="--wd: 0">Ubaid</span>
+									<span class="w" style="--wd: 1">Khoiri</span>
+								</p>
+								<p class="ic-parents">
+									<span class="ic-amp">
+										<span class="w" style="--wd: 2">Putra</span>
+										<span class="w" style="--wd: 3">dari</span>
+									</span>
+									<span class="folks"
+										><span class="w" style="--wd: 4">Bapak</span>
+										<strong><span class="w" style="--wd: 5">Amin</span></strong>
+										<span class="w" style="--wd: 6">&amp;</span>
+										<span class="w" style="--wd: 7">Ibu</span>
+										<strong
+											><span class="w" style="--wd: 8">Dwi</span>
+											<span class="w" style="--wd: 9">Suprihatin</span>
+											<span class="w" style="--wd: 10">R</span></strong
+										></span
+									>
+								</p>
+							</div>
+						</div>
+						<div class="n-line n-gap">
+							<p class="ic-amp"><span class="w" style="--wd: 14">dengan</span></p>
+						</div>
+						<div class="n-line">
+							<div class="ic-couple">
+								<p class="ic-name">
+									<span class="w" style="--wd: 17">Almar'atus</span>
+									<span class="w" style="--wd: 18">Sofia</span>
+									<span class="w" style="--wd: 19">T.</span>
+								</p>
+								<p class="ic-parents">
+									<span class="ic-amp">
+										<span class="w" style="--wd: 20">Putri</span>
+										<span class="w" style="--wd: 21">dari</span>
+									</span>
+									<span class="folks"
+										><span class="w" style="--wd: 22">Bapak</span>
+										<strong
+											><span class="w" style="--wd: 23">Agung</span>
+											<span class="w" style="--wd: 24">Pitana</span></strong
+										>
+										<span class="w" style="--wd: 25">&amp;</span>
+										<span class="w" style="--wd: 26">Ibu</span>
+										<strong><span class="w" style="--wd: 27">Karmini</span></strong></span
+									>
+								</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</section>
 	{/if}
-
-		<div class="invite-copy">
-			<p class="ic-prose-lead">
-				<em>Maha Suci Allah</em> yang telah menciptakan makhluk-Nya
-				<em>berpasang-pasangan</em>. Dengan memohon rahmat dan ridho-Nya, kami bermaksud
-				mengundang Bapak/Ibu/Saudara/i dalam acara <em>Syukuran Pernikahan (Ngunduh Mantu)</em>
-				putra-putri kami:
-			</p>
-		</div>
-
-		<div class="invite-copy">
-			<div class="ic-couple">
-				<p class="ic-name">Ubaid Khoiri</p>
-				<p class="ic-parents">
-					<span class="ic-amp">Putra dari</span>
-					<span class="folks"
-						>Bapak <strong>{groomParent.father}</strong> &amp; Ibu
-						<strong>{groomParent.mother}</strong></span
-					>
-				</p>
-			</div>
-			<p class="ic-amp">dengan</p>
-			<div class="ic-couple">
-				<p class="ic-name">Almar'atus Sofia T.</p>
-				<p class="ic-parents">
-					<span class="ic-amp">Putri dari</span>
-					<span class="folks"
-						>Bapak <strong>{brideParent.father}</strong> &amp; Ibu
-						<strong>{brideParent.mother}</strong></span
-					>
-				</p>
-			</div>
-		</div>
 
 		<div class="invite-copy">
 			<span class="ic-divider" aria-hidden="true"></span>
@@ -377,6 +504,8 @@
 			<p class="ic-signlabel">Kami yang berbahagia,</p>
 			<p class="ic-signature">Keluarga Besar Amin</p>
 		</div>
+
+		<div data-reveal data-title="Momen Kita"><MomentKita /></div>
 
 		<div class="card hero-title">
 			<p class="eyebrow">Undangan Ngunduh Mantu</p>
@@ -428,61 +557,91 @@
 		</div>
 	</header>
 
-	<div data-reveal><SectionCouple /></div>
-	<div data-reveal><SectionStory /></div>
-	<div data-reveal><SectionSchedule /></div>
-	<div data-reveal><SectionGallery /></div>
-	<div data-reveal><SectionRsvp /></div>
-	<div data-reveal><SectionMessages /></div>
-	<div data-reveal><SectionClosing /></div>
+	<div data-reveal data-title="Sepasang Mempelai"><SectionCouple /></div>
+	<div data-reveal data-title="Perjalanan Kami"><SectionStory /></div>
+	<div data-reveal data-title="Rangkaian Acara"><SectionSchedule /></div>
+	<div data-reveal data-title="Momen Terindah"><SectionGallery /></div>
+	<div data-reveal data-title="Konfirmasi Kehadiran"><SectionRsvp /></div>
+	<div data-reveal data-title="Tinggalkan Pesan"><SectionMessages /></div>
+	<div data-reveal data-title="Doa dan Restu"><SectionClosing /></div>
 
 	<div id="yt-player" class="player" aria-hidden="true" tabindex="-1"></div>
 
+	{#if opened}
+		<div class="fade-top" aria-hidden="true"></div>
+		<div class="fade-bottom" aria-hidden="true"></div>
+		<div class="topbar" role="status" aria-label={currentTitle}>
+			{#key currentTitle}
+				<p class="topbar-badge">{currentTitle}</p>
+			{/key}
+		</div>
+	{/if}
+
 	<div class="fab-layer">
-		{#if ytStarted}
-			<div class="now-playing" role="group" aria-label="Pemutar musik">
+		<nav class="bottombar" aria-label="Navigasi bagian">
+			{#each navIcons as item (item.key)}
 				<button
-					class="np-toggle"
 					type="button"
-					onclick={toggleMusic}
-					aria-pressed={musicOn}
-					aria-label={musicOn ? "Jeda musik" : "Putar musik"}
+					class="bb-btn"
+					class:is-active={activeKey === item.key}
+					onclick={() => jumpTo(item.key)}
+					aria-label={item.label}
+					aria-current={activeKey === item.key ? "true" : undefined}
+					title={item.label}
 				>
-					{#if musicOn}
-						<svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
-							<rect x="4" y="4" width="4" height="12" rx="1" />
-							<rect x="12" y="4" width="4" height="12" rx="1" />
-						</svg>
+					{#if activeKey === item.key}
+						<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"
+							>{@html item.solid}</svg
+						>
 					{:else}
-						<svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
-							<path d="M6 4.5v11l9-5.5z" />
-						</svg>
+						<svg
+							viewBox="0 0 24 24"
+							width="15"
+							height="15"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true">{@html item.outline}</svg
+						>
 					{/if}
 				</button>
-				<span class="np-meta">
-					<strong class="np-title">Honesty</strong>
-					<small class="np-artist">Pink Sweat$</small>
-				</span>
-				<span class="np-marquee" aria-hidden="true">
-					<svg viewBox="0 0 20 20" width="16" height="16" fill="none">
-						<circle cx="10" cy="10" r="7" />
-						<path d="M10 6v4l2.5 2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+			{/each}
+			<span class="bb-sep" aria-hidden="true"></span>
+			<button
+				type="button"
+				class="bb-btn"
+				class:is-active={musicOn}
+				onclick={toggleMusic}
+				aria-pressed={musicOn}
+				aria-label={musicOn ? "Jeda musik" : "Putar musik"}
+				title={musicOn ? "Jeda musik" : "Putar musik"}
+			>
+				{#if musicOn}
+					<svg viewBox="0 0 20 20" width="12" height="12" fill="currentColor" aria-hidden="true">
+						<rect x="4" y="4" width="4" height="12" rx="1" />
+						<rect x="12" y="4" width="4" height="12" rx="1" />
 					</svg>
-				</span>
-			</div>
-		{/if}
-		<a
-			class="share"
-			href="https://wa.me/?text={encodeURIComponent(shareText())}"
-			target="_blank"
-			rel="noreferrer"
-			aria-label="Bagikan undangan lewat WhatsApp"
-			title="Bagikan lewat WhatsApp"
-		>
-			<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
-				<path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.94L2 22l5.2-1.5A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.09.89.9-3-.2-.31a8.2 8.2 0 1 1 6.88 3.75Zm4.53-6.14c-.25-.12-1.46-.72-1.68-.8-.23-.09-.4-.13-.56.12-.17.25-.64.8-.78.97-.14.16-.29.18-.53.06-.25-.12-1.04-.39-1.99-1.23-.73-.66-1.23-1.46-1.38-1.71-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.13-.56-1.34-.76-1.84-.2-.49-.41-.42-.56-.43h-.48c-.16 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.6.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.2-.58.2-1.07.14-1.18-.06-.1-.23-.16-.48-.28Z" />
-			</svg>
-		</a>
+				{:else}
+					<svg viewBox="0 0 20 20" width="12" height="12" fill="currentColor" aria-hidden="true">
+						<path d="M6 4.5v11l9-5.5z" />
+					</svg>
+				{/if}
+			</button>
+			<a
+				class="bb-btn"
+				href="https://wa.me/?text={encodeURIComponent(shareText())}"
+				target="_blank"
+				rel="noreferrer"
+				aria-label="Bagikan undangan lewat WhatsApp"
+				title="Bagikan lewat WhatsApp"
+			>
+				<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true">
+					<path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.94L2 22l5.2-1.5A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.09.89.9-3-.2-.31a8.2 8.2 0 1 1 6.88 3.75Zm4.53-6.14c-.25-.12-1.46-.72-1.68-.8-.23-.09-.4-.13-.56.12-.17.25-.64.8-.78.97-.14.16-.29.18-.53.06-.25-.12-1.04-.39-1.99-1.23-.73-.66-1.23-1.46-1.38-1.71-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.13-.56-1.34-.76-1.84-.2-.49-.41-.42-.56-.43h-.48c-.16 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.6.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.2-.58.2-1.07.14-1.18-.06-.1-.23-.16-.48-.28Z" />
+				</svg>
+			</a>
+		</nav>
 	</div>
 
 	<footer class="admin-link">
@@ -816,11 +975,6 @@
 		margin: 150px 0 var(--spacing-page-bottom);
 	}
 
-	.hero > .ic-arab--top {
-		align-self: center;
-		margin-top: var(--spacing-l);
-	}
-
 	.page-mono {
 		position: relative;
 		z-index: 0;
@@ -878,19 +1032,6 @@
 		overflow: hidden;
 	}
 
-	.pin > .ic-arab--top {
-		position: absolute;
-		top: var(--spacing-l);
-		left: 50%;
-		right: auto;
-		z-index: 1;
-		width: max-content;
-		max-width: 92%;
-		transform: translateX(-50%);
-		margin-top: 0;
-		pointer-events: none;
-	}
-
 	.swap {
 		position: absolute;
 		inset: 0;
@@ -943,9 +1084,66 @@
 	}
 
 	.flipwrap > :global(.jewel) {
-		width: 90%;
+		width: 100%;
 		flex-shrink: 0;
 		margin-top: 0;
+	}
+
+	.nameswap {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: var(--spacing-2xs);
+		padding-inline: var(--spacing-s);
+		text-align: center;
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+	}
+
+	.nameswap .n-line {
+		opacity: 1;
+	}
+
+	.nameswap .n-gap {
+		margin-block: 50px;
+	}
+
+	.nameswap .w {
+		display: inline-block;
+		opacity: 0;
+		transform: translateY(10px);
+		transition:
+			opacity 0.45s ease,
+			transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+		/* Keluar cascade balik. */
+		transition-delay: calc((27 - var(--wd)) * 50ms);
+	}
+
+	.scene.named .nameswap .w {
+		opacity: 1;
+		transform: none;
+		/* Masuk per kata 90ms. Nomor lompat di dengan = jeda napas. */
+		transition-delay: calc(0.15s + var(--wd) * 90ms);
+	}
+
+	.scene.named .flipwrap {
+		opacity: 0;
+		transform: scale(0.9);
+		visibility: hidden;
+		pointer-events: none;
+		transition:
+			opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+			transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+			visibility 0s 0.5s;
+	}
+
+	.scene.named .nameswap {
+		opacity: 1;
+		visibility: visible;
 	}
 
 	@media (prefers-reduced-motion: no-preference) {
@@ -981,33 +1179,6 @@
 		text-align: center;
 		gap: var(--spacing-s);
 		padding-block: var(--spacing-s);
-		color: var(--color-text-strong);
-	}
-
-	.ic-arab {
-		margin: 0;
-		padding: var(--spacing-2xs) var(--spacing-s);
-		font-family: var(--font-text);
-		font-size: var(--text-invite-arab);
-		line-height: var(--leading-body);
-		color: var(--color-text-strong);
-		background: var(--color-bg-glass);
-		border: var(--border-width-hairline) solid var(--color-stroke-weak);
-		border-radius: var(--radius-full);
-		backdrop-filter: blur(8px);
-		-webkit-backdrop-filter: blur(8px);
-	}
-
-	.ic-prose-lead {
-		margin: var(--spacing-s) 0 0;
-		font-family: var(--font-text);
-		font-size: var(--text-invite-arab);
-		line-height: var(--leading-body);
-		color: var(--color-text-weak);
-		text-align: justify;
-	}
-
-	.ic-prose-lead em {
 		color: var(--color-text-strong);
 	}
 
@@ -1054,11 +1225,6 @@
 		font-style: italic;
 		font-size: var(--text-invite-prose);
 		color: var(--color-text-brand);
-	}
-
-	.invite-copy > .ic-amp {
-		margin-block: 20px;
-		color: var(--color-text-muted);
 	}
 
 	.ic-divider {
@@ -1279,6 +1445,86 @@
 		border: 0;
 	}
 
+	.topbar {
+		position: fixed;
+		inset: 0 0 auto 50%;
+		transform: translateX(-50%);
+		width: 100%;
+		max-width: 393px;
+		z-index: 30;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 2px;
+		padding: var(--spacing-s) var(--spacing-s) var(--spacing-xs);
+		pointer-events: none;
+		text-align: center;
+	}
+
+	.topbar-badge {
+		margin: 0;
+		padding: var(--spacing-2xs) var(--spacing-s);
+		font-family: var(--font-text);
+		font-size: var(--text-invite-arab);
+		line-height: var(--leading-body);
+		color: var(--color-text-strong);
+		background: var(--color-bg-glass);
+		border: var(--border-width-hairline) solid var(--color-stroke-weak);
+		border-radius: var(--radius-full);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+		animation: topbar-in 0.3s var(--ease-out);
+	}
+
+	@keyframes topbar-in {
+		from {
+			opacity: 0;
+			transform: translateY(4px);
+		}
+		to {
+			opacity: 1;
+			transform: none;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.topbar-badge {
+			animation: none;
+		}
+	}
+
+	.fade-top,
+	.fade-bottom {
+		position: fixed;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 100%;
+		max-width: 393px;
+		z-index: 4;
+		pointer-events: none;
+		/* Pre-mixed rgba biar jalan iOS 16.1. Langsung luruh 20% ke 0, no solid. */
+	}
+
+	.fade-top {
+		top: 0;
+		height: 96px;
+		background: linear-gradient(to bottom, rgba(249, 247, 244, 0.2), rgba(249, 247, 244, 0));
+		-webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+		mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+		-webkit-backdrop-filter: blur(6px);
+		backdrop-filter: blur(6px);
+	}
+
+	.fade-bottom {
+		bottom: 0;
+		height: 80px;
+		background: linear-gradient(to top, rgba(249, 247, 244, 0.2), rgba(249, 247, 244, 0));
+		-webkit-mask-image: linear-gradient(to top, black 60%, transparent 100%);
+		mask-image: linear-gradient(to top, black 60%, transparent 100%);
+		-webkit-backdrop-filter: blur(6px);
+		backdrop-filter: blur(6px);
+	}
+
 	.fab-layer {
 		position: fixed;
 		inset: auto 0 0 50%;
@@ -1288,87 +1534,74 @@
 		z-index: 10;
 		padding: 0 var(--spacing-s) var(--spacing-s);
 		display: flex;
-		flex-direction: column-reverse;
-		align-items: flex-end;
-		gap: var(--spacing-s);
+		justify-content: center;
 		pointer-events: none;
 	}
 
-	.now-playing {
+	.bottombar {
 		display: flex;
 		align-items: center;
-		gap: var(--spacing-s);
-		width: 100%;
-		padding: var(--spacing-2xs) var(--spacing-s);
+		justify-content: center;
+		gap: 0;
+		width: auto;
+		max-width: 90%;
+		margin: 0;
+		padding: 4px 10px;
 		border-radius: var(--radius-full);
-		background: var(--color-text-strong);
-		color: var(--color-bg-raised);
+		background: var(--color-bg-glass);
+		border: var(--border-width-hairline) solid var(--color-stroke-weak);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
 		pointer-events: auto;
 	}
 
-	.np-toggle {
+	.bb-btn {
 		display: grid;
 		place-items: center;
-		width: var(--size-control);
-		height: var(--size-control);
+		width: 24px;
+		height: 24px;
+		padding: 0;
 		border: 0;
 		border-radius: var(--radius-full);
-		background: var(--color-bg-raised);
-		color: var(--color-text-strong);
+		background: transparent;
+		color: var(--color-text-muted);
+		opacity: 0.55;
 		cursor: pointer;
+		text-decoration: none;
+		transition:
+			color 0.2s ease,
+			opacity 0.2s ease;
 		flex-shrink: 0;
 	}
 
-	.np-toggle:focus-visible {
-		outline: 2px solid var(--color-bg-raised);
-		outline-offset: 2px;
+	.bb-btn svg {
+		display: block;
 	}
 
-	.np-meta {
-		display: flex;
-		flex-direction: column;
-		gap: 0;
-		min-width: 0;
-	}
-
-	.np-title {
-		font-size: var(--text-body);
-		font-weight: var(--font-weight-bold);
-		line-height: 1.2;
-	}
-
-	.np-artist {
-		font-size: var(--text-caption);
-		color: var(--color-stroke-weak);
-	}
-
-	.np-marquee {
-		margin-left: auto;
-		opacity: 0.7;
-		display: grid;
-		place-items: center;
-	}
-
-	.share {
-		display: grid;
-		place-items: center;
-		width: var(--size-touch-target);
-		height: var(--size-touch-target);
-		border-radius: var(--radius-full);
-		background: var(--color-bg-raised);
-		border: var(--border-width-hairline) solid var(--color-stroke-weak);
+	.bb-btn:hover {
 		color: var(--color-text-strong);
-		text-decoration: none;
-		pointer-events: auto;
+		opacity: 1;
 	}
 
-	.share:hover {
-		background: var(--color-fill);
-	}
-
-	.share:focus-visible {
+	.bb-btn:focus-visible {
 		outline: 2px solid var(--color-focus);
 		outline-offset: 2px;
+	}
+
+	.bb-btn.is-active {
+		color: var(--color-text-strong);
+	}
+
+	.bb-sep {
+		width: var(--border-width-hairline);
+		height: 18px;
+		background: var(--color-stroke-weak);
+		margin-inline: 4px;
+		flex-shrink: 0;
+	}
+
+	[data-title] {
+		scroll-margin-top: 76px;
 	}
 
 	.admin-link {
