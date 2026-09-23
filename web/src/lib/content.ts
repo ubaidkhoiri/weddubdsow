@@ -3,10 +3,10 @@ export const event = {
 	title: "Undangan Ngunduh Mantu",
 	groom: "Ubaid",
 	bride: "Sofia",
-	dateStart: "7 Oktober 2026",
-	dateEnd: "8 Oktober 2026",
-	mainDay: "8 Oktober 2026",
-	mainTime: "09.00",
+	dateStart: "8 November 2026",
+	dateEnd: "8 November 2026",
+	mainDay: "8 November 2026",
+	mainTime: "09.00 - 13.00",
 	timezone: "Asia/Jakarta",
 	venue: "Balai Desa Kalurahan Giripurwo",
 	venueAddress: "Balai Desa Kalurahan Giripurwo, Giripurwo, Kulon Progo",
@@ -45,17 +45,10 @@ export const story = [
 
 export const days = [
 	{
-		label: "Hari 1",
-		title: "Midodareni",
-		date: "7 Oktober 2026",
-		time: "09.00 - selesai",
-		note: "Malam penuh makna menjelang upacara inti.",
-	},
-	{
-		label: "Hari 2",
+		label: "Hari H",
 		title: "Ngunduh Mantu",
-		date: "8 Oktober 2026",
-		time: "09.00 - selesai",
+		date: "8 November 2026",
+		time: "09.00 - 13.00",
 		note: "Upacara utama dilaksanakan pada hari ini.",
 	},
 ];

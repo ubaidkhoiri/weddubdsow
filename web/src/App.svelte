@@ -9,8 +9,8 @@
 
 	const groomParent = { father: "Amin", mother: "Dwi Suprihatin R" };
 	const brideParent = { father: "Agung Pitana", mother: "Karmini" };
-	const inviteDates = "7-8 November 2026";
-	const inviteHours = "09.00 - 14.00";
+	const inviteDates = "8 November 2026";
+	const inviteHours = "09.00 - 13.00";
 	import Admin from "./routes/admin.svelte";
 	import SectionCouple from "./lib/SectionCouple.svelte";
 	import SectionStory from "./lib/SectionStory.svelte";
@@ -19,8 +19,9 @@
 	import SectionRsvp from "./lib/SectionRsvp.svelte";
 	import SectionMessages from "./lib/SectionMessages.svelte";
 	import SectionClosing from "./lib/SectionClosing.svelte";
+	import CoupleFlip from "./lib/CoupleFlip.svelte";
 
-	const target = new Date("2026-10-08T09:00:00+07:00").getTime();
+	const target = new Date("2026-11-08T09:00:00+07:00").getTime();
 	let opened = $state(false);
 	let closing = $state(false);
 	let phase = $state(prefersReduced ? "cover" : "intro");
@@ -129,6 +130,34 @@
 		ensureYtPlayer();
 	});
 
+	let sceneEl: HTMLElement | null = $state(null);
+	let swapped = $state(false);
+
+	onMount(() => {
+		if (prefersReduced) return;
+		let ticking = false;
+		const update = () => {
+			ticking = false;
+			if (!sceneEl) return;
+			const total = sceneEl.offsetHeight - window.innerHeight;
+			const p = total > 0 ? Math.min(1, Math.max(0, -sceneEl.getBoundingClientRect().top / total)) : 0;
+			swapped = p > 0.12;
+		};
+		const onScroll = () => {
+			if (!ticking) {
+				ticking = true;
+				requestAnimationFrame(update);
+			}
+		};
+		update();
+		window.addEventListener("scroll", onScroll, { passive: true });
+		window.addEventListener("resize", onScroll);
+		return () => {
+			window.removeEventListener("scroll", onScroll);
+			window.removeEventListener("resize", onScroll);
+		};
+	});
+
 	function openInvite() {
 		if (closing) return;
 		if (prefersReduced) {
@@ -148,7 +177,9 @@
 	}
 
 	function shareText(): string {
-		return `Undangan Ngunduh Mantu ${event.groom} & ${event.bride}, ${event.dateStart} sampai ${event.dateEnd} di ${event.venue}.`;
+		const dates =
+			event.dateStart === event.dateEnd ? event.dateStart : `${event.dateStart} sampai ${event.dateEnd}`;
+		return `Undangan Ngunduh Mantu ${event.groom} & ${event.bride}, ${dates} di ${event.venue}.`;
 	}
 
 	let musicOn = $state(false);
@@ -264,6 +295,7 @@
 	{/if}
 
 	<header class="hero" aria-label={event.title}>
+	{#if prefersReduced}
 		<p class="ic-arab ic-arab--top">ألسلام عليكم ورحمة الله وبركاته</p>
 		<div class="mono-stage">
 			<span class="page-mono" aria-hidden="true">
@@ -272,6 +304,26 @@
 			</span>
 			<p class="page-names">{event.groom}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{event.bride}</p>
 		</div>
+		<CoupleFlip active />
+	{:else}
+		<section class="scene" bind:this={sceneEl} class:swapped aria-label="Ubaid dan Sofia">
+			<div class="pin">
+				<p class="ic-arab ic-arab--top">ألسلام عليكم ورحمة الله وبركاته</p>
+				<div class="swap">
+					<div class="mono-stage" aria-hidden={swapped}>
+						<span class="page-mono" aria-hidden="true">
+							<span class="m-line">U</span>
+							<span class="m-line">S</span>
+						</span>
+						<p class="page-names">{event.groom}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{event.bride}</p>
+					</div>
+					<div class="flipwrap" aria-hidden={!swapped}>
+						<CoupleFlip active={swapped} />
+					</div>
+				</div>
+			</div>
+		</section>
+	{/if}
 
 		<div class="invite-copy">
 			<p class="ic-prose-lead">
@@ -333,7 +385,11 @@
 				<span class="amp">&amp;</span>
 				<span class="name">{event.bride}</span>
 			</h1>
-			<p class="date-line">{event.dateStart} - {event.dateEnd}</p>
+			<p class="date-line">
+				{event.dateStart === event.dateEnd
+					? event.dateStart
+					: `${event.dateStart} - ${event.dateEnd}`}
+			</p>
 			<p class="venue">{event.venue}</p>
 		</div>
 
@@ -804,6 +860,92 @@
 
 	.page-mono .m-line {
 		display: block;
+	}
+
+	.scene {
+		height: 220vh;
+		height: 220svh;
+		/* Lepas dari pagar 60% global. Section ini full lebar phone. */
+		margin-inline: calc(var(--spacing-page-inset) * -1);
+	}
+
+	.pin {
+		position: -webkit-sticky;
+		position: sticky;
+		top: 0;
+		height: 100vh;
+		height: 100svh;
+		overflow: hidden;
+	}
+
+	.pin > .ic-arab--top {
+		position: absolute;
+		top: var(--spacing-l);
+		left: 50%;
+		right: auto;
+		z-index: 1;
+		width: max-content;
+		max-width: 92%;
+		transform: translateX(-50%);
+		margin-top: 0;
+		pointer-events: none;
+	}
+
+	.swap {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.scene .mono-stage {
+		margin: 0;
+		will-change: transform, opacity;
+		transition:
+			opacity 1s ease,
+			transform 2s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.scene.swapped .mono-stage {
+		opacity: 0;
+		transform: translateY(-60px) scale(0.6);
+		visibility: hidden;
+		pointer-events: none;
+	}
+
+	.flipwrap {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		will-change: transform, opacity;
+		opacity: 0;
+		transform: scale(0.8);
+		visibility: hidden;
+		pointer-events: none;
+		transition:
+			opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+			transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+			visibility 0s 0.6s;
+	}
+
+	.scene.swapped .flipwrap {
+		opacity: 1;
+		transform: scale(1);
+		visibility: visible;
+		pointer-events: auto;
+		transition:
+			opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+			transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+			visibility 0s 0s;
+	}
+
+	.flipwrap > :global(.jewel) {
+		width: 90%;
+		flex-shrink: 0;
+		margin-top: 0;
 	}
 
 	@media (prefers-reduced-motion: no-preference) {
