@@ -256,9 +256,9 @@
 		color: var(--jewel-cream);
 		transform: rotateY(180deg);
 		overflow: hidden;
-		/* Tutup fringe aliasing tepi: outline sewarna bg ikut radius. */
-		outline: 1px solid var(--jewel-rust);
-		outline-offset: -1px;
+		/* Tutup fringe aliasing tepi. Outline tidak dipakai:
+		   Safari lama gambar outline kotak abaikan radius. */
+		box-shadow: inset 0 0 0 1px var(--jewel-rust);
 	}
 
 	.back.tilt-l {

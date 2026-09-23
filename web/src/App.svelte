@@ -1496,8 +1496,9 @@
 	.fade-top,
 	.fade-bottom {
 		position: fixed;
-		left: 50%;
-		transform: translateX(-50%);
+		left: 0;
+		right: 0;
+		margin-inline: auto;
 		width: 100%;
 		max-width: 393px;
 		z-index: 4;
@@ -1516,8 +1517,8 @@
 	}
 
 	.fade-bottom {
-		bottom: 0;
-		height: 80px;
+		bottom: -2px;
+		height: 82px;
 		background: linear-gradient(to top, rgba(249, 247, 244, 0.2), rgba(249, 247, 244, 0));
 		-webkit-mask-image: linear-gradient(to top, black 60%, transparent 100%);
 		mask-image: linear-gradient(to top, black 60%, transparent 100%);
