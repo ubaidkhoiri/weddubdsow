@@ -271,11 +271,6 @@
 				<span class="m-line">S</span>
 			</span>
 			<p class="page-names">{event.groom}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{event.bride}</p>
-			<span class="spark-layer" aria-hidden="true"
-				><span class="spark">+</span><span class="spark">+</span
-				><span class="spark">+</span><span class="spark">+</span
-				><span class="spark">+</span><span class="spark">+</span></span
-			>
 		</div>
 
 		<div class="invite-copy">
@@ -768,81 +763,6 @@
 	.hero > .ic-arab--top {
 		align-self: center;
 		margin-top: var(--spacing-l);
-	}
-
-	.spark-layer {
-		position: absolute;
-		inset: -10% -15%;
-		z-index: 2;
-		pointer-events: none;
-	}
-
-	.spark {
-		position: absolute;
-		font-family: var(--font-text);
-		font-weight: 300;
-		font-size: var(--text-body);
-		line-height: 1;
-		color: var(--color-text-weak);
-		opacity: 0.5;
-	}
-
-	.spark:nth-child(1) {
-		top: 2%;
-		left: 18%;
-	}
-	.spark:nth-child(2) {
-		top: 10%;
-		right: 8%;
-	}
-	.spark:nth-child(3) {
-		top: 32%;
-		left: 4%;
-	}
-	.spark:nth-child(4) {
-		top: 32%;
-		right: 6%;
-	}
-	.spark:nth-child(5) {
-		bottom: 6%;
-		left: 24%;
-	}
-	.spark:nth-child(6) {
-		bottom: 10%;
-		right: 20%;
-	}
-
-	@media (prefers-reduced-motion: no-preference) {
-		.spark {
-			animation: spark-turn 2500ms linear infinite;
-		}
-		.spark:nth-child(2) {
-			animation-delay: 400ms;
-		}
-		.spark:nth-child(3) {
-			animation-delay: 800ms;
-		}
-		.spark:nth-child(4) {
-			animation-delay: 1200ms;
-		}
-		.spark:nth-child(5) {
-			animation-delay: 1600ms;
-		}
-		.spark:nth-child(6) {
-			animation-delay: 2000ms;
-		}
-
-		@keyframes spark-turn {
-			0% {
-				transform: rotate(0deg);
-			}
-			20% {
-				transform: rotate(90deg);
-			}
-			100% {
-				transform: rotate(90deg);
-			}
-		}
 	}
 
 	.page-mono {
