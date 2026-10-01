@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from "svelte"
 	import {
 		deleteAdminMessage,
 		getAdminMessages,
@@ -13,6 +14,12 @@
 	let passwordError = $state("");
 	let authed = $state(false);
 	let loggingIn = $state(false);
+	let showPassword = $state(false)
+	let titleEl: HTMLHeadingElement | null = $state(null)
+
+	onMount(() => {
+		titleEl?.focus()
+	})
 
 	let messages = $state<GuestMessage[]>([]);
 	let rsvps = $state<AdminRsvp[]>([]);
@@ -77,20 +84,34 @@
 </script>
 
 <section class="admin">
-	<h1>Kelola Undangan</h1>
+	<nav class="back" aria-label="Navigasi kembali">
+		<a class="back-link" href="#/">← Kembali ke undangan</a>
+		<button class="back-link" type="button" onclick={() => { location.hash = "#/" }}>Kembali</button>
+	</nav>
+	<h1 tabindex="-1" bind:this={titleEl}>Kelola Undangan</h1>
 
 	{#if !authed}
 		<form class="login" onsubmit={(e) => { e.preventDefault(); login(); }}>
 			<label for="admin-password">Kata sandi admin</label>
-			<input
-				id="admin-password"
-				name="password"
-				type="password"
-				bind:value={password}
-				autocomplete="current-password"
-			/>
+			<div class="password-row">
+				<input
+					id="admin-password"
+					name="password"
+					type={showPassword ? "text" : "password"}
+					bind:value={password}
+					autocomplete="current-password"
+					aria-describedby={passwordError ? "admin-password-error" : undefined}
+				/>
+				<button
+					class="toggle"
+					type="button"
+					aria-label={showPassword ? "Sembunyikan kata sandi" : "Tampilkan kata sandi"}
+					aria-pressed={showPassword}
+					onclick={() => { showPassword = !showPassword }}
+				>{showPassword ? "Sembunyi" : "Tampil"}</button>
+			</div>
 			{#if passwordError}
-				<p class="error" aria-live="polite">{passwordError}</p>
+				<p id="admin-password-error" class="error" role="alert" aria-live="polite">{passwordError}</p>
 			{/if}
 			<button class="primary" type="submit" disabled={loggingIn}>
 				{loggingIn ? "Memeriksa..." : "Masuk"}
@@ -161,6 +182,29 @@
 		padding: var(--spacing-section) var(--spacing-card);
 	}
 
+	.back {
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-s);
+	}
+
+	.back-link {
+		min-height: var(--size-touch-target);
+		display: inline-flex;
+		align-items: center;
+		color: var(--color-text-strong);
+		font-size: var(--text-body);
+		background: none;
+		border: 0;
+		padding: 0;
+		cursor: pointer;
+	}
+
+	.back-link:focus-visible {
+		outline: var(--focus-ring-width) solid var(--color-focus);
+		outline-offset: var(--focus-ring-offset);
+	}
+
 	.admin h1 {
 		font-size: var(--text-h1);
 		line-height: var(--leading-h1);
@@ -185,7 +229,7 @@
 	.login input {
 		min-height: var(--size-touch-target);
 		padding: var(--spacing-s);
-		border: 1px solid var(--color-stroke-weak);
+		border: var(--border-width-hairline) solid var(--color-stroke-strong);
 		border-radius: var(--radius-control);
 		background: var(--color-bg-base);
 		color: var(--color-text-strong);
@@ -193,8 +237,36 @@
 	}
 
 	.login input:focus-visible {
-		outline: 2px solid var(--color-focus);
-		outline-offset: 2px;
+		outline: var(--focus-ring-width) solid var(--color-focus);
+		outline-offset: var(--focus-ring-offset);
+	}
+
+	.password-row {
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-s);
+	}
+
+	.password-row input {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.toggle {
+		min-height: var(--size-touch-target);
+		padding: var(--spacing-2xs) var(--spacing-s);
+		background: none;
+		border: var(--border-width-hairline) solid var(--color-stroke-strong);
+		border-radius: var(--radius-control);
+		color: var(--color-text-strong);
+		font-size: var(--text-body);
+		cursor: pointer;
+		flex-shrink: 0;
+	}
+
+	.toggle:focus-visible {
+		outline: var(--focus-ring-width) solid var(--color-focus);
+		outline-offset: var(--focus-ring-offset);
 	}
 
 	.primary {
@@ -204,8 +276,8 @@
 		padding: var(--spacing-s) var(--spacing-l);
 		font-size: var(--text-body);
 		font-weight: var(--font-weight-bold);
-		color: var(--color-on-brand);
-		background: var(--color-brand);
+		color: var(--color-bg-base);
+		background: var(--color-text-strong);
 		border: 0;
 		border-radius: var(--radius-control);
 		cursor: pointer;
@@ -216,8 +288,8 @@
 	}
 
 	.primary:focus-visible {
-		outline: 2px solid var(--color-focus);
-		outline-offset: 2px;
+		outline: var(--focus-ring-width) solid var(--color-focus);
+		outline-offset: var(--focus-ring-offset);
 	}
 
 	.primary:disabled {
@@ -250,8 +322,14 @@
 		font-size: var(--text-body);
 	}
 
+	.link:focus-visible {
+		outline: var(--focus-ring-width) solid var(--color-focus);
+		outline-offset: var(--focus-ring-offset);
+	}
+
 	.danger {
 		color: var(--color-text-error);
+		background: none;
 	}
 
 	.messages {
