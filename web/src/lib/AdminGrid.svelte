@@ -767,7 +767,7 @@
 	}
 
 	dialog::backdrop {
-		background: rgb(0 0 0 / 40%);
+		background: var(--color-state-press);
 	}
 
 	dialog h3 {

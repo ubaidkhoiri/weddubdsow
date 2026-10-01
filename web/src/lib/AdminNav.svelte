@@ -54,10 +54,8 @@
 		margin: 0;
 		padding: var(--spacing-2xs);
 		border-radius: var(--radius-full);
-		background: var(--color-bg-glass);
+		background: var(--color-bg-overlay);
 		border: var(--border-width-hairline) solid var(--color-stroke-weak);
-		backdrop-filter: blur(8px);
-		-webkit-backdrop-filter: blur(8px);
 		pointer-events: auto;
 	}
 
