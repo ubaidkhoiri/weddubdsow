@@ -9,6 +9,7 @@
 		type GuestMessage,
 		type AdminRsvp,
 	} from "../lib/api";
+	import AdminNav, { type AdminTab } from "../lib/AdminNav.svelte"
 
 	let password = $state("");
 	let passwordError = $state("");
@@ -26,6 +27,10 @@
 	let loading = $state(false);
 	let hint = $state("");
 	let deleting = $state<string | null>(null);
+	let tab: AdminTab = $state("pesan")
+	let totalTamu = $derived(rsvps.reduce((sum, g) => sum + g.guests, 0))
+	let hadir = $derived(rsvps.filter((g) => g.attendance === "yes").length)
+	let berhalangan = $derived(rsvps.filter((g) => g.attendance === "no").length)
 
 	async function login() {
 		passwordError = "";
@@ -133,44 +138,59 @@
 			<p class="hint">Memuat...</p>
 		{/if}
 
-		<h2>Pesan Tamu ({messages.length})</h2>
-		{#if messages.length === 0}
-			<p class="hint">Belum ada pesan.</p>
-		{:else}
-			<ul class="messages">
-				{#each messages as m (m.id)}
-					<li>
-						<div class="msg-head">
-							<strong>{m.name}</strong>
-							<button
-								class="link danger"
-								type="button"
-								disabled={deleting === m.id}
-								onclick={() => remove(m.id)}
-							>{deleting === m.id ? "Menghapus..." : "Hapus"}</button>
-						</div>
-						<p>{m.message}</p>
-						<small>{m.hearts} <span class="heart-ico" aria-hidden="true"><svg viewBox="0 0 20 20" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M10 17.5 8.8 16.4C5 12.9 2.5 10.6 2.5 7.8 2.5 5.5 4.2 3.8 6.5 3.8c1.4 0 2.7.7 3.5 1.8.8-1.1 2.1-1.8 3.5-1.8 2.3 0 4 1.7 4 4 0 2.8-2.5 5.1-6.3 8.6L10 17.5Z"/></svg></span></small>
-					</li>
-				{/each}
-			</ul>
-		{/if}
+		<div class="tab-panel">
+			{#if tab === "pesan"}
+				<h2>Pesan Tamu ({messages.length})</h2>
+				{#if messages.length === 0}
+					<p class="hint">Belum ada pesan.</p>
+				{:else}
+					<ul class="messages">
+						{#each messages as m (m.id)}
+							<li>
+								<div class="msg-head">
+									<strong>{m.name}</strong>
+									<button
+										class="link danger"
+										type="button"
+										disabled={deleting === m.id}
+										onclick={() => remove(m.id)}
+									>{deleting === m.id ? "Menghapus..." : "Hapus"}</button>
+								</div>
+								<p>{m.message}</p>
+								<small>{m.hearts} <span class="heart-ico" aria-hidden="true"><svg viewBox="0 0 20 20" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M10 17.5 8.8 16.4C5 12.9 2.5 10.6 2.5 7.8 2.5 5.5 4.2 3.8 6.5 3.8c1.4 0 2.7.7 3.5 1.8.8-1.1 2.1-1.8 3.5-1.8 2.3 0 4 1.7 4 4 0 2.8-2.5 5.1-6.3 8.6L10 17.5Z"/></svg></span></small>
+							</li>
+						{/each}
+					</ul>
+				{/if}
+			{:else if tab === "rsvp"}
+				<h2>Daftar RSVP ({rsvps.length})</h2>
+				{#if rsvps.length === 0}
+					<p class="hint">Belum ada RSVP.</p>
+				{:else}
+					<ul class="rsvps">
+						{#each rsvps as g (g.id)}
+							<li>
+								<strong>{g.name}</strong>
+								<span>{g.attendance}</span>
+								<span>{g.guests} tamu</span>
+								{#if g.phone}<span>{g.phone}</span>{/if}
+							</li>
+						{/each}
+					</ul>
+				{/if}
+			{:else}
+				<h2>Ringkasan</h2>
+				<ul class="summary">
+					<li><strong>{messages.length}</strong><span>Pesan masuk</span></li>
+					<li><strong>{rsvps.length}</strong><span>Entri RSVP</span></li>
+					<li><strong>{totalTamu}</strong><span>Total tamu</span></li>
+					<li><strong>{hadir}</strong><span>Hadir</span></li>
+					<li><strong>{berhalangan}</strong><span>Berhalangan</span></li>
+				</ul>
+			{/if}
+		</div>
 
-		<h2>Daftar RSVP ({rsvps.length})</h2>
-		{#if rsvps.length === 0}
-			<p class="hint">Belum ada RSVP.</p>
-		{:else}
-			<ul class="rsvps">
-				{#each rsvps as g (g.id)}
-					<li>
-						<strong>{g.name}</strong>
-						<span>{g.attendance}</span>
-						<span>{g.guests} tamu</span>
-						{#if g.phone}<span>{g.phone}</span>{/if}
-					</li>
-				{/each}
-			</ul>
-		{/if}
+		<AdminNav active={tab} onselect={(t) => { tab = t }} />
 	{/if}
 </section>
 
@@ -180,6 +200,13 @@
 		flex-direction: column;
 		gap: var(--spacing-m);
 		padding: var(--spacing-section) var(--spacing-card);
+		padding-bottom: calc(var(--spacing-section) + var(--size-touch-target) + var(--spacing-m));
+	}
+
+	.tab-panel {
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-s);
 	}
 
 	.back {
@@ -381,6 +408,38 @@
 		border: var(--border-width-hairline) solid var(--color-stroke-weak);
 		border-radius: var(--radius-surface);
 		background: var(--color-bg-raised);
+	}
+
+	.summary {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-s);
+	}
+
+	.summary li {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: var(--spacing-s);
+		padding: var(--spacing-s);
+		border: var(--border-width-hairline) solid var(--color-stroke-weak);
+		border-radius: var(--radius-surface);
+		background: var(--color-bg-raised);
+	}
+
+	.summary strong {
+		font-size: var(--text-h3);
+		line-height: var(--leading-h3);
+		color: var(--color-text-strong);
+		font-variant-numeric: tabular-nums;
+	}
+
+	.summary span {
+		color: var(--color-text-weak);
+		font-size: var(--text-body);
 	}
 
 	.error, .hint {
