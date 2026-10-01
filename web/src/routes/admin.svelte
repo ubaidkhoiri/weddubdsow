@@ -68,6 +68,10 @@
 		return list.map((r) => ({ ...(r as unknown as Record<string, unknown>) }))
 	}
 
+	function isValidAdminId(id: string) {
+		return id.length >= 1 && id.length <= 64 && /^[A-Za-z0-9_-]+$/.test(id)
+	}
+
 	function parseList(json: unknown) {
 		if (Array.isArray(json)) return { rows: toRows(json as Array<GuestMessage>), total: json.length }
 		const body = json as { rows?: Array<GuestMessage>, total?: number }
@@ -104,7 +108,7 @@
 			if (!res.ok) {
 				const body = await readJson(res)
 				const msg = (body as { error?: string } | null)?.error
-				failed = typeof msg === "string" && msg !== "" ? msg : "Gagal memuat data."
+				failed = typeof msg === "string" && msg !== "" ? msg : "Gagal memuat data. Periksa koneksi lalu coba lagi."
 			} else {
 				const parsed = parseList(await res.json())
 				if (tab === "pesan") {
@@ -220,7 +224,7 @@
 				headers: { "content-type": "application/json" },
 				body: JSON.stringify(body)
 			})
-			if (!res.ok) hint = "Gagal menambah baris."
+			if (!res.ok) hint = "Gagal menambah baris. Periksa isian lalu coba lagi."
 			else refreshAll()
 		} catch {
 			hint = "Tidak dapat terhubung ke server. Coba lagi."
@@ -257,6 +261,10 @@
 			rsvpRows = rsvpRows.filter((r) => String(r.id) !== id)
 			return
 		}
+		if (!isValidAdminId(id)) {
+			hint = "ID tidak valid, periksa kembali data lalu coba lagi."
+			return
+		}
 		if (tab === "pesan") {
 			const result = await deleteAdminMessage(id)
 			if (result.ok) {
@@ -273,7 +281,7 @@
 				hint = "Sesi berakhir, masuk lagi."
 				return
 			}
-			if (!res.ok) hint = "Gagal menghapus baris."
+			if (!res.ok) hint = "Gagal menghapus baris. Periksa koneksi lalu coba lagi."
 			else {
 				rsvpRows = rsvpRows.filter((r) => String(r.id) !== id)
 				rsvpTotal = Math.max(0, rsvpTotal - 1)
@@ -293,6 +301,10 @@
 			else rsvpRows = patch(rsvpRows)
 			return
 		}
+		if (!isValidAdminId(id)) {
+			hint = "ID tidak valid, periksa kembali data lalu coba lagi."
+			return
+		}
 		const path = tab === "pesan"
 			? "/api/admin/messages/" + encodeURIComponent(id)
 			: "/api/admin/rsvp/" + encodeURIComponent(id)
@@ -310,7 +322,7 @@
 			if (!res.ok) {
 				const body = await readJson(res)
 				const errors = (body as { errors?: Array<string> } | null)?.errors
-				hint = errors && errors.length > 0 ? errors.join(" ") : "Gagal menyimpan perubahan."
+				hint = errors && errors.length > 0 ? errors.join(" ") : "Gagal menyimpan perubahan. Periksa isian lalu coba lagi."
 				return
 			}
 			const patch = (list: Array<Record<string, unknown>>) =>
