@@ -463,17 +463,20 @@
 
 <style>
 	.admin {
+		width: 100%;
+		max-width: 100%;
+		margin-inline: auto;
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-m);
-		padding: var(--spacing-section) var(--spacing-card);
-		padding-bottom: calc(var(--spacing-section) + var(--size-touch-target) + var(--spacing-m));
+		gap: var(--spacing-s);
+		padding: var(--spacing-s) var(--spacing-s);
+		padding-bottom: calc(var(--spacing-s) + var(--size-touch-target) + var(--spacing-xs));
 	}
 
 	.tab-panel {
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-s);
+		gap: var(--spacing-xs);
 	}
 
 	.back {
@@ -487,7 +490,7 @@
 		display: inline-flex;
 		align-items: center;
 		color: var(--color-text-strong);
-		font-size: var(--text-body);
+		font-size: var(--text-caption);
 		background: none;
 		border: 0;
 		padding: 0;
@@ -500,15 +503,15 @@
 	}
 
 	.admin h1 {
-		font-size: var(--text-h1);
-		line-height: var(--leading-h1);
+		font-size: var(--text-h2);
+		line-height: var(--leading-h2);
 		color: var(--color-text-strong);
 		margin: 0;
 	}
 
 	.admin h2 {
-		font-size: var(--text-h3);
-		line-height: var(--leading-h3);
+		font-size: var(--text-lead);
+		line-height: var(--leading-lead);
 		color: var(--color-text-strong);
 		margin: 0;
 		font-variant-numeric: tabular-nums;
@@ -517,13 +520,14 @@
 	.login {
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-s);
-		max-width: 20rem;
+		gap: var(--spacing-xs);
+		max-width: 100%;
+		width: 100%;
 	}
 
 	.login input {
 		min-height: var(--size-touch-target);
-		padding: var(--spacing-s);
+		padding: var(--spacing-xs);
 		border: var(--border-width-hairline) solid var(--color-stroke-strong);
 		border-radius: var(--radius-control);
 		background: var(--color-bg-base);
@@ -539,7 +543,7 @@
 	.password-row {
 		display: flex;
 		align-items: center;
-		gap: var(--spacing-s);
+		gap: var(--spacing-xs);
 	}
 
 	.password-row input {
@@ -549,12 +553,12 @@
 
 	.toggle {
 		min-height: var(--size-touch-target);
-		padding: var(--spacing-2xs) var(--spacing-s);
+		padding: var(--spacing-2xs) var(--spacing-xs);
 		background: none;
 		border: var(--border-width-hairline) solid var(--color-stroke-strong);
 		border-radius: var(--radius-control);
 		color: var(--color-text-strong);
-		font-size: var(--text-body);
+		font-size: var(--text-caption);
 		cursor: pointer;
 		flex-shrink: 0;
 	}
@@ -568,8 +572,8 @@
 		align-self: stretch;
 		width: 100%;
 		min-height: var(--size-control);
-		padding: var(--spacing-s) var(--spacing-l);
-		font-size: var(--text-body);
+		padding: var(--spacing-xs) var(--spacing-s);
+		font-size: var(--text-caption);
 		font-weight: var(--font-weight-bold);
 		color: var(--color-bg-base);
 		background: var(--color-text-strong);
@@ -604,7 +608,7 @@
 
 	.toolbar {
 		display: flex;
-		gap: var(--spacing-m);
+		gap: var(--spacing-s);
 	}
 
 	.link {
@@ -614,7 +618,7 @@
 		padding: 0;
 		color: var(--color-text-strong);
 		text-decoration: underline;
-		font-size: var(--text-body);
+		font-size: var(--text-caption);
 	}
 
 	.link:focus-visible {
@@ -628,33 +632,33 @@
 		padding: 0;
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-s);
+		gap: var(--spacing-xs);
 	}
 
 	.summary li {
 		display: flex;
 		align-items: baseline;
 		justify-content: space-between;
-		gap: var(--spacing-s);
-		padding: var(--spacing-s);
+		gap: var(--spacing-xs);
+		padding: var(--spacing-xs);
 		border: var(--border-width-hairline) solid var(--color-stroke-weak);
 		border-radius: var(--radius-surface);
 		background: var(--color-bg-raised);
 	}
 
 	.summary strong {
-		font-size: var(--text-h3);
-		line-height: var(--leading-h3);
+		font-size: var(--text-lead);
+		line-height: var(--leading-lead);
 		color: var(--color-text-strong);
 		font-variant-numeric: tabular-nums;
 	}
 
 	.summary span {
 		color: var(--color-text-weak);
-		font-size: var(--text-body);
+		font-size: var(--text-caption);
 	}
 
 	.error, .hint {
-		font-size: var(--text-body);
+		font-size: var(--text-caption);
 	}
 </style>

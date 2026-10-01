@@ -37,11 +37,11 @@
 		inset: auto 0 0 50%;
 		transform: translateX(-50%);
 		width: 100%;
-		max-width: 393px;
+		max-width: 100%;
 		z-index: 10;
 		display: flex;
 		justify-content: center;
-		padding: 0 var(--spacing-s) var(--spacing-s);
+		padding: 0 var(--spacing-xs) var(--spacing-xs);
 		pointer-events: none;
 	}
 
@@ -62,12 +62,12 @@
 
 	.admin-nav-btn {
 		min-height: var(--size-touch-target);
-		padding: var(--spacing-2xs) var(--spacing-s);
+		padding: var(--spacing-2xs) var(--spacing-xs);
 		border: 0;
 		border-radius: var(--radius-full);
 		background: transparent;
 		color: var(--color-text-weak);
-		font-size: var(--text-body);
+		font-size: var(--text-caption);
 		font-weight: var(--font-weight-regular);
 		cursor: pointer;
 		white-space: nowrap;

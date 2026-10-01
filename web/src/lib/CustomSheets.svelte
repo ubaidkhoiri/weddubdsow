@@ -415,7 +415,7 @@
 	.sheets {
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-xs);
+		gap: var(--spacing-2xs);
 		font-variant-numeric: tabular-nums;
 	}
 
@@ -423,8 +423,8 @@
 		display: flex;
 		flex-wrap: wrap;
 		align-items: end;
-		gap: var(--spacing-xs);
-		padding: var(--spacing-xs);
+		gap: var(--spacing-2xs);
+		padding: var(--spacing-2xs);
 		border: var(--border-width-hairline) solid var(--color-stroke-weak);
 		border-radius: var(--radius-surface);
 		background: var(--color-bg-raised);
@@ -463,7 +463,7 @@
 		border-radius: var(--radius-control);
 		background: var(--color-bg-base);
 		color: var(--color-text-strong);
-		font-size: var(--text-body);
+		font-size: var(--text-caption);
 		cursor: pointer;
 	}
 
@@ -485,12 +485,12 @@
 
 	.state {
 		margin: 0;
-		padding: var(--spacing-s);
+		padding: var(--spacing-xs);
 		border: var(--border-width-hairline) solid var(--color-stroke-weak);
 		border-radius: var(--radius-surface);
 		background: var(--color-bg-raised);
 		color: var(--color-text-weak);
-		font-size: var(--text-body);
+		font-size: var(--text-caption);
 	}
 
 	.sheetlist {
@@ -503,8 +503,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: var(--spacing-xs);
-		padding: var(--spacing-2xs) var(--spacing-xs);
+		gap: var(--spacing-2xs);
+		padding: var(--spacing-2xs) var(--spacing-2xs);
 		border: var(--border-width-hairline) solid var(--color-stroke-weak);
 		border-radius: var(--radius-surface);
 		background: var(--color-bg-raised);
@@ -582,9 +582,9 @@
 	th, td {
 		text-align: left;
 		vertical-align: middle;
-		padding: var(--spacing-2xs) var(--spacing-xs);
+		padding: var(--spacing-2xs) var(--spacing-2xs);
 		border-bottom: var(--border-width-hairline) solid var(--color-stroke-weak);
-		font-size: var(--text-body);
+		font-size: var(--text-caption);
 		color: var(--color-text-strong);
 		overflow: hidden;
 		min-height: var(--size-row);
@@ -597,7 +597,7 @@
 	td input {
 		width: 100%;
 		min-height: var(--size-control-sm);
-		padding: var(--spacing-2xs) var(--spacing-xs);
+		padding: var(--spacing-2xs) var(--spacing-2xs);
 		border: var(--border-width-hairline) solid var(--color-stroke-weak);
 		border-radius: var(--radius-control);
 		background: var(--color-bg-base);
@@ -634,7 +634,7 @@
 
 	dialog {
 		width: min(92vw, 28rem);
-		padding: var(--spacing-m);
+		padding: var(--spacing-s);
 		border: var(--border-width-hairline) solid var(--color-stroke-weak);
 		border-radius: var(--radius-surface);
 		background: var(--color-bg-overlay);
@@ -646,19 +646,19 @@
 	}
 
 	dialog h3 {
-		margin: 0 0 var(--spacing-xs);
-		font-size: var(--text-h3);
+		margin: 0 0 var(--spacing-2xs);
+		font-size: var(--text-lead);
 	}
 
 	dialog p {
-		margin: 0 0 var(--spacing-s);
+		margin: 0 0 var(--spacing-xs);
 		color: var(--color-text-weak);
 	}
 
 	.dlg-btns {
 		display: flex;
 		justify-content: flex-end;
-		gap: var(--spacing-xs);
+		gap: var(--spacing-2xs);
 	}
 
 	.danger-solid {
