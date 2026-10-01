@@ -1,5 +1,5 @@
 <script lang="ts">
-	export type AdminTab = "pesan" | "rsvp" | "ringkasan"
+	export type AdminTab = "pesan" | "rsvp" | "ringkasan" | "sheets"
 
 	let {
 		active = "pesan",
@@ -12,7 +12,8 @@
 	const tabs: Array<{ key: AdminTab; label: string }> = [
 		{ key: "pesan", label: "Pesan" },
 		{ key: "rsvp", label: "RSVP" },
-		{ key: "ringkasan", label: "Ringkasan" }
+		{ key: "ringkasan", label: "Ringkasan" },
+		{ key: "sheets", label: "Sheets" }
 	]
 </script>
 

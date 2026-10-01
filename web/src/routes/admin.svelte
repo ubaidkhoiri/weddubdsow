@@ -11,6 +11,7 @@
 	} from "../lib/api"
 	import AdminNav, { type AdminTab } from "../lib/AdminNav.svelte"
 	import AdminGrid, { type GridColumn, type GridDensity } from "../lib/AdminGrid.svelte"
+	import CustomSheets from "../lib/CustomSheets.svelte"
 
 	const pesanColumns: Array<GridColumn> = [
 		{ key: "name", label: "Nama", width: 150, sortable: true },
@@ -181,7 +182,7 @@
 		page = 1
 		query = ""
 		attendance = ""
-		loadList()
+		if (t !== "sheets") loadList()
 	}
 
 	function handleQuery(value: string) {
@@ -442,7 +443,7 @@
 					onlimit={handleLimit}
 					onreload={() => loadList()}
 				/>
-			{:else}
+			{:else if tab === "ringkasan"}
 				<h2>Ringkasan</h2>
 				<ul class="summary">
 					<li><strong>{sumMsgs}</strong><span>Pesan masuk</span></li>
@@ -451,6 +452,8 @@
 					<li><strong>{sumHadir}</strong><span>Hadir</span></li>
 					<li><strong>{sumAbsen}</strong><span>Berhalangan</span></li>
 				</ul>
+			{:else}
+				<CustomSheets />
 			{/if}
 		</div>
 
