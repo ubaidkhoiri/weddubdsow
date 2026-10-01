@@ -17,9 +17,9 @@
 **Files:**
 - Create: `web/src/lib/CustomSheets.svelte`
 
-- [ ] Step 1: Buat CustomSheets dengan daftar sheet tambah ganti nama hapus konfirmasi, grid 8 kolom 15 baris header A1, sel klik ketik simpan debounce localStorage, tambah sisip hapus kolom dan baris, ekspor CSV, kosong dan galat simpan punya pesan dan aksi. Ikuti token AdminGrid dan tanpa nilai mentah.
-- [ ] Step 2: Run `npm run build` di `web`
-- [ ] Step 3: Commit
+- [x] Step 1: Buat CustomSheets dengan daftar sheet tambah ganti nama hapus konfirmasi, grid 8 kolom 15 baris header A1, sel klik ketik simpan debounce localStorage, tambah sisip hapus kolom dan baris, ekspor CSV, kosong dan galat simpan punya pesan dan aksi. Ikuti token AdminGrid dan tanpa nilai mentah.
+- [x] Step 2: Run `npm run build` di `web`
+- [x] Step 3: Commit
 
 ### Task 2: Wiring tab Sheets → verify: build web exit 0 dan jumlah tab minimal 4
 
@@ -27,8 +27,8 @@
 - Modify: `web/src/lib/AdminNav.svelte:1-30`
 - Modify: `web/src/routes/admin.svelte:1-60`
 
-- [ ] Step 1: Tambah literal sheets ke tipe AdminTab dan entri tombol Sheets di nav sejajar tiga tab lama.
-- [ ] Step 2: Render CustomSheets saat tab aktif dan sembunyikan grid Pesan RSVP dan jaga toolbar dan logout tetap jalan.
-- [ ] Step 3: Run `npm run build` di `web`
-- [ ] Step 4: Run cari jumlah literal tab dan pastikan minimal 4
-- [ ] Step 5: Commit
+- [x] Step 1: Tambah literal sheets ke tipe AdminTab dan entri tombol Sheets di nav sejajar tiga tab lama.
+- [x] Step 2: Render CustomSheets saat tab aktif dan sembunyikan grid Pesan RSVP dan jaga toolbar dan logout tetap jalan.
+- [x] Step 3: Run `npm run build` di `web`
+- [x] Step 4: Run cari jumlah literal tab dan pastikan minimal 4
+- [x] Step 5: Commit
