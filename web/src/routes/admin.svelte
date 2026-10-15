@@ -4,8 +4,11 @@
 		deleteAdminMessage,
 		getAdminMessages,
 		getAdminRsvp,
+		getAdminVersion,
 		postAdminLogin,
 		postAdminLogout,
+		setAdminVersion,
+		type ActiveVersion,
 		type GuestMessage,
 		type AdminRsvp
 	} from "../lib/api"
@@ -60,6 +63,9 @@
 	let sumTamu = $state(0)
 	let sumHadir = $state(0)
 	let sumAbsen = $state(0)
+
+	let activeVersion = $state<ActiveVersion>("v2")
+	let versionLoading = $state(false)
 
 	let activeRows = $derived(tab === "pesan" ? pesanRows : rsvpRows)
 	let activeTotal = $derived(tab === "pesan" ? pesanTotal : rsvpTotal)
@@ -147,6 +153,43 @@
 	function refreshAll() {
 		loadList()
 		loadSummary()
+		loadVersion()
+	}
+
+	async function loadVersion() {
+		if (!authed) return
+		versionLoading = true
+		const result = await getAdminVersion()
+		versionLoading = false
+		if (!result.ok) {
+			if (result.status === 401) {
+				authed = false
+				hint = "Sesi berakhir, masuk lagi."
+				return
+			}
+			hint = "Gagal memuat versi aktif. Coba lagi."
+			return
+		}
+		activeVersion = result.data.version
+	}
+
+	async function switchVersion(version: ActiveVersion) {
+		if (versionLoading || version === activeVersion) return
+		hint = ""
+		versionLoading = true
+		const result = await setAdminVersion(version)
+		versionLoading = false
+		if (!result.ok) {
+			if (result.status === 401) {
+				authed = false
+				hint = "Sesi berakhir, masuk lagi."
+				return
+			}
+			hint = "Gagal mengganti versi. Coba lagi."
+			return
+		}
+		activeVersion = result.data.version
+		hint = result.data.version === "v2" ? "Tampilan baru (V2) aktif di halaman utama." : "Tampilan lama (V1) aktif di halaman utama."
 	}
 
 	async function login() {
@@ -182,7 +225,7 @@
 		page = 1
 		query = ""
 		attendance = ""
-		if (t !== "sheets") loadList()
+		if (t !== "sheets" && t !== "versi") loadList()
 	}
 
 	function handleQuery(value: string) {
@@ -452,6 +495,32 @@
 					<li><strong>{sumHadir}</strong><span>Hadir</span></li>
 					<li><strong>{sumAbsen}</strong><span>Berhalangan</span></li>
 				</ul>
+			{:else if tab === "versi"}
+				<h2>Versi Tampilan</h2>
+				<p class="version-status">
+					{#if versionLoading}
+						Memuat...
+					{:else}
+						Aktif: <strong>{activeVersion === "v2" ? "V2 (baru)" : "V1 (lama)"}</strong>
+					{/if}
+				</p>
+				<div class="version-row">
+					<button
+						class="primary"
+						type="button"
+						disabled={versionLoading || activeVersion === "v1"}
+						onclick={() => switchVersion("v1")}
+					>Aktifkan V1</button>
+					<button
+						class="primary"
+						type="button"
+						disabled={versionLoading || activeVersion === "v2"}
+						onclick={() => switchVersion("v2")}
+					>Aktifkan V2</button>
+				</div>
+				<p class="version-preview">
+					Lihat langsung: <a href="/?v=v1">pratinjau V1</a> &middot; <a href="/?v=v2">pratinjau V2</a>
+				</p>
 			{:else}
 				<CustomSheets />
 			{/if}
@@ -656,6 +725,23 @@
 	.summary span {
 		color: var(--color-text-weak);
 		font-size: var(--text-caption);
+	}
+
+	.version-status {
+		color: var(--color-text-strong);
+		font-size: var(--text-caption);
+		margin: 0;
+	}
+
+	.version-row {
+		display: flex;
+		gap: var(--spacing-xs);
+	}
+
+	.version-preview {
+		font-size: var(--text-caption);
+		color: var(--color-text-weak);
+		margin: 0;
 	}
 
 	.error, .hint {
