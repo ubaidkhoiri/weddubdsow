@@ -6,6 +6,11 @@
 
 	let version = $state<ActiveVersion>("v2");
 	let ready = $state(false);
+	let isAdmin = $state(false);
+
+	function syncAdmin() {
+		isAdmin = location.hash === "#/admin";
+	}
 
 	function resolveFromUrl(): ActiveVersion | null {
 		const params = new URLSearchParams(location.search);
@@ -17,6 +22,8 @@
 	}
 
 	onMount(async () => {
+		syncAdmin();
+		window.addEventListener("hashchange", syncAdmin);
 		const forced = resolveFromUrl();
 		if (forced) {
 			version = forced;
@@ -25,11 +32,12 @@
 			if (res.ok) version = res.data.version;
 		}
 		ready = true;
+		return () => window.removeEventListener("hashchange", syncAdmin);
 	});
 </script>
 
 {#if ready}
-	{#if version === "v1"}
+	{#if isAdmin || version === "v1"}
 		<V1App />
 	{:else}
 		<V2App />
