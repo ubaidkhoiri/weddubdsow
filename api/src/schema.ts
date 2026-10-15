@@ -12,6 +12,11 @@ export const guests = pgTable("guests", {
 	createdAt: text("created_at").notNull().default(sql`(now())::text`),
 });
 
+export const settings = pgTable("settings", {
+	key: text("key").primaryKey(),
+	value: text("value").notNull(),
+});
+
 export const messages = pgTable("messages", {
 	id: uuid("id").defaultRandom().primaryKey(),
 	name: text("name").notNull(),

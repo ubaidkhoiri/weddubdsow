@@ -16,6 +16,11 @@ import {
 	validateMessagePatch,
 	validateRsvpPatch,
 } from "../lib/validate";
+import {
+	getActiveVersion,
+	isActiveVersion,
+	setActiveVersion,
+} from "./version";
 
 export const adminRoutes = new Hono();
 
@@ -72,6 +77,23 @@ adminRoutes.post("/login", rateLimiter(5, 15 * 60 * 1000), async (c) => {
 adminRoutes.post("/logout", requireAdmin(), (c) => {
 	deleteCookie(c, ADMIN_COOKIE, { path: "/" });
 	return c.json({ ok: true });
+});
+
+adminRoutes.get("/version", requireAdmin(), async (c) => {
+	return c.json({ version: await getActiveVersion() });
+});
+
+adminRoutes.patch("/version", requireAdmin(), async (c) => {
+	const body = await readJsonBody(c);
+	if (body === null || typeof body !== "object" || !("version" in body)) {
+		return c.json({ error: "invalid JSON" }, 400);
+	}
+	const version = (body as { version: unknown }).version;
+	if (!isActiveVersion(version)) {
+		return c.json({ error: "version harus salah satu dari v1, v2" }, 400);
+	}
+	await setActiveVersion(version);
+	return c.json({ ok: true, version });
 });
 
 adminRoutes.get("/messages", requireAdmin(), async (c) => {

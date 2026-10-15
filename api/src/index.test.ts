@@ -69,9 +69,13 @@ vi.mock("./db", () => {
 						"attendance" in (table as Record<string, unknown>)
 							? guestRows
 							: messageRows;
+					const result = () => Promise.resolve(rows.map((row) => ({ ...row })));
 					return {
 						orderBy: () => ({
-							limit: () => Promise.resolve(rows.map((row) => ({ ...row }))),
+							limit: result,
+						}),
+						where: () => ({
+							limit: () => Promise.resolve([]),
 						}),
 					};
 				},
@@ -383,8 +387,7 @@ describe("admin sheets task 3", () => {
 		expect(badPage.status).toBe(400);
 	});
 
-	it("lolos ubah terbatas dengan validasi yang sama seperti buat", async () => {
-		expect(validateMessagePatch({ message: "Selamat" }).ok).toBe(true);
+	it("lolos ubah terbatas dengan validasi yang sama seperti buat", async () => {		expect(validateMessagePatch({ message: "Selamat" }).ok).toBe(true);
 		expect(validateMessagePatch({}).ok).toBe(false);
 		expect(validateRsvpPatch({ guests: 3 }).ok).toBe(true);
 		expect(validateRsvpPatch({ guests: 99 }).ok).toBe(false);
@@ -429,5 +432,64 @@ describe("admin sheets task 3", () => {
 			body: JSON.stringify({ guests: 99 }),
 		});
 		expect(patchRsvpBad.status).toBe(400);
+	});
+});
+
+describe("version switch", () => {
+	const original = process.env.ADMIN_PASSWORD;
+	beforeEach(() => {
+		process.env.ADMIN_PASSWORD = "test-secret";
+	});
+	afterAll(() => {
+		process.env.ADMIN_PASSWORD = original;
+	});
+
+	async function loginCookie(ip: string): Promise<string> {
+		const res = await app.request("/api/admin/login", {
+			method: "POST",
+			headers: { "content-type": "application/json", "cf-connecting-ip": ip },
+			body: JSON.stringify({ password: "test-secret" }),
+		});
+		expect(res.status).toBe(200);
+		const match = (res.headers.get("set-cookie") ?? "").match(/weddu_admin=([^;]+)/);
+		expect(match).not.toBeNull();
+		return match?.[1] ?? "";
+	}
+
+	it("publik baca versi default v2", async () => {
+		const res = await app.request("/api/version");
+		expect(res.status).toBe(200);
+		expect(((await res.json()) as { version: string }).version).toBe("v2");
+	});
+
+	it("admin baca versi menolak tanpa cookie", async () => {
+		const res = await app.request("/api/admin/version", {
+			headers: { "cf-connecting-ip": "10.0.2.1" },
+		});
+		expect(res.status).toBe(401);
+	});
+
+	it("admin tulis versi lolos nilai valid dan tolak nilai salah", async () => {
+		const cookie = await loginCookie("10.0.2.2");
+		const ok = await app.request("/api/admin/version", {
+			method: "PATCH",
+			headers: {
+				"content-type": "application/json",
+				"cf-connecting-ip": "10.0.2.2",
+				cookie: `weddu_admin=${cookie}`,
+			},
+			body: JSON.stringify({ version: "v1" }),
+		});
+		expect(ok.status).toBe(200);
+		const bad = await app.request("/api/admin/version", {
+			method: "PATCH",
+			headers: {
+				"content-type": "application/json",
+				"cf-connecting-ip": "10.0.2.2",
+				cookie: `weddu_admin=${cookie}`,
+			},
+			body: JSON.stringify({ version: "v3" }),
+		});
+		expect(bad.status).toBe(400);
 	});
 });

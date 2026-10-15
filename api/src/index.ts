@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { adminRoutes } from "./routes/admin";
 import { messageRoutes } from "./routes/messages";
 import { rsvpRoutes } from "./routes/rsvp";
+import { versionRoutes } from "./routes/version";
 
 const app = new Hono();
 
@@ -28,6 +29,7 @@ app.get("/api/health", (c) => {
 
 app.route("/api", rsvpRoutes);
 app.route("/api", messageRoutes);
+app.route("/api", versionRoutes);
 app.route("/api/admin", adminRoutes);
 
 export default app;
