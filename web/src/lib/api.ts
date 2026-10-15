@@ -50,6 +50,24 @@ function jsonInit(body: unknown): RequestInit {
 	};
 }
 
+export type ActiveVersion = "v1" | "v2";
+
+export function getActiveVersion(): Promise<ApiResult<{ version: ActiveVersion }>> {
+	return send("/api/version");
+}
+
+export function getAdminVersion(): Promise<ApiResult<{ version: ActiveVersion }>> {
+	return send("/api/admin/version");
+}
+
+export function setAdminVersion(version: ActiveVersion): Promise<ApiResult<{ ok: true; version: ActiveVersion }>> {
+	return send("/api/admin/version", {
+		method: "PATCH",
+		headers: { "content-type": "application/json" },
+		body: JSON.stringify({ version }),
+	});
+}
+
 export function postRsvp(body: RsvpBody): Promise<ApiResult<{ ok: true }>> {
 	return send("/api/rsvp", jsonInit(body));
 }
